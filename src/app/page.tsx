@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useEffect, useMemo, useState } from "react";
 import {
   Utensils,
@@ -14,9 +13,10 @@ import {
 import { sampleRestaurants } from "@/data/sampleRestaurants";
 import { filterRestaurants } from "@/lib/filterRestaurants";
 import { mapEtablissementApiRow } from "@/lib/mapEtablissementApiRow";
+import RestaurantMapPanel, {
+  type GeoOnglet,
+} from "@/components/RestaurantMapPanel";
 import type { MenuFiltre, Restaurant } from "@/types/restaurant";
-
-const ChefMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
 const MENU: { id: MenuFiltre; label: string; icon?: typeof Star }[] = [
   { id: "tous", label: "Tout voir", icon: Sparkles },
@@ -31,6 +31,8 @@ export default function Home() {
   const [recherche, setRecherche] = useState("");
   const [rows, setRows] = useState<Restaurant[]>(sampleRestaurants);
   const [source, setSource] = useState<"d1" | "demo">("demo");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [onglet, setOnglet] = useState<GeoOnglet>("carte");
 
   useEffect(() => {
     let cancelled = false;
@@ -69,6 +71,16 @@ export default function Home() {
     () => filterRestaurants(rows, filtre, recherche),
     [rows, filtre, recherche]
   );
+
+  useEffect(() => {
+    if (affiche.length === 0) {
+      setSelectedId(null);
+      return;
+    }
+    setSelectedId((prev) =>
+      prev != null && affiche.some((r) => r.id === prev) ? prev : affiche[0].id
+    );
+  }, [affiche]);
 
   return (
     <main className="min-h-screen bg-gray-50 p-4 sm:p-8">
@@ -135,7 +147,13 @@ export default function Home() {
             />
           </div>
 
-          <ChefMap restaurants={affiche} />
+          <RestaurantMapPanel
+            restaurants={affiche}
+            selectedId={selectedId}
+            onSelectId={setSelectedId}
+            onglet={onglet}
+            onOnglet={setOnglet}
+          />
 
           <p className="text-center text-sm text-gray-500">
             {affiche.length === 0
@@ -157,8 +175,22 @@ export default function Home() {
             </p>
           ) : (
             <ul className="divide-y divide-gray-100">
-              {affiche.map((restau) => (
-                <li key={restau.id} className="py-4 first:pt-0">
+              {affiche.map((restau) => {
+                const sel = selectedId === restau.id;
+                return (
+                  <li key={restau.id}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedId(restau.id);
+                        setOnglet("carte");
+                      }}
+                      className={`w-full rounded-lg py-4 pl-1 pr-1 text-left transition first:pt-0 ${
+                        sel
+                          ? "bg-red-50 ring-2 ring-red-200 ring-offset-2"
+                          : "hover:bg-gray-50"
+                      }`}
+                    >
                   <p className="text-xs font-medium uppercase text-gray-400">
                     {restau.ville}
                     {restau.top_chef && (
@@ -184,6 +216,7 @@ export default function Home() {
                     {restau.telephone ? (
                       <a
                         href={`tel:${restau.telephone.replace(/\s/g, "")}`}
+                        onClick={(e) => e.stopPropagation()}
                         className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
                         aria-label={`Téléphone du restaurant ${restau.nom_restaurant}`}
                       >
@@ -193,6 +226,7 @@ export default function Home() {
                     {restau.email ? (
                       <a
                         href={`mailto:${restau.email}`}
+                        onClick={(e) => e.stopPropagation()}
                         className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
                         aria-label={`E-mail du restaurant ${restau.nom_restaurant}`}
                       >
@@ -200,8 +234,10 @@ export default function Home() {
                       </a>
                     ) : null}
                   </div>
-                </li>
-              ))}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           )}
         </aside>

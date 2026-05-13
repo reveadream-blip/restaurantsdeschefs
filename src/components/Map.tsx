@@ -11,6 +11,10 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Restaurant } from "@/types/restaurant";
+import {
+  googleDirectionsUrl,
+  googleStreetViewUrl,
+} from "@/lib/mapsLinks";
 
 const customIcon = new L.Icon({
   iconUrl:
@@ -98,6 +102,24 @@ export default function ChefMap({
                       {restau.email}
                     </a>
                   ) : null}
+                  <div className="mt-2 flex flex-wrap gap-2 border-t border-gray-100 pt-2">
+                    <a
+                      href={googleDirectionsUrl(restau.latitude, restau.longitude)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-red-700 underline"
+                    >
+                      Itinéraire
+                    </a>
+                    <a
+                      href={googleStreetViewUrl(restau.latitude, restau.longitude)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-medium text-red-700 underline"
+                    >
+                      Street View
+                    </a>
+                  </div>
                 </div>
               </Popup>
             </Marker>
