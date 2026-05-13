@@ -1,0 +1,11 @@
+name = "restaurants-des-chefs"
+compatibility_date = "2024-11-01"
+
+# Ce dépôt est un Next.js classique : déploiement simple sur Vercel (voir README ou npx vercel).
+# Pour Cloudflare Pages + Next.js + D1, il faut un adaptateur (ex. @opennextjs/cloudflare)
+# et une config dédiée ; décommentez puis renseignez l’UUID D1 du dashboard :
+#
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "chefs_db"
+# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
