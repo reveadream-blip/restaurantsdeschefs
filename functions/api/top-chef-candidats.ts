@@ -20,7 +20,7 @@ export async function onRequest(context: {
   try {
     const { results } = await db
       .prepare(
-        `SELECT id, nom_complet, saisons_json
+        `SELECT id, nom_complet, saisons_json, parcours, diplome, site_web, lien_wikipedia, lien_fandom, notes_source
          FROM top_chef_candidats
          ORDER BY nom_complet COLLATE NOCASE`
       )

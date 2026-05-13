@@ -357,3 +357,7 @@ mkdirSync(sqlDir, { recursive: true });
 const sqlPath = join(sqlDir, "topchef-candidats-seed.sql");
 writeFileSync(sqlPath, sqlLines.join("\n") + "\n", "utf8");
 console.log("Écrit", sqlPath, sqlLines.length - 3, "INSERT.");
+
+const nomsPath = join(sqlDir, "topchef-noms.json");
+writeFileSync(nomsPath, JSON.stringify(merged, null, 2), "utf8");
+console.log("Écrit", nomsPath);
