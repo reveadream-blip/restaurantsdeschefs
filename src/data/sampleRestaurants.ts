@@ -1,6 +1,9 @@
 import type { Restaurant } from "@/types/restaurant";
 
-/** Données de démonstration — à remplacer par l’API D1 */
+/**
+ * Données de démonstration — à remplacer par l’API D1.
+ * `telephone` et `email` : uniquement les coordonnées publiques du restaurant (résa / accueil).
+ */
 export const sampleRestaurants: Restaurant[] = [
   {
     id: 1,

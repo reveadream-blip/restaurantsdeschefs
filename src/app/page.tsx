@@ -138,20 +138,24 @@ export default function Home() {
                     </p>
                   )}
                   <div className="mt-3 flex gap-2">
-                    <a
-                      href={`tel:${restau.telephone}`}
-                      className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
-                      aria-label={`Appeler ${restau.chef_nom}`}
-                    >
-                      <Phone size={18} />
-                    </a>
-                    <button
-                      type="button"
-                      className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
-                      aria-label="Contact e-mail (à brancher)"
-                    >
-                      <Mail size={18} />
-                    </button>
+                    {restau.telephone ? (
+                      <a
+                        href={`tel:${restau.telephone.replace(/\s/g, "")}`}
+                        className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
+                        aria-label={`Téléphone du restaurant ${restau.nom_restaurant}`}
+                      >
+                        <Phone size={18} />
+                      </a>
+                    ) : null}
+                    {restau.email ? (
+                      <a
+                        href={`mailto:${restau.email}`}
+                        className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
+                        aria-label={`E-mail du restaurant ${restau.nom_restaurant}`}
+                      >
+                        <Mail size={18} />
+                      </a>
+                    ) : null}
                   </div>
                 </li>
               ))}

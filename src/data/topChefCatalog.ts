@@ -5,9 +5,8 @@
  * Source des listes : https://topchef.fandom.com/fr/wiki/Liste_des_candidats_de_Top_Chef_par_saison
  * Contenu sous licence CC-BY-SA (communauté Fandom).
  *
- * Champs détaillés (parcours, diplômes, coordonnées perso, restaurants à jour)
- * ne sont pas inclus : à compléter depuis des sources vérifiables (sites officiels,
- * presse, fiches restaurant) — pas d’invention de mails / téléphones.
+ * Aucune donnée personnelle de contact ici. Téléphone et e-mail des restaurants
+ * se renseignent au niveau des fiches établissement (table top_chef_restaurants ou équivalent).
  */
 
 export const TOP_CHEF_BY_SAISON = {

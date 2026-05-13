@@ -82,12 +82,22 @@ export default function ChefMap({
                       {restau.etoiles_michelin > 1 ? "étoiles" : "étoile"})
                     </p>
                   )}
-                  <a
-                    href={`tel:${restau.telephone}`}
-                    className="mt-2 block text-xs text-blue-600 underline"
-                  >
-                    {restau.telephone}
-                  </a>
+                  {restau.telephone ? (
+                    <a
+                      href={`tel:${restau.telephone.replace(/\s/g, "")}`}
+                      className="mt-2 block text-xs text-blue-600 underline"
+                    >
+                      {restau.telephone}
+                    </a>
+                  ) : null}
+                  {restau.email ? (
+                    <a
+                      href={`mailto:${restau.email}`}
+                      className="mt-1 block text-xs text-blue-600 underline"
+                    >
+                      {restau.email}
+                    </a>
+                  ) : null}
                 </div>
               </Popup>
             </Marker>

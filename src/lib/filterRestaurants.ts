@@ -38,8 +38,9 @@ function searchBlob(r: Restaurant): string {
     ? "top chef tops chefs topchef candidat emission top chef"
     : "";
 
+  const mail = r.email ? stripAccents(r.email) : "";
   return stripAccents(
-    `${r.chef_nom} ${r.nom_restaurant} ${r.ville} ${etoiles} ${top}`
+    `${r.chef_nom} ${r.nom_restaurant} ${r.ville} ${etoiles} ${top} ${mail}`
   );
 }
 

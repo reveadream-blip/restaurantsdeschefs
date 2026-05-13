@@ -1,6 +1,7 @@
--- Schéma D1 / SQLite pour l'annuaire (chefs + tables) et le catalogue Top Chef.
+-- Schéma D1 / SQLite — pas de données personnelles des chefs.
+-- Seuls téléphone et e-mail des établissements (restaurants) sont prévus au niveau contact.
 
--- Tables historiques (restaurants étoilés / liens chef)
+-- Chefs / candidats : identité et contexte pro (pas de mail ni téléphone perso ici).
 CREATE TABLE IF NOT EXISTS chefs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom TEXT NOT NULL,
@@ -9,6 +10,7 @@ CREATE TABLE IF NOT EXISTS chefs (
     parcours_resume TEXT
 );
 
+-- Restaurants : coordonnées = celles du restaurant (standard, réservation, accueil).
 CREATE TABLE IF NOT EXISTS etablissements (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     chef_id INTEGER,
@@ -24,15 +26,13 @@ CREATE TABLE IF NOT EXISTS etablissements (
     FOREIGN KEY (chef_id) REFERENCES chefs(id)
 );
 
--- Candidats Top Chef (France) : noms + saisons importables ; le reste à enrichir manuellement.
+-- Candidats Top Chef : noms + saisons ; pas de champs de contact personnel.
 CREATE TABLE IF NOT EXISTS top_chef_candidats (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     nom_complet TEXT NOT NULL UNIQUE,
     saisons_json TEXT NOT NULL,
     parcours TEXT,
     diplome TEXT,
-    email_contact TEXT,
-    telephone_contact TEXT,
     site_web TEXT,
     lien_wikipedia TEXT,
     lien_fandom TEXT,
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS top_chef_candidats (
     created_at TEXT DEFAULT (datetime('now'))
 );
 
--- Un candidat peut avoir plusieurs restaurants (actuels / passés).
+-- Restaurants liés à un candidat : seul endroit pour téléphone / mail (établissement).
 CREATE TABLE IF NOT EXISTS top_chef_restaurants (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     candidat_id INTEGER NOT NULL,
@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS top_chef_restaurants (
     ville TEXT,
     latitude REAL,
     longitude REAL,
-    telephone_public TEXT,
-    email_reservation TEXT,
+    telephone TEXT,
+    email TEXT,
     site_web TEXT,
     etoiles_michelin INTEGER DEFAULT 0,
     est_actif INTEGER DEFAULT 1,
