@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "data:topchef": "node scripts/build-topchef-catalog.mjs"
+    "data:topchef": "node scripts/build-topchef-catalog.mjs",
+    "pages:dev": "npm run build && wrangler pages dev ./out --compatibility-date=2024-11-01 --d1=DB=chefs_db"
   },
   "dependencies": {
     "leaflet": "^1.9.4",

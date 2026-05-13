@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Utensils,
   Star,
@@ -13,7 +13,8 @@ import {
 } from "lucide-react";
 import { sampleRestaurants } from "@/data/sampleRestaurants";
 import { filterRestaurants } from "@/lib/filterRestaurants";
-import type { MenuFiltre } from "@/types/restaurant";
+import { mapEtablissementApiRow } from "@/lib/mapEtablissementApiRow";
+import type { MenuFiltre, Restaurant } from "@/types/restaurant";
 
 const ChefMap = dynamic(() => import("@/components/Map"), { ssr: false });
 
@@ -28,10 +29,45 @@ const MENU: { id: MenuFiltre; label: string; icon?: typeof Star }[] = [
 export default function Home() {
   const [filtre, setFiltre] = useState<MenuFiltre>("tous");
   const [recherche, setRecherche] = useState("");
+  const [rows, setRows] = useState<Restaurant[]>(sampleRestaurants);
+  const [source, setSource] = useState<"d1" | "demo">("demo");
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/etablissements", { cache: "no-store" });
+        if (!res.ok) throw new Error(String(res.status));
+        const data: unknown = await res.json();
+        if (!Array.isArray(data)) throw new Error("bad json");
+        const mapped = data
+          .map((x) =>
+            mapEtablissementApiRow(x as Record<string, unknown>)
+          )
+          .filter((x): x is Restaurant => x != null);
+        if (cancelled) return;
+        if (mapped.length > 0) {
+          setRows(mapped);
+          setSource("d1");
+        } else {
+          setRows(sampleRestaurants);
+          setSource("demo");
+        }
+      } catch {
+        if (!cancelled) {
+          setRows(sampleRestaurants);
+          setSource("demo");
+        }
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const affiche = useMemo(
-    () => filterRestaurants(sampleRestaurants, filtre, recherche),
-    [filtre, recherche]
+    () => filterRestaurants(rows, filtre, recherche),
+    [rows, filtre, recherche]
   );
 
   return (
@@ -44,6 +80,13 @@ export default function Home() {
         <p className="mt-2 text-gray-500">
           Top Chef et tables Michelin : filtrez par étoiles ou recherchez une
           ville, un chef ou un restaurant.
+        </p>
+        <p
+          className={`mt-1 text-xs ${source === "d1" ? "text-emerald-700" : "text-amber-800"}`}
+        >
+          {source === "d1"
+            ? "Données chargées depuis la base D1 (établissements)."
+            : "Données de démonstration : l’API /api/etablissements est indisponible, vide, ou vous êtes en next dev sans Pages Functions."}
         </p>
 
         <nav

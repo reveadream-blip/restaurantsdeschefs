@@ -1,6 +1,15 @@
 name = "restaurants-des-chefs"
 compatibility_date = "2024-11-01"
 
-# Cloudflare Pages exige cette clé pour appliquer ce fichier ; sortie Next `output: "export"`.
-# Dashboard : Build command = `npm run build` (si les logs indiquent encore « No build command »).
 pages_build_output_dir = "./out"
+
+# D1 (chefs_db) : sur Cloudflare Pages > ton projet > Paramètres > Liaisons,
+# ajoute la base D1 `chefs_db` avec le nom de variable d’environnement **DB**
+# (identique au binding attendu par functions/api/*.ts).
+#
+# Optionnel : décommente ci-dessous et mets l’UUID de chefs_db pour que wrangler.toml
+# soit la source de vérité (sinon la liaison dashboard suffit).
+# [[d1_databases]]
+# binding = "DB"
+# database_name = "chefs_db"
+# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
