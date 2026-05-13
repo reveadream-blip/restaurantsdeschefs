@@ -15,7 +15,7 @@
 
 # next.js
 /.next/
-/out/
+# /out/ versionné pour Cloudflare Pages (CI sans commande de build). Relancer `npm run build` avant commit si tu changes le site.
 
 # production
 /build
