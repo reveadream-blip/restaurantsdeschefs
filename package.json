@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "data:topchef": "node scripts/build-topchef-catalog.mjs"
   },
   "dependencies": {
     "leaflet": "^1.9.4",
