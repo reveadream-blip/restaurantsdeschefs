@@ -1,4 +1,5 @@
 import type { FicheContactOverride, Restaurant } from "@/types/restaurant";
+import { normalizeFichePhotoList } from "@/lib/normalizeFicheMediaUrl";
 
 function optString(v: unknown): string | undefined {
   if (v == null) return undefined;
@@ -84,7 +85,8 @@ export function mapEtablissementApiRow(
     const urls = fp
       .filter((x): x is string => typeof x === "string" && x.trim() !== "")
       .map((u) => u.trim());
-    if (urls.length > 0) row.fiche_photos = urls.slice(0, 24);
+    const normalized = normalizeFichePhotoList(urls);
+    if (normalized.length > 0) row.fiche_photos = normalized;
   }
   const fc = r.fiche_contact;
   if (fc && typeof fc === "object" && !Array.isArray(fc)) {

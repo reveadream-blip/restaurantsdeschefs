@@ -7,6 +7,8 @@
  *   (même nom d’établissement + mêmes coordonnées). Sinon le candidat disparaissait alors que le chef en base
  *   porte un autre nom (cas fréquent dans le CSV).
  */
+import { normalizePhotoUrlList } from "../lib/normalizePhotoUrl";
+
 type D1Result<T = Record<string, unknown>> = { results?: T[] };
 
 type D1Statement = {
@@ -144,7 +146,8 @@ async function mergeEditorialFiches(
           const urls = p.filter(
             (x): x is string => typeof x === "string" && x.trim() !== ""
           );
-          if (urls.length > 0) row.fiche_photos = urls;
+          const normalized = normalizePhotoUrlList(urls);
+          if (normalized.length > 0) row.fiche_photos = normalized;
         }
       } catch {
         /* ignore */

@@ -1,4 +1,8 @@
 import { isAdminRequest } from "../../lib/adminSession";
+import {
+  normalizePhotoUrlList,
+  parsePhotoUrlsFromText,
+} from "../../lib/normalizePhotoUrl";
 
 type D1Db = {
   prepare: (q: string) => {
@@ -25,18 +29,14 @@ function normalizePhotos(input: unknown): string | null {
   if (input == null) return null;
   let urls: string[] = [];
   if (Array.isArray(input)) {
-    urls = input
-      .map((x) => String(x).trim())
-      .filter((u) => u.length > 0 && u.length <= MAX_URL);
+    urls = normalizePhotoUrlList(
+      input.map((x) => String(x).trim()).filter((u) => u.length > 0)
+    );
   } else if (typeof input === "string") {
-    urls = input
-      .split(/\r?\n/)
-      .map((l) => l.trim())
-      .filter((u) => u.length > 0 && u.length <= MAX_URL);
+    urls = parsePhotoUrlsFromText(input);
   } else return null;
-  urls = urls.slice(0, MAX_PHOTOS);
   if (urls.length === 0) return null;
-  return JSON.stringify(urls);
+  return JSON.stringify(urls.slice(0, MAX_PHOTOS));
 }
 
 function normalizeContact(input: unknown): string | null {

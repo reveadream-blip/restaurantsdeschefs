@@ -18,6 +18,7 @@ import {
   googleStreetViewUrl,
 } from "@/lib/mapsLinks";
 import { videoEmbedUrl } from "@/lib/videoEmbedUrl";
+import { normalizeFichePhotoList } from "@/lib/normalizeFicheMediaUrl";
 import type { Restaurant } from "@/types/restaurant";
 
 type TabId = "apropos" | "localisation" | "evenements" | "avis";
@@ -37,14 +38,46 @@ function SectionBar({ title }: { title: string }) {
   );
 }
 
-function menusPrixHint(r: Restaurant): string {
-  const custom = r.fiche_menu_prix?.trim();
-  if (custom) return custom;
+function menusPrixFallbackText(r: Restaurant): string {
   const n = r.etoiles_michelin;
   if (n === 3) return "Gastronomique — fourchette indicative 180 € et +";
   if (n === 2) return "Haute gastronomie — fourchette indicative 95 € à 180 €";
   if (n === 1) return "Gastronomique — fourchette indicative 45 € à 95 €";
   return "Carte et menus sur demande — contactez l’établissement";
+}
+
+function FichePhotoImg({
+  src,
+  priority,
+  className,
+}: {
+  src: string;
+  priority?: boolean;
+  className?: string;
+}) {
+  const [failed, setFailed] = useState(false);
+  if (failed) {
+    return (
+      <div
+        className={`flex items-center justify-center bg-[var(--rc-surface)] text-center text-xs font-light text-[var(--rc-text-muted)] ${className ?? ""}`}
+      >
+        Image inaccessible
+        <span className="sr-only"> ({src})</span>
+      </div>
+    );
+  }
+  return (
+    // eslint-disable-next-line @next/next/no-img-element -- URLs éditoriales arbitraires
+    <img
+      src={src}
+      alt=""
+      className={className}
+      loading={priority ? "eager" : "lazy"}
+      referrerPolicy="no-referrer-when-downgrade"
+      decoding="async"
+      onError={() => setFailed(true)}
+    />
+  );
 }
 
 export default function RestaurantFichePage({ restaurant: r }: { restaurant: Restaurant }) {
@@ -96,7 +129,10 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
     return parts.length > 0 ? parts.join(" — ") : null;
   }, [c?.adresse, r.restaurant_adresse, displayVille]);
 
-  const photos = r.fiche_photos?.filter((u) => u.trim() !== "") ?? [];
+  const photos = useMemo(
+    () => normalizeFichePhotoList(r.fiche_photos),
+    [r.fiche_photos]
+  );
   const videoSrc = r.fiche_video_url
     ? videoEmbedUrl(r.fiche_video_url)
     : null;
@@ -194,13 +230,10 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
                           : "aspect-[4/3]"
                       }`}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element -- URLs éditoriales arbitraires */}
-                      <img
+                      <FichePhotoImg
                         src={src}
-                        alt=""
                         className="h-full w-full object-cover"
-                        loading={i === 0 ? "eager" : "lazy"}
-                        referrerPolicy="no-referrer-when-downgrade"
+                        priority={i === 0}
                       />
                     </div>
                   ))
@@ -258,12 +291,23 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
                 </span>
                 Menus et Prix
               </h2>
-              <p className="mt-2 text-sm font-light leading-relaxed text-[var(--rc-text-muted)] sm:text-[0.9375rem]">
-                {menusPrixHint(r)}
-                {!r.fiche_menu_prix?.trim()
-                  ? " — tarifs à titre indicatif, selon saison et carte."
-                  : ""}
-              </p>
+              {r.fiche_menu_prix?.trim() ? (
+                <div className="mt-3 rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 py-5 shadow-sm sm:px-6">
+                  <div className="whitespace-pre-wrap break-words font-sans text-sm font-light leading-[1.65] text-[var(--rc-text)] sm:text-[0.9375rem]">
+                    {r.fiche_menu_prix.trim()}
+                  </div>
+                  <p className="mt-4 border-t border-[var(--rc-border)] pt-4 text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
+                    Tarifs et menus à titre indicatif — selon saison, carte et
+                    disponibilités de l’établissement.
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-2 text-sm font-light leading-relaxed text-[var(--rc-text-muted)] sm:text-[0.9375rem]">
+                  {menusPrixFallbackText(r)}
+                  {" — "}
+                  tarifs à titre indicatif, selon saison et carte.
+                </p>
+              )}
             </section>
 
             <section aria-labelledby="fiche-video-title">

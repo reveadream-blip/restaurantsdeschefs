@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import type { Restaurant } from "@/types/restaurant";
+import { parseFichePhotoLines } from "@/lib/normalizeFicheMediaUrl";
 import { mapEtablissementApiRow } from "@/lib/mapEtablissementApiRow";
 
 type FicheApi = {
@@ -228,10 +229,7 @@ function AdminFicheEditor() {
     setSaving(true);
     setErr(null);
     setSaved(false);
-    const photos = photosLines
-      .split(/\r?\n/)
-      .map((l) => l.trim())
-      .filter(Boolean);
+    const photos = parseFichePhotoLines(photosLines);
     const contact: Record<string, string> = {};
     if (ctTel.trim()) contact.telephone = ctTel.trim();
     if (ctEmail.trim()) contact.email = ctEmail.trim();
@@ -383,8 +381,9 @@ function AdminFicheEditor() {
             Photos (URL)
           </h2>
           <p className="mt-1 text-xs text-[var(--rc-text-muted)]">
-            Une URL https par ligne (hébergement externe ou Cloudflare R2).
-            Remplace la galerie par défaut si au moins une URL est fournie.
+            Liens <strong>https://</strong> vers les images (une par ligne, ou
+            plusieurs sur la même ligne séparées par des espaces ou des
+            virgules). Un domaine sans <code className="rounded bg-black/5 px-0.5">https://</code> est complété automatiquement. Remplace la galerie par défaut si au moins une URL valide est fournie.
           </p>
           <textarea
             value={photosLines}
@@ -399,12 +398,17 @@ function AdminFicheEditor() {
           <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
             Menu et prix
           </h2>
+          <p className="mt-1 text-xs text-[var(--rc-text-muted)]">
+            Utilisez <strong>Entrée</strong> pour des retours à la ligne : ils
+            seront conservés sur la fiche publique (paragraphes, listes de
+            formules, etc.).
+          </p>
           <textarea
             value={menuPrix}
             onChange={(e) => setMenuPrix(e.target.value)}
-            rows={4}
-            className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-3 text-sm font-light text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
-            placeholder="Texte libre (ex. formules, fourchettes de prix…)."
+            rows={8}
+            className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-3 text-sm font-light leading-relaxed text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)] whitespace-pre-wrap"
+            placeholder={"Texte libre (ex. formules, fourchettes de prix…).\nAppuyez sur Entrée pour passer à la ligne."}
           />
         </section>
 
