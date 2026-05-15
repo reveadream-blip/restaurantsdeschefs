@@ -103,7 +103,8 @@ export default function ChefMap({
                       Sponsoring (contenu éditorial)
                     </p>
                   ) : null}
-                  {restau.saisons_top_chef &&
+                  {restau.top_chef &&
+                  restau.saisons_top_chef &&
                   restau.saisons_top_chef.length > 0 ? (
                     <p className="mt-0.5 text-xs text-gray-500">
                       Saisons {restau.saisons_top_chef.join(", ")}

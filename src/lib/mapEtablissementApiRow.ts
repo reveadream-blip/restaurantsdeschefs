@@ -55,7 +55,11 @@ export function mapEtablissementApiRow(
         ? String(emailRaw).trim()
         : undefined,
   };
-  if (saisons_top_chef != null && saisons_top_chef.length > 0) {
+  if (
+    row.top_chef &&
+    saisons_top_chef != null &&
+    saisons_top_chef.length > 0
+  ) {
     row.saisons_top_chef = saisons_top_chef;
   }
 
