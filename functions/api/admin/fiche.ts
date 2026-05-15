@@ -1,5 +1,6 @@
 import { isAdminRequest } from "../../lib/adminSession";
 import {
+  normalizePhotoUrl,
   normalizePhotoUrlList,
   parsePhotoUrlsFromText,
 } from "../../lib/normalizePhotoUrl";
@@ -95,7 +96,7 @@ export async function onRequest(context: {
     try {
       const row = await db
         .prepare(
-          `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, updated_at
+          `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at
            FROM etablissement_fiches WHERE etablissement_id = ?`
         )
         .bind(id)
@@ -106,6 +107,7 @@ export async function onRequest(context: {
           menu_prix: string | null;
           video_url: string | null;
           contact_json: string | null;
+          card_cover_url: string | null;
           updated_at: string | null;
         }>();
       if (!row) {
@@ -116,6 +118,7 @@ export async function onRequest(context: {
           menu_prix: null,
           video_url: null,
           contact_json: null,
+          card_cover_url: null,
           updated_at: null,
         });
       }
@@ -123,11 +126,20 @@ export async function onRequest(context: {
     } catch (e) {
       const msg =
         e instanceof Error ? e.message : "Erreur lecture fiche éditoriale.";
-      if (msg.includes("no such table") || msg.includes("SQLITE_ERROR")) {
+      if (msg.includes("no such table")) {
         return Response.json(
           {
             error:
               "Table etablissement_fiches absente. Exécutez la migration : data/migration-etablissement-fiches.sql",
+          },
+          { status: 500 }
+        );
+      }
+      if (msg.includes("no such column") && msg.includes("card_cover_url")) {
+        return Response.json(
+          {
+            error:
+              "Colonne card_cover_url absente. Exécutez : data/migration-fiche-card-cover-url.sql",
           },
           { status: 500 }
         );
@@ -159,18 +171,23 @@ export async function onRequest(context: {
     const menu_prix = clampStr(body.menu_prix, MAX_MENU);
     const video_url = clampStr(body.video_url, MAX_URL);
     const contact_json = normalizeContact(body.contact_json ?? body.contact);
+    const card_cover_raw = clampStr(body.card_cover_url, MAX_URL);
+    const card_cover_url = card_cover_raw
+      ? normalizePhotoUrl(card_cover_raw)
+      : null;
 
     try {
       await db
         .prepare(
-          `INSERT INTO etablissement_fiches (etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+          `INSERT INTO etablissement_fiches (etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
            ON CONFLICT(etablissement_id) DO UPDATE SET
              description_text = excluded.description_text,
              photos_json = excluded.photos_json,
              menu_prix = excluded.menu_prix,
              video_url = excluded.video_url,
              contact_json = excluded.contact_json,
+             card_cover_url = excluded.card_cover_url,
              updated_at = excluded.updated_at`
         )
         .bind(
@@ -179,18 +196,28 @@ export async function onRequest(context: {
           photos_json,
           menu_prix,
           video_url,
-          contact_json
+          contact_json,
+          card_cover_url
         )
         .run();
       return Response.json({ ok: true });
     } catch (e) {
       const msg =
         e instanceof Error ? e.message : "Erreur enregistrement fiche.";
-      if (msg.includes("no such table") || msg.includes("SQLITE_ERROR")) {
+      if (msg.includes("no such table")) {
         return Response.json(
           {
             error:
               "Table etablissement_fiches absente. Exécutez la migration : data/migration-etablissement-fiches.sql",
+          },
+          { status: 500 }
+        );
+      }
+      if (msg.includes("no such column") && msg.includes("card_cover_url")) {
+        return Response.json(
+          {
+            error:
+              "Colonne card_cover_url absente. Exécutez : data/migration-fiche-card-cover-url.sql",
           },
           { status: 500 }
         );

@@ -18,9 +18,12 @@ function linkLabel(url: string, fallback: string): string {
 
 export function restaurantHasExtendedFiche(r: Restaurant): boolean {
   if (r.top_chef) return true;
+  const fc = r.fiche_contact;
   return (
     hasText(r.restaurant_adresse) ||
+    hasText(fc?.adresse) ||
     hasText(r.restaurant_site_web) ||
+    hasText(fc?.site_web) ||
     hasText(r.candidat_parcours) ||
     hasText(r.candidat_diplome) ||
     hasText(r.candidat_site_web) ||
@@ -36,9 +39,14 @@ export default function RestaurantFicheDetails({
 }) {
   if (!restaurantHasExtendedFiche(r)) return null;
 
+  const adresseDisplay =
+    r.fiche_contact?.adresse?.trim() || r.restaurant_adresse?.trim();
+  const siteDisplay =
+    r.fiche_contact?.site_web?.trim() || r.restaurant_site_web?.trim();
+
   const showEtablissement =
-    hasText(r.restaurant_adresse) ||
-    hasText(r.restaurant_site_web) ||
+    hasText(adresseDisplay) ||
+    hasText(siteDisplay) ||
     (r.top_chef && hasText(r.ville));
 
   return (
@@ -48,21 +56,23 @@ export default function RestaurantFicheDetails({
           <p className="text-xs font-medium uppercase tracking-[0.2em] text-[var(--rc-text-muted)]">
             Établissement
           </p>
-          {hasText(r.restaurant_adresse) ? (
-            <p className="text-sm leading-snug">{r.restaurant_adresse}</p>
+          {hasText(adresseDisplay) ? (
+            <p className="whitespace-pre-wrap break-words text-sm leading-relaxed">
+              {adresseDisplay}
+            </p>
           ) : r.top_chef && hasText(r.ville) ? (
             <p className="text-sm leading-snug text-[var(--rc-text-muted)]">
               {r.ville}
             </p>
           ) : null}
-          {hasText(r.restaurant_site_web) ? (
+          {hasText(siteDisplay) ? (
             <a
-              href={r.restaurant_site_web}
+              href={siteDisplay}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 text-[var(--rc-ruby)] underline decoration-[var(--rc-ruby-soft)] underline-offset-2 hover:opacity-90"
             >
-              {linkLabel(r.restaurant_site_web!, "Site web")}
+              {linkLabel(siteDisplay!, "Site web")}
               <ExternalLink className="h-3.5 w-3.5 shrink-0 opacity-70" aria-hidden />
             </a>
           ) : null}
@@ -81,7 +91,7 @@ export default function RestaurantFicheDetails({
             </p>
           ) : null}
           {hasText(r.candidat_diplome) ? (
-            <p>
+            <p className="whitespace-pre-wrap break-words leading-relaxed">
               <span className="font-normal text-[var(--rc-text)]">
                 Formation / diplôme :{" "}
               </span>

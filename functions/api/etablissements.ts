@@ -7,7 +7,7 @@
  *   (même nom d’établissement + mêmes coordonnées). Sinon le candidat disparaissait alors que le chef en base
  *   porte un autre nom (cas fréquent dans le CSV).
  */
-import { normalizePhotoUrlList } from "../lib/normalizePhotoUrl";
+import { normalizePhotoUrl, normalizePhotoUrlList } from "../lib/normalizePhotoUrl";
 
 type D1Result<T = Record<string, unknown>> = { results?: T[] };
 
@@ -93,6 +93,7 @@ type FicheRow = {
   menu_prix: string | null;
   video_url: string | null;
   contact_json: string | null;
+  card_cover_url: string | null;
 };
 
 async function mergeEditorialFiches(
@@ -112,7 +113,7 @@ async function mergeEditorialFiches(
   for (let i = 0; i < ids.length; i += BATCH) {
     const slice = ids.slice(i, i + BATCH);
     const placeholders = slice.map(() => "?").join(",");
-    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json
+    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url
                  FROM etablissement_fiches WHERE etablissement_id IN (${placeholders})`;
     try {
       const { results = [] } = await db
@@ -162,6 +163,10 @@ async function mergeEditorialFiches(
       } catch {
         /* ignore */
       }
+    }
+    if (f.card_cover_url && String(f.card_cover_url).trim() !== "") {
+      const u = normalizePhotoUrl(String(f.card_cover_url).trim());
+      if (u) row.fiche_card_cover_url = u;
     }
   }
 }

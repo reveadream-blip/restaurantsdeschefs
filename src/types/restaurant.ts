@@ -45,6 +45,8 @@ export type Restaurant = {
   fiche_menu_prix?: string;
   fiche_video_url?: string;
   fiche_contact?: FicheContactOverride;
+  /** Image bandeau fiche + carte liste (URL https, D1). */
+  fiche_card_cover_url?: string;
 };
 
 export type MenuFiltre = "tous" | "top-chef" | "etoiles" | "3" | "2" | "1";

@@ -18,7 +18,10 @@ import {
   googleStreetViewUrl,
 } from "@/lib/mapsLinks";
 import { videoEmbedUrl } from "@/lib/videoEmbedUrl";
-import { normalizeFichePhotoList } from "@/lib/normalizeFicheMediaUrl";
+import {
+  normalizeFichePhotoList,
+  normalizeFichePhotoUrl,
+} from "@/lib/normalizeFicheMediaUrl";
 import type { Restaurant } from "@/types/restaurant";
 
 type TabId = "apropos" | "localisation" | "evenements" | "avis";
@@ -124,14 +127,21 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
   }, [r.fiche_description, r.wikipedia_intro, r.candidat_parcours]);
 
   const adresseLigne = useMemo(() => {
-    const addr = c?.adresse?.trim() || r.restaurant_adresse;
-    const parts = [addr, displayVille].filter(Boolean);
-    return parts.length > 0 ? parts.join(" — ") : null;
+    const addr = (c?.adresse?.trim() || r.restaurant_adresse)?.trim();
+    const ville = displayVille?.trim();
+    if (addr && ville) return `${addr}\n${ville}`;
+    if (addr) return addr;
+    if (ville) return ville;
+    return null;
   }, [c?.adresse, r.restaurant_adresse, displayVille]);
 
   const photos = useMemo(
     () => normalizeFichePhotoList(r.fiche_photos),
     [r.fiche_photos]
+  );
+  const heroCoverUrl = useMemo(
+    () => normalizeFichePhotoUrl(r.fiche_card_cover_url ?? ""),
+    [r.fiche_card_cover_url]
   );
   const videoSrc = r.fiche_video_url
     ? videoEmbedUrl(r.fiche_video_url)
@@ -142,18 +152,38 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
   return (
     <div className="min-h-screen bg-[var(--rc-page-bg)] pb-16">
       <div className="relative h-48 w-full overflow-hidden sm:h-56 md:h-64">
-        <Image
-          src="/hero-caption.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/40"
-        />
+        {heroCoverUrl ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element -- URL éditoriale */}
+            <img
+              src={heroCoverUrl}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="eager"
+              decoding="async"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/78 via-black/30 to-black/45"
+            />
+          </>
+        ) : (
+          <>
+            <Image
+              src="/hero-caption.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/40"
+            />
+          </>
+        )}
         <div className="absolute inset-x-0 bottom-0 flex flex-col gap-2 px-4 pb-4 pt-10 sm:px-6">
           <Link
             href="/"
@@ -270,11 +300,11 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
               </h2>
               <SectionBar title="Description" />
               <div className="border border-t-0 border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 py-5 sm:px-6">
-                <p className="whitespace-pre-wrap font-sans text-sm font-light leading-relaxed text-[var(--rc-text-muted)] sm:text-[0.9375rem]">
+                <p className="whitespace-pre-wrap break-words font-sans text-sm font-light leading-relaxed text-[var(--rc-text-muted)] sm:text-[0.9375rem]">
                   {description}
                 </p>
                 {adresseLigne ? (
-                  <p className="mt-5 text-sm font-medium text-[var(--rc-text)]">
+                  <p className="mt-5 whitespace-pre-wrap break-words text-sm font-medium leading-relaxed text-[var(--rc-text)]">
                     {adresseLigne}
                   </p>
                 ) : null}

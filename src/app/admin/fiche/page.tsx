@@ -14,6 +14,7 @@ type FicheApi = {
   menu_prix: string | null;
   video_url: string | null;
   contact_json: string | null;
+  card_cover_url?: string | null;
 };
 
 async function fetchJson<T>(
@@ -49,6 +50,7 @@ function AdminFicheEditor() {
   const [photosLines, setPhotosLines] = useState("");
   const [menuPrix, setMenuPrix] = useState("");
   const [videoUrl, setVideoUrl] = useState("");
+  const [cardCoverUrl, setCardCoverUrl] = useState("");
   const [ctTel, setCtTel] = useState("");
   const [ctEmail, setCtEmail] = useState("");
   const [ctSite, setCtSite] = useState("");
@@ -144,6 +146,7 @@ function AdminFicheEditor() {
         setPhotosLines(lines);
         setMenuPrix(f.menu_prix ?? "");
         setVideoUrl(f.video_url ?? "");
+        setCardCoverUrl(f.card_cover_url ?? "");
         if (f.contact_json) {
           try {
             const c = JSON.parse(f.contact_json) as Record<string, string>;
@@ -249,6 +252,7 @@ function AdminFicheEditor() {
           photos: photos.length ? photos : null,
           menu_prix: menuPrix.trim() || null,
           video_url: videoUrl.trim() || null,
+          card_cover_url: cardCoverUrl.trim() || null,
           contact_json: Object.keys(contact).length ? contact : null,
         }),
       }
@@ -371,8 +375,8 @@ function AdminFicheEditor() {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={12}
-            className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-3 text-sm font-light text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
-            placeholder="Texte affiché sur la fiche publique (remplace Wikipédia / parcours si renseigné)."
+            className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-3 text-sm font-light leading-relaxed text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)] whitespace-pre-wrap"
+            placeholder={"Texte affiché sur la fiche publique (remplace Wikipédia / parcours si renseigné).\nAppuyez sur Entrée pour des retours à la ligne."}
           />
         </section>
 
@@ -391,6 +395,22 @@ function AdminFicheEditor() {
             rows={6}
             className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-3 font-mono text-xs text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
             placeholder={"https://…\nhttps://…"}
+          />
+        </section>
+
+        <section>
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
+            Image de couverture (liste + bandeau fiche)
+          </h2>
+          <p className="mt-1 text-xs text-[var(--rc-text-muted)]">
+            Une seule URL d’image <strong>https://</strong>. Elle remplace le fond doré sur la carte de l’annuaire et le bandeau photo en haut de la fiche publique. Laissez vide pour revenir au visuel par défaut.
+          </p>
+          <input
+            type="url"
+            value={cardCoverUrl}
+            onChange={(e) => setCardCoverUrl(e.target.value)}
+            className="mt-2 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 font-mono text-xs text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
+            placeholder="https://exemple.com/photo-restaurant.jpg"
           />
         </section>
 
@@ -451,11 +471,12 @@ function AdminFicheEditor() {
               onChange={(e) => setCtSite(e.target.value)}
               className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm sm:col-span-2"
             />
-            <input
-              placeholder="Adresse"
+            <textarea
+              placeholder="Adresse (plusieurs lignes possibles)"
               value={ctAdr}
               onChange={(e) => setCtAdr(e.target.value)}
-              className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm sm:col-span-2"
+              rows={3}
+              className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm whitespace-pre-wrap sm:col-span-2"
             />
             <input
               placeholder="Ville"

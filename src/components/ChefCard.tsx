@@ -1,6 +1,7 @@
 "use client";
 
 import { Mail, MapPin, Phone, Star } from "lucide-react";
+import { normalizeFichePhotoUrl } from "@/lib/normalizeFicheMediaUrl";
 import type { Restaurant } from "@/types/restaurant";
 
 export type ChefCardProps = {
@@ -31,23 +32,44 @@ function MichelinStars({ count }: { count: 1 | 2 | 3 }) {
 export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
   const stars = r.etoiles_michelin;
   const hasStars = stars > 0;
+  const coverUrl = normalizeFichePhotoUrl(r.fiche_card_cover_url ?? "");
 
   return (
     <>
       {/* Hero visuel */}
       <div className="relative h-36 overflow-hidden sm:h-40">
-        <div
-          aria-hidden
-          className="absolute inset-0 bg-[linear-gradient(135deg,#121212_0%,#2a2418_38%,rgba(154,125,46,0.42)_72%,rgba(196,30,58,0.32)_100%)]"
-        />
-        <div
-          aria-hidden
-          className="absolute inset-0 opacity-[0.07] mix-blend-overlay"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-          }}
-        />
+        {coverUrl ? (
+          <>
+            {/* eslint-disable-next-line @next/next/no-img-element -- URL éditoriale */}
+            <img
+              src={coverUrl}
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-gradient-to-t from-black/72 via-black/25 to-black/40"
+            />
+          </>
+        ) : (
+          <>
+            <div
+              aria-hidden
+              className="absolute inset-0 bg-[linear-gradient(135deg,#121212_0%,#2a2418_38%,rgba(154,125,46,0.42)_72%,rgba(196,30,58,0.32)_100%)]"
+            />
+            <div
+              aria-hidden
+              className="absolute inset-0 opacity-[0.07] mix-blend-overlay"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
+              }}
+            />
+          </>
+        )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
 
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2 sm:right-4 sm:top-4">
