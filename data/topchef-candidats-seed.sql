@@ -1,5 +1,6 @@
 -- Seed top_chef_candidats (noms + saisons). Généré par scripts/build-topchef-catalog.mjs
-BEGIN TRANSACTION;
+-- (pas de BEGIN/COMMIT : D1 `wrangler d1 execute --remote --file` ne les accepte pas.)
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Aboubakar Bamba', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Abraham de la Rosa', '[2]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Adel Dakkar', '[6]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Adrien Cachot', '[11]');
@@ -13,14 +14,17 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Al
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexandre Moormann', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexandre Spinelli', '[8]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexia Duchêne', '[10]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexia Jolivet', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexis Braconnier', '[2,5]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexis Delassaux', '[8]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Alexy Algar-Denos', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ambroise Voreux', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Amélie Langlais', '[3]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Anaïs Catherine', '[1]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Anicée Lacrouts', '[15]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Anissa Boulesteix', '[10]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Anne-Cécile Degenne', '[5]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Antoine Garcia', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Arnaud Baptiste', '[12]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Arnaud Delvenne', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Arnaud Munster', '[15]');
@@ -63,6 +67,7 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Da
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Denny Imbroisi', '[3]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Diego Alary', '[11]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Dieuveil Malonga', '[5]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Dylan Bury', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Elis Bond', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ella Aflalo', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Elliott Van de Velde', '[13]');
@@ -133,14 +138,18 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('K�
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Kevin Roquet', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Kilian Franceschi', '[16]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Latifa Ichou', '[4,5]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Léa Vautier Lecointre', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Léo Renusson', '[14]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Lilian Douchet', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Lise Deveix', '[15]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Logan Depuydt', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Louise Bourrat', '[13]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Louise Perrone', '[17]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Lucas Renault', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Lucie Berthier Gembara', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ludovic Turac', '[2]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Maël Duval', '[10]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Maël Paranthoen', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mallory Gabsi', '[11]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Margaux Elie', '[16]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Marie Pacotte', '[15]');
@@ -152,6 +161,7 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ma
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mathew Hegarty', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mathieu Lagarde', '[14]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mathieu Vande Velde', '[12]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Matteo Pioppi', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Matthias Marc', '[12]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Matthieu Lestrade', '[2]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Maxime Zimmer', '[11]');
@@ -166,6 +176,7 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mo
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Mory Sacko', '[11]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Naoëlle d''Hainaut', '[4]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Nastasia Lyard', '[11]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Nicolas Parage', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Nicolas Pourcheresse', '[6]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Nicolas Seibold', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Noé Pellet', '[16]');
@@ -197,6 +208,7 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Re
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Romain Tischenko', '[1]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ronan Kernen', '[2]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Ruben Sarfati', '[3,5]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Sacha Boyadjian', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Samuel Albert', '[10]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Sarah Gade', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Sarah Mainguy', '[12]');
@@ -211,6 +223,7 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('St
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Tabata Bonardi', '[3]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Tania Cadeddu', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Tara Khattar', '[9]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Théo Chassé', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Thibaud Erard-Penguilly', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Thibault Barbafieri', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Thibault Marchand', '[15]');
@@ -220,14 +233,17 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Th
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Thomas Letourneur', '[8]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Thomas Murer', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Tiffany Depardieu', '[2,5]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Tom Paduano', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Valentin Néraudeau', '[4]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Valentin Raffali', '[15]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Vanessa Robuschi', '[6]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Victor Blanchet', '[14]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Victor Kuntz', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Victor Mercier', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Vincent Crepel', '[9]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Vincent Gomis', '[4]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Virginie Martinetti', '[4]');
+INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Viviana Pisacane', '[17]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Wilfried Graux', '[7]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Wilfried Romain', '[13]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Xavier Koenig', '[6]');
@@ -235,4 +251,3 @@ INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Xa
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Yoaké San', '[1,5]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Yohei Hosaka', '[12]');
 INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES ('Yoni Saada', '[4]');
-COMMIT;

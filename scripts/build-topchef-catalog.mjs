@@ -289,6 +289,24 @@ const PAR_SAISON = [
     "Ilane Tinchant",
     "Grégoire Touchard",
   ],
+  [
+    "Alexy Algar-Denos",
+    "Aboubakar Bamba",
+    "Sacha Boyadjian",
+    "Dylan Bury",
+    "Théo Chassé",
+    "Antoine Garcia",
+    "Alexia Jolivet",
+    "Victor Kuntz",
+    "Tom Paduano",
+    "Nicolas Parage",
+    "Maël Paranthoen",
+    "Louise Perrone",
+    "Matteo Pioppi",
+    "Viviana Pisacane",
+    "Lucas Renault",
+    "Léa Vautier Lecointre",
+  ],
 ];
 
 const byNom = new Map();
@@ -317,6 +335,7 @@ const header = `/**
  * Généré par scripts/build-topchef-catalog.mjs — ne pas éditer à la main.
  *
  * Source des listes : https://topchef.fandom.com/fr/wiki/Liste_des_candidats_de_Top_Chef_par_saison
+ * (saisons 1–17 ; saison 17 : https://topchef.fandom.com/fr/wiki/Saison_17_de_Top_Chef )
  * Contenu sous licence CC-BY-SA (communauté Fandom).
  *
  * Aucune donnée personnelle de contact ici. Téléphone et e-mail des restaurants
@@ -344,19 +363,18 @@ console.log("Écrit", tsPath, merged.length, "candidats uniques.");
 const esc = (s) => "'" + String(s).replace(/'/g, "''") + "'";
 const sqlLines = [
   "-- Seed top_chef_candidats (noms + saisons). Généré par scripts/build-topchef-catalog.mjs",
-  "BEGIN TRANSACTION;",
+  "-- (pas de BEGIN/COMMIT : D1 `wrangler d1 execute --remote --file` ne les accepte pas.)",
 ];
 for (const row of merged) {
   sqlLines.push(
     `INSERT OR IGNORE INTO top_chef_candidats (nom_complet, saisons_json) VALUES (${esc(row.nom)}, ${esc(JSON.stringify(row.saisons))});`
   );
 }
-sqlLines.push("COMMIT;");
 const sqlDir = join(root, "data");
 mkdirSync(sqlDir, { recursive: true });
 const sqlPath = join(sqlDir, "topchef-candidats-seed.sql");
 writeFileSync(sqlPath, sqlLines.join("\n") + "\n", "utf8");
-console.log("Écrit", sqlPath, sqlLines.length - 3, "INSERT.");
+console.log("Écrit", sqlPath, merged.length, "INSERT.");
 
 const nomsPath = join(sqlDir, "topchef-noms.json");
 writeFileSync(nomsPath, JSON.stringify(merged, null, 2), "utf8");

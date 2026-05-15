@@ -1,0 +1,203 @@
+import { isAdminRequest } from "../../lib/adminSession";
+
+type D1Db = {
+  prepare: (q: string) => {
+    bind: (...args: unknown[]) => {
+      first: <T = Record<string, unknown>>() => Promise<T | null>;
+      run: () => Promise<unknown>;
+    };
+  };
+};
+
+const MAX_DESC = 80_000;
+const MAX_MENU = 40_000;
+const MAX_URL = 2048;
+const MAX_PHOTOS = 24;
+
+function clampStr(s: unknown, max: number): string | null {
+  if (s == null) return null;
+  const t = String(s).trim();
+  if (t === "") return null;
+  return t.length > max ? t.slice(0, max) : t;
+}
+
+function normalizePhotos(input: unknown): string | null {
+  if (input == null) return null;
+  let urls: string[] = [];
+  if (Array.isArray(input)) {
+    urls = input
+      .map((x) => String(x).trim())
+      .filter((u) => u.length > 0 && u.length <= MAX_URL);
+  } else if (typeof input === "string") {
+    urls = input
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .filter((u) => u.length > 0 && u.length <= MAX_URL);
+  } else return null;
+  urls = urls.slice(0, MAX_PHOTOS);
+  if (urls.length === 0) return null;
+  return JSON.stringify(urls);
+}
+
+function normalizeContact(input: unknown): string | null {
+  if (input == null) return null;
+  if (typeof input !== "object" || input === null) return null;
+  const o = input as Record<string, unknown>;
+  const out: Record<string, string> = {};
+  const keys = [
+    "telephone",
+    "email",
+    "site_web",
+    "adresse",
+    "ville",
+    "chef_nom",
+    "nom_restaurant",
+  ] as const;
+  for (const k of keys) {
+    const v = o[k];
+    if (v == null) continue;
+    const s = String(v).trim();
+    if (s === "") continue;
+    out[k] = s.length > 500 ? s.slice(0, 500) : s;
+  }
+  if (Object.keys(out).length === 0) return null;
+  return JSON.stringify(out);
+}
+
+export async function onRequest(context: {
+  request: Request;
+  env: { DB?: D1Db; ADMIN_SESSION_SECRET?: string };
+}): Promise<Response> {
+  const db = context.env.DB;
+  if (!db) {
+    return Response.json(
+      { error: "D1 non configuré (binding DB manquant)." },
+      { status: 500 }
+    );
+  }
+
+  const authed = await isAdminRequest(
+    context.request,
+    context.env.ADMIN_SESSION_SECRET
+  );
+
+  const url = new URL(context.request.url);
+  const idParam = url.searchParams.get("id");
+  const id = idParam != null ? Number(idParam) : NaN;
+  if (!Number.isFinite(id) || id <= 0) {
+    return Response.json({ error: "Paramètre id invalide." }, { status: 400 });
+  }
+
+  if (context.request.method === "GET") {
+    if (!authed) {
+      return Response.json({ error: "Non authentifié." }, { status: 401 });
+    }
+    try {
+      const row = await db
+        .prepare(
+          `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, updated_at
+           FROM etablissement_fiches WHERE etablissement_id = ?`
+        )
+        .bind(id)
+        .first<{
+          etablissement_id: number;
+          description_text: string | null;
+          photos_json: string | null;
+          menu_prix: string | null;
+          video_url: string | null;
+          contact_json: string | null;
+          updated_at: string | null;
+        }>();
+      if (!row) {
+        return Response.json({
+          etablissement_id: id,
+          description_text: null,
+          photos_json: null,
+          menu_prix: null,
+          video_url: null,
+          contact_json: null,
+          updated_at: null,
+        });
+      }
+      return Response.json(row);
+    } catch (e) {
+      const msg =
+        e instanceof Error ? e.message : "Erreur lecture fiche éditoriale.";
+      if (msg.includes("no such table") || msg.includes("SQLITE_ERROR")) {
+        return Response.json(
+          {
+            error:
+              "Table etablissement_fiches absente. Exécutez la migration : data/migration-etablissement-fiches.sql",
+          },
+          { status: 500 }
+        );
+      }
+      return Response.json({ error: msg }, { status: 500 });
+    }
+  }
+
+  if (context.request.method === "PUT") {
+    if (!authed) {
+      return Response.json({ error: "Non authentifié." }, { status: 401 });
+    }
+    let body: Record<string, unknown>;
+    try {
+      body = (await context.request.json()) as Record<string, unknown>;
+    } catch {
+      return Response.json({ error: "Corps JSON invalide." }, { status: 400 });
+    }
+    const bodyId = Number(body.etablissement_id ?? body.id);
+    if (!Number.isFinite(bodyId) || bodyId !== id) {
+      return Response.json(
+        { error: "etablissement_id incohérent avec l’URL." },
+        { status: 400 }
+      );
+    }
+
+    const description_text = clampStr(body.description_text, MAX_DESC);
+    const photos_json = normalizePhotos(body.photos_json ?? body.photos);
+    const menu_prix = clampStr(body.menu_prix, MAX_MENU);
+    const video_url = clampStr(body.video_url, MAX_URL);
+    const contact_json = normalizeContact(body.contact_json ?? body.contact);
+
+    try {
+      await db
+        .prepare(
+          `INSERT INTO etablissement_fiches (etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, datetime('now'))
+           ON CONFLICT(etablissement_id) DO UPDATE SET
+             description_text = excluded.description_text,
+             photos_json = excluded.photos_json,
+             menu_prix = excluded.menu_prix,
+             video_url = excluded.video_url,
+             contact_json = excluded.contact_json,
+             updated_at = excluded.updated_at`
+        )
+        .bind(
+          id,
+          description_text,
+          photos_json,
+          menu_prix,
+          video_url,
+          contact_json
+        )
+        .run();
+      return Response.json({ ok: true });
+    } catch (e) {
+      const msg =
+        e instanceof Error ? e.message : "Erreur enregistrement fiche.";
+      if (msg.includes("no such table") || msg.includes("SQLITE_ERROR")) {
+        return Response.json(
+          {
+            error:
+              "Table etablissement_fiches absente. Exécutez la migration : data/migration-etablissement-fiches.sql",
+          },
+          { status: 500 }
+        );
+      }
+      return Response.json({ error: msg }, { status: 500 });
+    }
+  }
+
+  return new Response(null, { status: 405 });
+}

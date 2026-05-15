@@ -1,21 +1,18 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import {
-  Utensils,
-  Star,
-  Phone,
-  Mail,
-  Search,
-  ChefHat,
-  Sparkles,
-} from "lucide-react";
-import { sampleRestaurants } from "@/data/sampleRestaurants";
+import Image from "next/image";
+import Link from "next/link";
+import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { motion, useReducedMotion } from "framer-motion";
+import { Star, ChefHat, Sparkles, ChevronUp } from "lucide-react";
 import { filterRestaurants } from "@/lib/filterRestaurants";
-import { mapEtablissementApiRow } from "@/lib/mapEtablissementApiRow";
-import RestaurantMapPanel, {
-  type GeoOnglet,
-} from "@/components/RestaurantMapPanel";
+import { fetchRestaurantsForApp } from "@/lib/fetchRestaurantsForApp";
+import RestaurantFicheDetails from "@/components/RestaurantFicheDetails";
+import RestaurantMapPanel from "@/components/RestaurantMapPanel";
+import SiteHeader from "@/components/SiteHeader";
+import ChefCard from "@/components/ChefCard";
+import { googleDirectionsUrl, googleStreetViewUrl } from "@/lib/mapsLinks";
 import type { MenuFiltre, Restaurant } from "@/types/restaurant";
 
 const MENU: { id: MenuFiltre; label: string; icon?: typeof Star }[] = [
@@ -26,222 +23,532 @@ const MENU: { id: MenuFiltre; label: string; icon?: typeof Star }[] = [
   { id: "1", label: "1 étoile", icon: Star },
 ];
 
+const listContainer = {
+  hidden: {},
+  visible: {
+    transition: { staggerChildren: 0.045, delayChildren: 0.05 },
+  },
+};
+
+const listItem = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.42, ease: [0.22, 1, 0.36, 1] },
+  },
+};
+
+const listItemReduced = {
+  hidden: { opacity: 1 },
+  visible: { opacity: 1 },
+};
+
+/** Jusqu’à `n` établissements choisis au hasard (ordre différent à chaque chargement des données). */
+function pickRandomRestaurants(list: Restaurant[], n: number): Restaurant[] {
+  if (list.length === 0) return [];
+  if (list.length <= n) return [...list];
+  const a = [...list];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
+
 export default function Home() {
+  const router = useRouter();
+  const reduceMotion = useReducedMotion();
+  const itemVariants = reduceMotion ? listItemReduced : listItem;
+
   const [filtre, setFiltre] = useState<MenuFiltre>("tous");
+  const [topChefSaison, setTopChefSaison] = useState<number | null>(null);
   const [recherche, setRecherche] = useState("");
-  const [rows, setRows] = useState<Restaurant[]>(sampleRestaurants);
-  const [source, setSource] = useState<"d1" | "demo">("demo");
+  const [rows, setRows] = useState<Restaurant[]>([]);
+  const [source, setSource] = useState<"d1" | "demo" | "local-dev">("demo");
+  const [fetchDone, setFetchDone] = useState(false);
+  const [apiHint, setApiHint] = useState<string | null>(null);
   const [selectedId, setSelectedId] = useState<number | null>(null);
-  const [onglet, setOnglet] = useState<GeoOnglet>("carte");
+  /** La carte et la liste complète ne s’affichent qu’après « Carte des Chefs ». */
+  const [showMap, setShowMap] = useState(false);
+
+  useEffect(() => {
+    if (filtre !== "top-chef") setTopChefSaison(null);
+  }, [filtre]);
+
+  const skipFiltreMapScroll = useRef(true);
+  useEffect(() => {
+    if (!showMap) return;
+    if (skipFiltreMapScroll.current) {
+      skipFiltreMapScroll.current = false;
+      return;
+    }
+    setSelectedId(null);
+    requestAnimationFrame(() => {
+      document.getElementById("carte-etablissements")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  }, [filtre, topChefSaison, showMap]);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      try {
-        const res = await fetch("/api/etablissements", { cache: "no-store" });
-        if (!res.ok) throw new Error(String(res.status));
-        const data: unknown = await res.json();
-        if (!Array.isArray(data)) throw new Error("bad json");
-        const mapped = data
-          .map((x) =>
-            mapEtablissementApiRow(x as Record<string, unknown>)
-          )
-          .filter((x): x is Restaurant => x != null);
-        if (cancelled) return;
-        if (mapped.length > 0) {
-          setRows(mapped);
-          setSource("d1");
-        } else {
-          setRows(sampleRestaurants);
-          setSource("demo");
-        }
-      } catch {
-        if (!cancelled) {
-          setRows(sampleRestaurants);
-          setSource("demo");
-        }
-      }
+      const { rows: list, source: src, apiHint: hint } =
+        await fetchRestaurantsForApp();
+      if (cancelled) return;
+      setRows(list);
+      setSource(src);
+      setApiHint(hint);
+      setFetchDone(true);
     })();
     return () => {
       cancelled = true;
     };
   }, []);
 
+  const rechercheDeferred = useDeferredValue(recherche);
   const affiche = useMemo(
-    () => filterRestaurants(rows, filtre, recherche),
-    [rows, filtre, recherche]
+    () =>
+      filterRestaurants(rows, filtre, rechercheDeferred, topChefSaison),
+    [rows, filtre, rechercheDeferred, topChefSaison]
   );
 
-  useEffect(() => {
-    if (affiche.length === 0) {
-      setSelectedId(null);
-      return;
+  const dixAleatoires = useMemo(
+    () => pickRandomRestaurants(affiche, 10),
+    [affiche]
+  );
+
+  const scrollToCarte = () => {
+    setShowMap(true);
+    requestAnimationFrame(() => {
+      document.getElementById("carte-etablissements")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
+
+  /** Sélection affichée : garde l’intention utilisateur si l’id est encore dans la liste, sinon première fiche. */
+  const effectiveSelectedId = useMemo(() => {
+    if (affiche.length === 0) return null;
+    if (selectedId != null && affiche.some((r) => r.id === selectedId)) {
+      return selectedId;
     }
-    setSelectedId((prev) =>
-      prev != null && affiche.some((r) => r.id === prev) ? prev : affiche[0].id
-    );
+    return affiche[0].id;
+  }, [affiche, selectedId]);
+
+  const afficheRef = useRef(affiche);
+  useEffect(() => {
+    afficheRef.current = affiche;
   }, [affiche]);
 
+  /** Défile la liste seulement après un choix explicite (fiche ou liste déroulante), pas au changement de filtre. */
+  useEffect(() => {
+    if (selectedId == null) return;
+    if (!afficheRef.current.some((r) => r.id === selectedId)) return;
+    const el = document.getElementById(`liste-fiche-${selectedId}`);
+    if (!el) return;
+    requestAnimationFrame(() => {
+      el.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "nearest",
+      });
+    });
+  }, [selectedId]);
+
+  const listAnimKey = `${filtre}-${rechercheDeferred}-${
+    filtre === "top-chef" ? String(topChefSaison ?? "all") : ""
+  }`;
+
   return (
-    <main className="min-h-screen bg-gray-50 p-4 sm:p-8">
-      <header className="mx-auto mb-8 max-w-6xl">
-        <h1 className="flex items-center gap-3 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-          <Utensils className="shrink-0 text-red-600" /> L&apos;Annuaire des
-          Chefs
-        </h1>
-        <p className="mt-2 text-gray-500">
-          Top Chef et tables Michelin : filtrez par étoiles ou recherchez une
-          ville, un chef ou un restaurant.
-        </p>
-        <p
-          className={`mt-1 text-xs ${source === "d1" ? "text-emerald-700" : "text-amber-800"}`}
-        >
-          {source === "d1"
-            ? "Données chargées depuis la base D1 (établissements)."
-            : "Données de démonstration : l’API /api/etablissements est indisponible, vide, ou vous êtes en next dev sans Pages Functions."}
-        </p>
-
-        <nav
-          className="mt-6 flex flex-wrap gap-2 border-b border-gray-200 pb-4"
-          aria-label="Filtrer par catégorie"
-        >
-          {MENU.map((item) => {
-            const Icon = item.icon ?? Star;
-            const actif = filtre === item.id;
-            return (
-              <button
-                key={item.id}
-                type="button"
-                onClick={() => setFiltre(item.id)}
-                className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-                  actif
-                    ? "bg-red-600 text-white shadow-md ring-2 ring-red-600 ring-offset-2"
-                    : "bg-white text-gray-700 shadow hover:bg-gray-50"
-                }`}
-              >
-                <Icon
-                  className="h-4 w-4 shrink-0"
-                  fill={item.id !== "tous" && actif ? "currentColor" : "none"}
-                />
-                {item.label}
-              </button>
-            );
-          })}
-        </nav>
-      </header>
-
-      <section className="mx-auto grid max-w-6xl grid-cols-1 gap-8 lg:grid-cols-3">
-        <div className="flex flex-col gap-4 lg:col-span-2">
-          <div className="relative">
-            <Search
-              className="pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400"
-              aria-hidden
-            />
-            <input
-              type="search"
-              value={recherche}
-              onChange={(e) => setRecherche(e.target.value)}
-              placeholder="Ville, chef, restaurant, « Top Chef », « 3 étoiles »…"
-              className="w-full rounded-xl border border-gray-200 bg-white py-3 pl-11 pr-4 text-gray-900 shadow-sm outline-none ring-red-200 transition placeholder:text-gray-400 focus:border-red-300 focus:ring-2"
-              aria-label="Rechercher sur la carte"
+    <>
+      <section aria-label="Paris la nuit" className="relative w-full">
+        <div className="relative min-h-[100svh] w-full bg-black">
+          <div className="absolute inset-0 overflow-hidden">
+            <Image
+              src="/hero-caption.jpg"
+              alt=""
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-center"
             />
           </div>
-
-          <RestaurantMapPanel
-            restaurants={affiche}
-            selectedId={selectedId}
-            onSelectId={setSelectedId}
-            onglet={onglet}
-            onOnglet={setOnglet}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/55"
           />
 
-          <p className="text-center text-sm text-gray-500">
-            {affiche.length === 0
-              ? "Aucun établissement ne correspond aux critères."
-              : `${affiche.length} établissement${affiche.length > 1 ? "s" : ""} affiché${affiche.length > 1 ? "s" : ""}`}
-            {recherche.trim() || filtre !== "tous"
-              ? " — filtre ou recherche actif."
-              : ""}
-          </p>
-        </div>
+          <SiteHeader
+            position="absolute"
+            overPhoto
+            value={recherche}
+            onChange={setRecherche}
+            filtre={filtre}
+            onFiltre={setFiltre}
+            topChefSaison={topChefSaison}
+            onTopChefSaison={setTopChefSaison}
+            onCarte={scrollToCarte}
+          />
 
-        <aside className="max-h-[640px] overflow-y-auto rounded-xl bg-white p-6 shadow-md">
-          <h2 className="mb-4 flex items-center gap-2 text-xl font-bold">
-            <Star className="text-yellow-500" fill="currentColor" /> Liste
-          </h2>
-          {affiche.length === 0 ? (
-            <p className="text-sm text-gray-500">
-              Aucun résultat. Essayez un autre filtre ou une autre recherche.
+          <div className="pointer-events-none absolute inset-0 z-[1] flex min-h-[100svh] flex-col pt-[min(30vh,14rem)] sm:pt-[min(26vh,12rem)] md:pt-[min(24vh,11rem)]">
+            <div className="flex flex-1 flex-col items-center justify-center px-5 pb-16 text-center sm:px-8 sm:pb-24">
+              <h1 className="max-w-5xl font-sans text-[2rem] font-bold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_32px_rgba(0,0,0,0.88)]">
+                L&apos;annuaire des Grands Chefs
+              </h1>
+              <p className="mt-5 max-w-3xl font-sans text-base font-light leading-relaxed text-white/95 sm:mt-6 sm:text-xl md:text-2xl [text-shadow:0_1px_16px_rgba(0,0,0,0.8)]">
+                Trouvez facilement les restaurants des chefs étoilés Michelin,
+                des candidats Top Chef et explorez la carte des tables.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <button
+        type="button"
+        className="fixed bottom-[max(1rem,env(safe-area-inset-bottom))] right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full border border-[var(--rc-glass-border)] bg-[var(--rc-glass)] text-[var(--rc-gold)] shadow-[var(--rc-shadow)] backdrop-blur-xl backdrop-saturate-150 transition hover:border-[var(--rc-gold)] hover:bg-[var(--rc-gold-soft)] active:scale-95 lg:hidden"
+        aria-label={
+          showMap ? "Remonter à la carte" : "Afficher la carte des chefs"
+        }
+        onClick={() => {
+          if (showMap) {
+            document.getElementById("carte-etablissements")?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          } else {
+            scrollToCarte();
+          }
+        }}
+      >
+        <ChevronUp
+          className="h-6 w-6 text-[var(--rc-gold)]"
+          strokeWidth={2}
+          aria-hidden
+        />
+      </button>
+
+      <main className="min-h-screen bg-rc-page pb-12 max-lg:pb-28">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <header className="mb-8 border-b border-[var(--rc-border)] pb-8 pt-8 sm:mb-10 sm:pb-10 sm:pt-10">
+            <p className="text-xs font-medium uppercase tracking-[0.32em] text-[var(--rc-text-muted)]">
+              Sélection
             </p>
-          ) : (
-            <ul className="divide-y divide-gray-100">
-              {affiche.map((restau) => {
-                const sel = selectedId === restau.id;
+            <h1 className="mt-2 font-display text-[1.75rem] font-semibold leading-[1.15] tracking-tight text-[var(--rc-text)] sm:text-[2.35rem] sm:leading-[1.12]">
+              L&apos;annuaire des Grands Chefs
+            </h1>
+            <p className="mt-3 max-w-2xl font-light leading-relaxed text-[var(--rc-text-muted)] sm:text-[1.0625rem]">
+              Tables Michelin et maisons Top Chef : explorez la carte, affinez
+              par étoiles ou recherchez par ville, département ou chef.
+            </p>
+
+            {!fetchDone ? (
+              <p className="mt-4 text-xs font-light text-[var(--rc-gold)]">
+                Chargement des données…
+              </p>
+            ) : source === "d1" ? null : (
+              <p
+                className={`mt-4 text-xs font-light leading-relaxed ${
+                  source === "local-dev"
+                    ? "text-[var(--rc-text-muted)]"
+                    : "text-[var(--rc-ruby)]"
+                }`}
+              >
+                {source === "local-dev"
+                  ? "Développement local : l’API Cloudflare n’est pas servie ici — données de référence du dépôt. Pour D1 : npm run pages:dev."
+                  : "Mode démonstration : l’API n’a pas renvoyé d’établissements exploitables. Pour un jeu de démo : npm run db:seed:demo."}
+              </p>
+            )}
+            {fetchDone && apiHint != null && source !== "local-dev" ? (
+              <p className="mt-2 max-w-2xl text-xs font-light leading-relaxed text-[var(--rc-ruby)]">
+                {apiHint}
+              </p>
+            ) : null}
+
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              {!showMap && fetchDone && rows.length > 0 ? (
+                <button
+                  type="button"
+                  onClick={scrollToCarte}
+                  className="inline-flex items-center rounded-full border border-[var(--rc-gold)] bg-[var(--rc-gold-soft)] px-4 py-2 text-xs font-medium uppercase tracking-[0.14em] text-[var(--rc-text)] transition hover:bg-[var(--rc-gold)] hover:text-white sm:text-[0.8125rem]"
+                >
+                  Carte des chefs
+                </button>
+              ) : null}
+            </div>
+
+            <nav
+              className="mt-8 flex flex-wrap gap-2"
+              aria-label="Filtrer par catégorie"
+            >
+              {MENU.map((item) => {
+                const Icon = item.icon ?? Star;
+                const actif = filtre === item.id;
+                const isTopChef = item.id === "top-chef";
+                const isStar =
+                  item.id === "1" || item.id === "2" || item.id === "3";
                 return (
-                  <li key={restau.id}>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setSelectedId(restau.id);
-                        setOnglet("carte");
-                      }}
-                      className={`w-full rounded-lg py-4 pl-1 pr-1 text-left transition first:pt-0 ${
-                        sel
-                          ? "bg-red-50 ring-2 ring-red-200 ring-offset-2"
-                          : "hover:bg-gray-50"
-                      }`}
-                    >
-                  <p className="text-xs font-medium uppercase text-gray-400">
-                    {restau.ville}
-                    {restau.top_chef && (
-                      <span className="ml-2 rounded bg-orange-100 px-1.5 py-0.5 text-orange-800">
-                        Top Chef
-                      </span>
-                    )}
-                  </p>
-                  <h3 className="font-semibold text-gray-900">
-                    {restau.chef_nom}
-                  </h3>
-                  <p className="text-sm italic text-gray-600">
-                    {restau.nom_restaurant}
-                  </p>
-                  {restau.etoiles_michelin > 0 && (
-                    <p className="mt-1 text-xs text-amber-700">
-                      {restau.etoiles_michelin}{" "}
-                      {restau.etoiles_michelin > 1 ? "étoiles" : "étoile"}{" "}
-                      Michelin
-                    </p>
-                  )}
-                  <div className="mt-3 flex gap-2">
-                    {restau.telephone ? (
-                      <a
-                        href={`tel:${restau.telephone.replace(/\s/g, "")}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
-                        aria-label={`Téléphone du restaurant ${restau.nom_restaurant}`}
-                      >
-                        <Phone size={18} />
-                      </a>
-                    ) : null}
-                    {restau.email ? (
-                      <a
-                        href={`mailto:${restau.email}`}
-                        onClick={(e) => e.stopPropagation()}
-                        className="rounded-full bg-gray-100 p-2 transition hover:bg-gray-200"
-                        aria-label={`E-mail du restaurant ${restau.nom_restaurant}`}
-                      >
-                        <Mail size={18} />
-                      </a>
-                    ) : null}
-                  </div>
-                    </button>
-                  </li>
+                  <button
+                    key={item.id}
+                    type="button"
+                    onClick={() => setFiltre(item.id)}
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2.5 text-xs uppercase tracking-[0.14em] transition sm:text-[0.8125rem] ${
+                      actif
+                        ? `font-medium ${
+                            isTopChef
+                              ? "border-[var(--rc-ruby)] bg-[var(--rc-ruby)] text-white shadow-md"
+                              : isStar
+                                ? "border-[var(--rc-gold)] bg-[var(--rc-gold)] text-white shadow-md"
+                                : "border-[var(--rc-text)] bg-[var(--rc-text)] text-[var(--rc-page-bg)] shadow-md"
+                          }`
+                        : "font-light border-[var(--rc-border)] bg-[var(--rc-surface)] text-[var(--rc-text-muted)] hover:border-[var(--rc-border-strong)] hover:text-[var(--rc-text)]"
+                    }`}
+                  >
+                    <Icon
+                      className="h-4 w-4 shrink-0"
+                      fill={item.id !== "tous" && actif ? "currentColor" : "none"}
+                      strokeWidth={1.75}
+                    />
+                    {item.label}
+                  </button>
                 );
               })}
-            </ul>
-          )}
-        </aside>
-      </section>
-    </main>
+            </nav>
+
+            <div
+              className="relative mt-6 w-full max-w-2xl sm:mt-8"
+              role="search"
+              aria-label="Affiner la recherche"
+            >
+              <Image
+                src="/top-chef-icon.png"
+                alt=""
+                width={192}
+                height={192}
+                className="pointer-events-none absolute left-2.5 top-1/2 z-[1] h-7 w-7 -translate-y-1/2 rounded-md object-contain sm:left-3 sm:h-8 sm:w-8"
+                aria-hidden
+              />
+              <input
+                type="search"
+                value={recherche}
+                onChange={(e) => setRecherche(e.target.value)}
+                placeholder="Ville, département, chef, restaurant…"
+                className="w-full rounded-xl border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] py-2.5 pl-11 pr-3 text-sm font-light text-[var(--rc-text)] outline-none transition placeholder:text-[var(--rc-text-muted)] focus:border-[var(--rc-gold)] focus:ring-2 focus:ring-[var(--rc-gold-soft)] sm:py-3 sm:pl-[3.25rem] sm:text-[0.9375rem] md:pl-14"
+                aria-label="Rechercher près de la carte"
+              />
+            </div>
+          </header>
+
+          <section className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
+            {!showMap ? (
+              <div
+                id="selection-aleatoire"
+                className="scroll-mt-6 space-y-6 lg:col-span-3"
+              >
+                <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                  <h2 className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-[var(--rc-text)] sm:text-2xl">
+                    <Sparkles
+                      className="h-5 w-5 text-[var(--rc-gold)]"
+                      strokeWidth={1.75}
+                      aria-hidden
+                    />
+                    10 tables au hasard
+                  </h2>
+                  <p className="max-w-xl text-sm font-light text-[var(--rc-text-muted)]">
+                    Un aperçu de l’annuaire. Utilisez les filtres puis{" "}
+                    <button
+                      type="button"
+                      onClick={scrollToCarte}
+                      className="font-medium text-[var(--rc-ruby)] underline-offset-2 hover:underline"
+                    >
+                      Carte des chefs
+                    </button>{" "}
+                    pour afficher la carte et toute la liste.
+                  </p>
+                </div>
+
+                {!fetchDone ? (
+                  <p className="text-sm font-light text-[var(--rc-gold)]">
+                    Chargement des fiches…
+                  </p>
+                ) : affiche.length === 0 ? (
+                  <p className="text-sm font-light text-[var(--rc-text-muted)]">
+                    Aucun résultat avec ces critères. Ajustez la recherche ou les
+                    filtres pour afficher des fiches, puis ouvrez la carte des
+                    chefs.
+                  </p>
+                ) : (
+                  <ul className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 xl:grid-cols-2">
+                    {dixAleatoires.map((restau) => (
+                      <li key={restau.id} className="scroll-mt-6">
+                        <div className="overflow-hidden rounded-[var(--rc-radius-xl)] border border-[var(--rc-border)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 hover:border-[var(--rc-border-strong)]">
+                          <ChefCard
+                            restaurant={restau}
+                            onSelect={() =>
+                              router.push(`/restaurant?id=${restau.id}`)
+                            }
+                          />
+                          <RestaurantFicheDetails restaurant={restau} />
+                          <div
+                            className="flex gap-1 border-t border-[var(--rc-border)] bg-[var(--rc-surface)] p-1"
+                            role="tablist"
+                            aria-label={`Plans — ${restau.nom_restaurant}`}
+                          >
+                            <a
+                              href={googleDirectionsUrl(
+                                restau.latitude,
+                                restau.longitude
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex flex-1 items-center justify-center rounded-lg bg-[var(--rc-page-bg)] px-2 py-2.5 text-center text-xs font-light uppercase tracking-[0.12em] text-[var(--rc-text)] transition hover:bg-[var(--rc-gold-soft)]"
+                            >
+                              Itinéraire
+                            </a>
+                            <a
+                              href={googleStreetViewUrl(
+                                restau.latitude,
+                                restau.longitude
+                              )}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex flex-1 items-center justify-center rounded-lg bg-[var(--rc-page-bg)] px-2 py-2.5 text-center text-xs font-light uppercase tracking-[0.12em] text-[var(--rc-text)] transition hover:bg-[var(--rc-gold-soft)]"
+                            >
+                              Street View
+                            </a>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ) : (
+              <>
+                <div
+                  id="carte-etablissements"
+                  className="flex min-w-0 scroll-mt-6 flex-col gap-6 lg:col-span-2"
+                >
+                  <RestaurantMapPanel
+                    restaurants={affiche}
+                    selectedId={effectiveSelectedId}
+                    onSelectId={setSelectedId}
+                  />
+
+                  <p className="text-center text-sm font-light text-[var(--rc-text-muted)]">
+                    {affiche.length === 0
+                      ? "Aucun établissement ne correspond aux critères."
+                      : `${affiche.length} établissement${affiche.length > 1 ? "s" : ""} affiché${affiche.length > 1 ? "s" : ""}`}
+                    {recherche.trim() || filtre !== "tous"
+                      ? " — filtre ou recherche actif."
+                      : ""}
+                  </p>
+                </div>
+
+                <aside
+                  id="liste-tables"
+                  className="min-h-0 scroll-mt-6 lg:max-h-[min(85vh,920px)] lg:overflow-y-auto"
+                >
+                  <div className="sticky top-24 space-y-5">
+                    <h2 className="flex items-center gap-2 font-display text-xl font-semibold tracking-tight text-[var(--rc-text)] sm:text-2xl">
+                      <Star
+                        className="h-5 w-5 text-[var(--rc-gold)]"
+                        fill="currentColor"
+                        strokeWidth={0}
+                        aria-hidden
+                      />
+                      Tables
+                    </h2>
+
+                    {affiche.length === 0 ? (
+                      <p className="text-sm font-light leading-relaxed text-[var(--rc-text-muted)]">
+                        Aucun résultat. Essayez un autre filtre ou une autre
+                        recherche.
+                      </p>
+                    ) : (
+                      <motion.ul
+                        key={listAnimKey}
+                        className="flex flex-col gap-5 pb-8"
+                        variants={listContainer}
+                        initial="hidden"
+                        animate="visible"
+                      >
+                        {affiche.map((restau) => {
+                          const highlighted = selectedId === restau.id;
+                          return (
+                            <motion.li
+                              id={`liste-fiche-${restau.id}`}
+                              key={restau.id}
+                              className="scroll-mt-6"
+                              variants={itemVariants}
+                            >
+                              <div
+                                className={`overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 ${
+                                  highlighted
+                                    ? "border border-[var(--rc-gold)] ring-2 ring-[var(--rc-gold-soft)] ring-offset-2 ring-offset-[var(--rc-page-bg)]"
+                                    : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
+                                }`}
+                              >
+                                <ChefCard
+                                  restaurant={restau}
+                                  onSelect={() =>
+                                    router.push(`/restaurant?id=${restau.id}`)
+                                  }
+                                />
+                                <RestaurantFicheDetails restaurant={restau} />
+                                <div
+                                  className="flex gap-1 border-t border-[var(--rc-border)] bg-[var(--rc-surface)] p-1"
+                                  role="tablist"
+                                  aria-label={`Plans — ${restau.nom_restaurant}`}
+                                >
+                                  <a
+                                    href={googleDirectionsUrl(
+                                      restau.latitude,
+                                      restau.longitude
+                                    )}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex flex-1 items-center justify-center rounded-lg bg-[var(--rc-page-bg)] px-2 py-2.5 text-center text-xs font-light uppercase tracking-[0.12em] text-[var(--rc-text)] transition hover:bg-[var(--rc-gold-soft)]"
+                                  >
+                                    Itinéraire
+                                  </a>
+                                  <a
+                                    href={googleStreetViewUrl(
+                                      restau.latitude,
+                                      restau.longitude
+                                    )}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex flex-1 items-center justify-center rounded-lg bg-[var(--rc-page-bg)] px-2 py-2.5 text-center text-xs font-light uppercase tracking-[0.12em] text-[var(--rc-text)] transition hover:bg-[var(--rc-gold-soft)]"
+                                  >
+                                    Street View
+                                  </a>
+                                </div>
+                              </div>
+                            </motion.li>
+                          );
+                        })}
+                      </motion.ul>
+                    )}
+                  </div>
+                </aside>
+              </>
+            )}
+          </section>
+        </div>
+        <p className="mt-10 border-t border-[var(--rc-border)] pt-8 text-center text-xs font-light text-[var(--rc-text-muted)]">
+          <Link
+            href="/admin"
+            className="text-[var(--rc-text-muted)] underline-offset-2 hover:text-[var(--rc-text)] hover:underline"
+          >
+            Administration des fiches
+          </Link>
+        </p>
+      </main>
+    </>
   );
 }

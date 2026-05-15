@@ -1,0 +1,5566 @@
+{
+  "meta": {
+    "genere_le": "2026-05-14T08:55:56.701Z",
+    "fichier_csv": "data/france_complete_2024.csv",
+    "fichier_manuel": "data/topchef-restaurants-manual.json",
+    "score_minimum_insert_sql": 52,
+    "note": "Les INSERT SQL ne retiennent que le meilleur match CSV si score >= 52, plus les entrées manuelles non dupliquées."
+  },
+  "resume": {
+    "total_candidats": 251,
+    "avec_etablissement_geolocalise": 145,
+    "sans_etablissement": 106
+  },
+  "noms_sans_etablissement": [
+    "Aboubakar Bamba",
+    "Abraham de la Rosa",
+    "Adrien Clauwaert",
+    "Adrien Demametz",
+    "Albane Auvray",
+    "Alexia Duchêne",
+    "Alexia Jolivet",
+    "Alexis Braconnier",
+    "Amélie Langlais",
+    "Anaïs Catherine",
+    "Anne-Cécile Degenne",
+    "Arnaud Baptiste",
+    "Arnaud Delvenne",
+    "Arnaud Munster",
+    "Aurélien Coutaudier",
+    "Benjamin Darnaud",
+    "Benjamin Kalifa",
+    "Bérangère Fagart",
+    "Brice Morvent",
+    "Bryan Debouche",
+    "Carl Gillain",
+    "Carla Ferrari",
+    "César Lewandowski",
+    "Charles Gantois",
+    "Charline Stengel",
+    "Chloé Charles",
+    "Clotaire Poirier",
+    "Coline Faulquier",
+    "Cyrille Zen",
+    "Danny Khezzar",
+    "Diego Alary",
+    "Dieuveil Malonga",
+    "Elliott Van de Velde",
+    "Étienne Geney",
+    "Fabien Morreale",
+    "Fatimata Amadou",
+    "Flora Lamoure",
+    "Florent Pietravalle",
+    "Florian Barbarot",
+    "Florian Chatelard",
+    "Franckelie Laloum",
+    "Gaston Savina",
+    "Geoffrey Degros",
+    "Giacinta Trivero",
+    "Gianmarco Gorni",
+    "Gratien Leroy",
+    "Grégory Cuilleron",
+    "Grégory Delobe",
+    "Harmony Brioude",
+    "Hugo Riboulet",
+    "Ibrahim Kharbach",
+    "Jean-Baptiste Ascione",
+    "Jean-Edern Hurstel",
+    "Jean-Philippe Watteyne",
+    "Jennifer Taïeb",
+    "Jérémie Falissard",
+    "Jordan Vignal",
+    "Jordan Yuste",
+    "Jorick Dorignac",
+    "Joris Bijdendijk",
+    "Justine Piluso",
+    "Kévin d'Andréa",
+    "Kevin Roquet",
+    "Kilian Franceschi",
+    "Léo Renusson",
+    "Logan Depuydt",
+    "Maël Paranthoen",
+    "Marion Lefebvre",
+    "Marjorie Maltais",
+    "Mathew Hegarty",
+    "Maximilien Dienst",
+    "Merouan Bounekraf",
+    "Mickaël Braure",
+    "Mickaël Riss",
+    "Miguel Garcia-Herrera",
+    "Mory Sacko",
+    "Nastasia Lyard",
+    "Noé Pellet",
+    "Noëmie Honiat",
+    "Pascal Barandoni",
+    "Pauline Berghonnier",
+    "Pauline Séné",
+    "Pavel Hug",
+    "Philippine Jaillet",
+    "Pierre Eon",
+    "Quentin Bourdy",
+    "Quentin Maufrais",
+    "Romain Tischenko",
+    "Ruben Sarfati",
+    "Sacha Boyadjian",
+    "Sarika Sor",
+    "Sean Gabbiani",
+    "Sébastien Oger",
+    "Shirley Duthilleux",
+    "Tania Cadeddu",
+    "Tara Khattar",
+    "Thibaud Erard-Penguilly",
+    "Thibault Barbafieri",
+    "Thibault Marchand",
+    "Tiffany Depardieu",
+    "Valentin Néraudeau",
+    "Virginie Martinetti",
+    "Wilfried Graux",
+    "Wilfried Romain",
+    "Yoaké San",
+    "Yohei Hosaka"
+  ],
+  "candidats": [
+    {
+      "nom": "Aboubakar Bamba",
+      "saisons": [
+        17
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Abraham de la Rosa",
+      "saisons": [
+        2
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Adel Dakkar",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Casadelmar",
+          "ville": "Porto-Vecchio",
+          "adresse": "route de Palombaggia, Porto-Vecchio, 20137, France",
+          "latitude": 41.5948102,
+          "longitude": 9.3099771,
+          "etoiles_michelin": 2,
+          "url": "https://www.casadelmar.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Casadelmar",
+          "ville": "Porto-Vecchio"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Madeleine",
+          "ville": "Sens"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Les Mets d'Adélaïde",
+          "ville": "Castres"
+        }
+      ]
+    },
+    {
+      "nom": "Adrien Cachot",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Vaisseau",
+          "ville": "Paris",
+          "adresse": "35 rue Faidherbe, 75011 Paris, France",
+          "latitude": 48.8531937,
+          "longitude": 2.3825854,
+          "etoiles_michelin": 0,
+          "url": "https://www.restaurant-vaisseau.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Adrien Clauwaert",
+      "saisons": [
+        2
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Adrien Demametz",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Adrien Descouls",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Origines",
+          "ville": "Le Broc",
+          "adresse": "Rue du clos de la Chaux, 63500 Le Broc, France (Issoire)",
+          "latitude": 45.5014095,
+          "longitude": 3.2436174,
+          "etoiles_michelin": 1,
+          "url": "https://restaurant-origines.fr/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Adrien Zedda",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Culina Hortus",
+          "ville": "Lyon",
+          "adresse": "38 rue de l'Arbre Sec, 69001 Lyon, France",
+          "latitude": 45.7666794,
+          "longitude": 4.8373615,
+          "etoiles_michelin": 0,
+          "url": "https://www.culinahortus.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Albane Auvray",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Alexandre Dionisio",
+      "saisons": [
+        1
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille",
+          "adresse": "9 rue François-Rocca, Marseille, 13008, France",
+          "latitude": 43.2701104,
+          "longitude": 5.3862325,
+          "etoiles_michelin": 3,
+          "url": "https://www.alexandre-mazzia.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Michel Kayser - Restaurant Alexandre",
+          "ville": "Garons"
+        }
+      ]
+    },
+    {
+      "nom": "Alexandre Marchon",
+      "saisons": [
+        14
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille",
+          "adresse": "9 rue François-Rocca, Marseille, 13008, France",
+          "latitude": 43.2701104,
+          "longitude": 5.3862325,
+          "etoiles_michelin": 3,
+          "url": "https://www.alexandre-mazzia.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Michel Kayser - Restaurant Alexandre",
+          "ville": "Garons"
+        }
+      ]
+    },
+    {
+      "nom": "Alexandre Moormann",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille",
+          "adresse": "9 rue François-Rocca, Marseille, 13008, France",
+          "latitude": 43.2701104,
+          "longitude": 5.3862325,
+          "etoiles_michelin": 3,
+          "url": "https://www.alexandre-mazzia.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Michel Kayser - Restaurant Alexandre",
+          "ville": "Garons"
+        }
+      ]
+    },
+    {
+      "nom": "Alexandre Spinelli",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille",
+          "adresse": "9 rue François-Rocca, Marseille, 13008, France",
+          "latitude": 43.2701104,
+          "longitude": 5.3862325,
+          "etoiles_michelin": 3,
+          "url": "https://www.alexandre-mazzia.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "AM par Alexandre Mazzia",
+          "ville": "Marseille"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Michel Kayser - Restaurant Alexandre",
+          "ville": "Garons"
+        }
+      ]
+    },
+    {
+      "nom": "Alexia Duchêne",
+      "saisons": [
+        10
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Alexia Jolivet",
+      "saisons": [
+        17
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Alexis Braconnier",
+      "saisons": [
+        2,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Alexis Delassaux",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Luz Verde",
+          "ville": "Paris",
+          "adresse": "24 rue Henry Monnier, 75009 Paris, France",
+          "latitude": 48.8803935,
+          "longitude": 2.3376028,
+          "etoiles_michelin": 0,
+          "url": "https://luzverde.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Alexy Algar-Denos",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "L'Almandin",
+          "ville": "Saint-Cyprien",
+          "adresse": "Boulevard de l'Almandin, St-Cyprien Sud, Saint-Cyprien, 66750, France",
+          "latitude": 42.6095379,
+          "longitude": 3.036187,
+          "etoiles_michelin": 1,
+          "url": "https://www.almandin.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Ambroise Voreux",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Cabane à Matelot",
+          "ville": "Bréhémont",
+          "adresse": "19 avenue du 11 Novembre, 37130 Bréhémont, France",
+          "latitude": 47.295309,
+          "longitude": 0.353658,
+          "etoiles_michelin": 0,
+          "url": "https://les-pecheries-ligeriennes.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Amélie Langlais",
+      "saisons": [
+        3
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Anaïs Catherine",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Anicée Lacrouts",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Table",
+          "ville": "Veyrier-du-Lac",
+          "adresse": "13 vieille route des Pensières, 74290 Veyrier-du-Lac, France",
+          "latitude": 45.8889235,
+          "longitude": 6.1721868,
+          "etoiles_michelin": 2,
+          "url": "https://yoann-conte.com/la-table-de-yoann-conte/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Anissa Boulesteix",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Jardin Alpin (Cheval Blanc)",
+          "ville": "Courchevel",
+          "adresse": "Le Jardin Alpin, Courchevel 1850, 73120 Courchevel, France (Hôtel Cheval Blanc)",
+          "latitude": 45.4094877,
+          "longitude": 6.6338696,
+          "etoiles_michelin": 3,
+          "url": "https://www.chevalblanc.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Anne-Cécile Degenne",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Antoine Garcia",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Bistrot d'Antoine",
+          "ville": "Nice",
+          "adresse": "27 rue de la Préfecture, Nice, 06300, France",
+          "latitude": 43.69635,
+          "longitude": 7.2762832,
+          "etoiles_michelin": 1,
+          "url": null
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Clos des Sens",
+          "ville": "Annecy",
+          "adresse": "13 rue Jean-Mermoz - à Annecy-le-Vieux, Annecy, 74940, France",
+          "latitude": 45.9176317,
+          "longitude": 6.1445765,
+          "etoiles_michelin": 3,
+          "url": "https://www.closdessens.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Bistrot d'Antoine",
+          "ville": "Nice"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Bistrot d'Antoine",
+          "ville": "Strasbourg"
+        }
+      ]
+    },
+    {
+      "nom": "Arnaud Baptiste",
+      "saisons": [
+        12
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Arnaud Delvenne",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Arnaud Munster",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Arthur Vonderheyden",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Paul-Arthur",
+          "ville": "Rouen",
+          "adresse": "23-25 place de la Pucelle, Rouen, 76000, France",
+          "latitude": 49.4423399,
+          "longitude": 1.0884942,
+          "etoiles_michelin": 1,
+          "url": "http://www.paul-arthurrestaurant.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Paul-Arthur",
+          "ville": "Rouen"
+        }
+      ]
+    },
+    {
+      "nom": "Aurélien Coutaudier",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Baptiste Renouard",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Ochre",
+          "ville": "Rueil-Malmaison",
+          "adresse": "56 rue du Gué, 92500 Rueil-Malmaison, France",
+          "latitude": 48.8778387,
+          "longitude": 2.1830535,
+          "etoiles_michelin": 1,
+          "url": "https://ochre.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Baptiste Trudel",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Halo",
+          "ville": "Paris",
+          "adresse": "12 rue Saint-Sauveur, 75002 Paris, France",
+          "latitude": 48.8660178,
+          "longitude": 2.3488601,
+          "etoiles_michelin": 0,
+          "url": "https://www.halo-paris.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Benjamin Darnaud",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Benjamin Kalifa",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Bérangère Fagart",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Brice Morvent",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Bruno Aubin",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Table - Bruno Verjus",
+          "ville": "Paris",
+          "adresse": "3 rue de Prague, Paris, 75012, France",
+          "latitude": 48.8486151,
+          "longitude": 2.3759654,
+          "etoiles_michelin": 2,
+          "url": "http://www.table.paris"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Table - Bruno Verjus",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bruno",
+          "ville": "Lorgues"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines - Bruno Cirino",
+          "ville": "Nice"
+        }
+      ]
+    },
+    {
+      "nom": "Bryan Debouche",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Camille Delcroix",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Bacôve",
+          "ville": "Saint-Omer",
+          "adresse": "8 rue Caventou, 62500 Saint-Omer, France",
+          "latitude": 50.7482609,
+          "longitude": 2.2553606,
+          "etoiles_michelin": 1,
+          "url": "https://restaurant-bacove.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Camille Maury",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Maison Nouvelle",
+          "ville": "Bordeaux",
+          "adresse": "11 rue Rode, 33000 Bordeaux, France",
+          "latitude": 44.8524933,
+          "longitude": -0.5720934,
+          "etoiles_michelin": 2,
+          "url": "https://maison-nouvelle.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Carl Dutting",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Bella",
+          "ville": "Cannes",
+          "adresse": "2 rue Brougham, square Mistral, 06400 Cannes, France (Hôtel & Spa Belle Plage)",
+          "latitude": 43.549483,
+          "longitude": 7.007531,
+          "etoiles_michelin": 0,
+          "url": "https://www.hotelbelleplage.fr/fr/page/restaurant-rooftop-cannes.12413.html"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Carl Gillain",
+      "saisons": [
+        3
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Carla Ferrari",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "César Lewandowski",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Charles Gantois",
+      "saisons": [
+        7
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Charles Neyers",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Boréal",
+          "ville": "Paris",
+          "adresse": "39 rue Montcalm, 75018 Paris, France",
+          "latitude": 48.893816,
+          "longitude": 2.3390239,
+          "etoiles_michelin": 0,
+          "url": "https://www.leborealparis.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Charlie Anne",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Anne de Bretagne",
+          "ville": "La Plaine-sur-Mer",
+          "adresse": "Port de Gravette, La Plaine-sur-Mer, 44770, France",
+          "latitude": 47.1547317,
+          "longitude": -2.2134222,
+          "etoiles_michelin": 2,
+          "url": "http://www.annedebretagne.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Anne de Bretagne",
+          "ville": "La Plaine-sur-Mer"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Anne",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Anne & Matthieu Omont - Hôtel de France",
+          "ville": "Montmarault"
+        }
+      ]
+    },
+    {
+      "nom": "Charline Stengel",
+      "saisons": [
+        12
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Chloé Charles",
+      "saisons": [
+        12
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Christophe Bibard",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table des Amis by Christophe Bacquié",
+          "ville": "Bonnieux",
+          "adresse": "Les Mas Les Eydins, 2420 chemin du Four, Bonnieux, 84480, France",
+          "latitude": 43.8511871,
+          "longitude": 5.3018513,
+          "etoiles_michelin": 2,
+          "url": "http://www.leseydins.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table des Amis by Christophe Bacquié",
+          "ville": "Bonnieux"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Château de Beaulieu - Christophe Dufossé",
+          "ville": "Busnes"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Christopher Coutanceau",
+          "ville": "La Rochelle"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Christophe Hay - Fleur de Loire",
+          "ville": "Blois"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table - Christophe Hay et Loïs Bée",
+          "ville": "Ardon"
+        }
+      ]
+    },
+    {
+      "nom": "Christophe Pirotais",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table des Amis by Christophe Bacquié",
+          "ville": "Bonnieux",
+          "adresse": "Les Mas Les Eydins, 2420 chemin du Four, Bonnieux, 84480, France",
+          "latitude": 43.8511871,
+          "longitude": 5.3018513,
+          "etoiles_michelin": 2,
+          "url": "http://www.leseydins.com"
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "Mieux qu'à la Maison (MQLM)",
+          "ville": "Saint-Leu-la-Forêt",
+          "adresse": "137 rue du Général Leclerc, 95320 Saint-Leu-la-Forêt, France",
+          "latitude": 49.0208265,
+          "longitude": 2.2387495,
+          "etoiles_michelin": 0,
+          "url": "https://mieuxqualamaison.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table des Amis by Christophe Bacquié",
+          "ville": "Bonnieux"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Château de Beaulieu - Christophe Dufossé",
+          "ville": "Busnes"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Christopher Coutanceau",
+          "ville": "La Rochelle"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Christophe Hay - Fleur de Loire",
+          "ville": "Blois"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table - Christophe Hay et Loïs Bée",
+          "ville": "Ardon"
+        }
+      ]
+    },
+    {
+      "nom": "Claudio Semedo Borges",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Prince de Galles",
+          "ville": "Paris",
+          "adresse": "33 avenue George V, 75008 Paris, France",
+          "latitude": 48.8691274,
+          "longitude": 2.3007665,
+          "etoiles_michelin": 0,
+          "url": "https://www.marriott.com/fr/hotels/parlc-prince-de-galles-a-luxury-collection-hotel-paris/overview/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Clément Bruneau",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun",
+          "adresse": "6 rue Eugène-Mazélie, Lauzun, 47410, France",
+          "latitude": 44.62969,
+          "longitude": 0.46069,
+          "etoiles_michelin": 1,
+          "url": null
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun"
+        }
+      ]
+    },
+    {
+      "nom": "Clément Torres",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun",
+          "adresse": "6 rue Eugène-Mazélie, Lauzun, 47410, France",
+          "latitude": 44.62969,
+          "longitude": 0.46069,
+          "etoiles_michelin": 1,
+          "url": null
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun"
+        }
+      ]
+    },
+    {
+      "nom": "Clément Vergeat",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun",
+          "adresse": "6 rue Eugène-Mazélie, Lauzun, 47410, France",
+          "latitude": 44.62969,
+          "longitude": 0.46069,
+          "etoiles_michelin": 1,
+          "url": null
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun"
+        }
+      ]
+    },
+    {
+      "nom": "Clotaire Poirier",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Coline Faulquier",
+      "saisons": [
+        7
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Cyrille Zen",
+      "saisons": [
+        3
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Damien Laforce",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Braque",
+          "ville": "Lille",
+          "adresse": "45 rue de la Monnaie, 59000 Lille, France",
+          "latitude": 50.6410463,
+          "longitude": 3.0627196,
+          "etoiles_michelin": 0,
+          "url": "https://www.le-braque.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Danny Khezzar",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "David Fricaud",
+      "saisons": [
+        1
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris",
+          "adresse": "29 rue Surcouf, Paris, 75007, France",
+          "latitude": 48.8602663,
+          "longitude": 2.3097038,
+          "etoiles_michelin": 2,
+          "url": "https://www.davidtoutain.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "David Gallienne",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris",
+          "adresse": "29 rue Surcouf, Paris, 75007, France",
+          "latitude": 48.8602663,
+          "longitude": 2.3097038,
+          "etoiles_michelin": 2,
+          "url": "https://www.davidtoutain.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "David Gilabert",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris",
+          "adresse": "29 rue Surcouf, Paris, 75007, France",
+          "latitude": 48.8602663,
+          "longitude": 2.3097038,
+          "etoiles_michelin": 2,
+          "url": "https://www.davidtoutain.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "David Gremillet",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris",
+          "adresse": "29 rue Surcouf, Paris, 75007, France",
+          "latitude": 48.8602663,
+          "longitude": 2.3097038,
+          "etoiles_michelin": 2,
+          "url": "https://www.davidtoutain.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "David Toutain",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Denny Imbroisi",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Ischia",
+          "ville": "Paris",
+          "adresse": "14 rue Cauchy, 75015 Paris, France",
+          "latitude": 48.8429578,
+          "longitude": 2.2759583,
+          "etoiles_michelin": 0,
+          "url": "https://restaurant-ischia.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Diego Alary",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Dieuveil Malonga",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Dylan Bury",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Maison Rostang",
+          "ville": "Paris",
+          "adresse": "20 rue Rennequin, Paris, 75017, France",
+          "latitude": 48.881407,
+          "longitude": 2.2985363,
+          "etoiles_michelin": 2,
+          "url": "https://www.maisonrostang.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Elis Bond",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table d'Élise",
+          "ville": "L'Herbaudière",
+          "adresse": "5 rue Marie-Lemonnier, L'Herbaudière, 85330, France",
+          "latitude": 47.0236705,
+          "longitude": -2.298846,
+          "etoiles_michelin": 1,
+          "url": "https://www.alexandrecouillon.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table d'Élise",
+          "ville": "L'Herbaudière"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Fidelis",
+          "ville": "Saint-Malo"
+        }
+      ]
+    },
+    {
+      "nom": "Ella Aflalo",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Maison Rosella par Francesco Di Marzio",
+          "ville": "Port-Lesney",
+          "adresse": "Château de Germigney, 31 rue Edgar-Faure, Port-Lesney, 39600, France",
+          "latitude": 46.9990085,
+          "longitude": 5.8239441,
+          "etoiles_michelin": 1,
+          "url": "http://www.chateaudegermigney.com/fr/restaurant/maison-rosella.html"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Maison Rosella par Francesco Di Marzio",
+          "ville": "Port-Lesney"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bellavista",
+          "ville": "Prats-de-Mollo-la-Preste"
+        }
+      ]
+    },
+    {
+      "nom": "Elliott Van de Velde",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Émilie Oberlin",
+      "saisons": [
+        4
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue",
+          "adresse": "61 lieu-dit Cambelong, Conques-en-Rouergue, 12320, France",
+          "latitude": 44.5926775,
+          "longitude": 2.3959849,
+          "etoiles_michelin": 1,
+          "url": "http://www.moulindecambelong.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue"
+        }
+      ]
+    },
+    {
+      "nom": "Esteban Salazar",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Tilleul",
+          "ville": "Ussel",
+          "adresse": "1 rue du Château-du-Theil, 19200 Ussel, France",
+          "latitude": 45.5564317,
+          "longitude": 2.3268836,
+          "etoiles_michelin": 0,
+          "url": "https://www.chateaudutheil.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Étienne Geney",
+      "saisons": [
+        4,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Fabien Morreale",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Fanny Aimerito",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "L'Auberge de Saint-Rémy - Fanny Rey & Jonathan Wahid",
+          "ville": "Saint-Rémy-de-Provence",
+          "adresse": "12 boulevard Mirabeau, Saint-Rémy-de-Provence, 13210, France",
+          "latitude": 43.7885608,
+          "longitude": 4.8333205,
+          "etoiles_michelin": 1,
+          "url": "https://www.aubergesaintremy.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge de Saint-Rémy - Fanny Rey & Jonathan Wahid",
+          "ville": "Saint-Rémy-de-Provence"
+        }
+      ]
+    },
+    {
+      "nom": "Fanny Rey",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 100,
+          "nom_restaurant": "L'Auberge de Saint-Rémy - Fanny Rey & Jonathan Wahid",
+          "ville": "Saint-Rémy-de-Provence",
+          "adresse": "12 boulevard Mirabeau, Saint-Rémy-de-Provence, 13210, France",
+          "latitude": 43.7885608,
+          "longitude": 4.8333205,
+          "etoiles_michelin": 1,
+          "url": "https://www.aubergesaintremy.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 100,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 100,
+          "nom_restaurant": "L'Auberge de Saint-Rémy - Fanny Rey & Jonathan Wahid",
+          "ville": "Saint-Rémy-de-Provence"
+        }
+      ]
+    },
+    {
+      "nom": "Fatimata Amadou",
+      "saisons": [
+        6
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Flora Lamoure",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Florent Ladeyn",
+      "saisons": [
+        4
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Pigments",
+          "ville": "Villeneuve-d'Ascq",
+          "adresse": "1 allée du Musée (LaM), 59650 Villeneuve-d'Ascq, France",
+          "latitude": 50.6375886,
+          "longitude": 3.1511611,
+          "etoiles_michelin": 0,
+          "url": "https://pigments.zensites.zenchef.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Florent Pietravalle",
+      "saisons": [
+        3
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Florian Barbarot",
+      "saisons": [
+        10
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Florian Chatelard",
+      "saisons": [
+        6
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Franck Morello",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne",
+          "adresse": "80 chemin des Anglais, au Sud de la Cité, Carcassonne, 11000, France",
+          "latitude": 43.2013363,
+          "longitude": 2.3603104,
+          "etoiles_michelin": 2,
+          "url": "https://www.franckputelat.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne"
+        }
+      ]
+    },
+    {
+      "nom": "Franck Pelux",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne",
+          "adresse": "80 chemin des Anglais, au Sud de la Cité, Carcassonne, 11000, France",
+          "latitude": 43.2013363,
+          "longitude": 2.3603104,
+          "etoiles_michelin": 2,
+          "url": "https://www.franckputelat.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne"
+        }
+      ]
+    },
+    {
+      "nom": "Franck Radiu",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne",
+          "adresse": "80 chemin des Anglais, au Sud de la Cité, Carcassonne, 11000, France",
+          "latitude": 43.2013363,
+          "longitude": 2.3603104,
+          "etoiles_michelin": 2,
+          "url": "https://www.franckputelat.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Franck Putelat",
+          "ville": "Carcassonne"
+        }
+      ]
+    },
+    {
+      "nom": "Franckelie Laloum",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Gabriel Evin",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Gabriel - La Réserve Paris",
+          "ville": "Paris",
+          "adresse": "La Réserve Paris, 42 avenue Gabriel, Paris, 75008, France",
+          "latitude": 48.8697309,
+          "longitude": 2.3132078,
+          "etoiles_michelin": 3,
+          "url": "https://www.lareserve-paris.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Gabriel - La Réserve Paris",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Observatoire du Gabriel",
+          "ville": "Bordeaux"
+        }
+      ]
+    },
+    {
+      "nom": "Gaston Savina",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Geoffrey Degros",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Gérald Guille",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Pureté",
+          "ville": "Lille",
+          "adresse": "79 rue de la Monnaie, 59800 Lille, France",
+          "latitude": 50.6415293,
+          "longitude": 3.0618541,
+          "etoiles_michelin": 1,
+          "url": "https://www.restaurant-purete.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Giacinta Trivero",
+      "saisons": [
+        8
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Gianmarco Gorni",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Gratien Leroy",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Grégoire Touchard",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Pavyllon Paris",
+          "ville": "Paris",
+          "adresse": "Pavillon Ledoyen, 8 avenue Dutuit, 75008 Paris, France",
+          "latitude": 48.8660193,
+          "longitude": 2.315754,
+          "etoiles_michelin": 1,
+          "url": "https://www.yannick-alleno.com/les-etablissements-du-groupe/pavyllon-paris"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Grégory Cuilleron",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Grégory Delobe",
+      "saisons": [
+        2
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Guillaume Pape",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Guillaume Scheer - Les Plaisirs Gourmands",
+          "ville": "Schiltigheim",
+          "adresse": "35 route du Général-de-Gaulle, Schiltigheim, 67300, France",
+          "latitude": 48.6005284,
+          "longitude": 7.7392002,
+          "etoiles_michelin": 1,
+          "url": "http://www.les-plaisirs-gourmands.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Guillaume Scheer - Les Plaisirs Gourmands",
+          "ville": "Schiltigheim"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Bistrot de Guillaume",
+          "ville": "Moulins"
+        }
+      ]
+    },
+    {
+      "nom": "Guillaume Sanchez",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Guillaume Scheer - Les Plaisirs Gourmands",
+          "ville": "Schiltigheim",
+          "adresse": "35 route du Général-de-Gaulle, Schiltigheim, 67300, France",
+          "latitude": 48.6005284,
+          "longitude": 7.7392002,
+          "etoiles_michelin": 1,
+          "url": "http://www.les-plaisirs-gourmands.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Guillaume Scheer - Les Plaisirs Gourmands",
+          "ville": "Schiltigheim"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Bistrot de Guillaume",
+          "ville": "Moulins"
+        }
+      ]
+    },
+    {
+      "nom": "Harmony Brioude",
+      "saisons": [
+        6
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Hugo Riboulet",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Ibrahim Kharbach",
+      "saisons": [
+        10
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Ilane Tinchant",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "L'Oursin",
+          "ville": "Carry-le-Rouet",
+          "adresse": "1 boulevard des Moulins, 13620 Carry-le-Rouet, France",
+          "latitude": 43.3297339,
+          "longitude": 5.1512273,
+          "etoiles_michelin": 1,
+          "url": "https://www.hotelbleucarry.com/fr/restaurant-et-bar.html"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Inès Trontin",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Origines",
+          "ville": "Le Broc",
+          "adresse": "Rue du Clos-de-la-Chaux, Le Broc, 63500, France",
+          "latitude": 45.5014095,
+          "longitude": 3.2436174,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurant-origines.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Origines",
+          "ville": "Le Broc"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines - Bruno Cirino",
+          "ville": "Nice"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines",
+          "ville": "Rennes"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le 1862 - Les Glycines",
+          "ville": "Les Eyzies-de-Tayac-Sireuil"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Relais des Moines",
+          "ville": "Les Arcs"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines by Daniel Gallacher",
+          "ville": "Bordeaux"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Relais des Salines",
+          "ville": "Le Grand-Village-Plage"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines",
+          "ville": "Bourg-en-Bresse"
+        }
+      ]
+    },
+    {
+      "nom": "Jacques Lagarde",
+      "saisons": [
+        14
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Puits Saint Jacques",
+          "ville": "Pujaudran",
+          "adresse": "57 avenue Victor-Capoul, Pujaudran, 32600, France",
+          "latitude": 43.5907291,
+          "longitude": 1.149996,
+          "etoiles_michelin": 2,
+          "url": "http://www.lepuitssaintjacques.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Puits Saint Jacques",
+          "ville": "Pujaudran"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Côte Saint-Jacques",
+          "ville": "Joigny"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jacques Faussat",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Jarvis Scott",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Turbulent",
+          "ville": "Trouville-sur-Mer",
+          "adresse": "1 rue Durand Couyère, 14360 Trouville-sur-Mer, France",
+          "latitude": 49.364229,
+          "longitude": 0.0836106,
+          "etoiles_michelin": 0,
+          "url": "https://turbulent-trouville.com/fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jean Covillault",
+      "saisons": [
+        14
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Grand Restaurant - Jean-François Piège",
+          "ville": "Paris",
+          "adresse": "7 rue d'Aguesseau, Paris, 75008, France",
+          "latitude": 48.8701983,
+          "longitude": 2.3193146,
+          "etoiles_michelin": 2,
+          "url": "http://jeanfrancoispiege.com/le-grand-restaurant"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Grand Restaurant - Jean-François Piège",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean Sulpice",
+          "ville": "Talloires-Montmin"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean Imbert au Plaza Athénée",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Chapelle - Château Saint-Jean",
+          "ville": "Montluçon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Luc Tartarin",
+          "ville": "Le Havre"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pur' - Jean-François Rouquette",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Claude Leclerc",
+          "ville": "Clermont-Ferrand"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Marc Pérochon",
+          "ville": "Bretignolles-sur-Mer"
+        }
+      ]
+    },
+    {
+      "nom": "Jean Imbert",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 100,
+          "nom_restaurant": "Jean Imbert au Plaza Athénée",
+          "ville": "Paris",
+          "adresse": "25 avenue Montaigne, Paris, 75008, France",
+          "latitude": 48.8661718,
+          "longitude": 2.3042735,
+          "etoiles_michelin": 1,
+          "url": "https://www.dorchestercollection.com/fr/paris/hotel-plaza-athenee/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 100,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 100,
+          "nom_restaurant": "Jean Imbert au Plaza Athénée",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Grand Restaurant - Jean-François Piège",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean Sulpice",
+          "ville": "Talloires-Montmin"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Chapelle - Château Saint-Jean",
+          "ville": "Montluçon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Luc Tartarin",
+          "ville": "Le Havre"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pur' - Jean-François Rouquette",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Claude Leclerc",
+          "ville": "Clermont-Ferrand"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Marc Pérochon",
+          "ville": "Bretignolles-sur-Mer"
+        }
+      ]
+    },
+    {
+      "nom": "Jean-Baptiste Ascione",
+      "saisons": [
+        6
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jean-Edern Hurstel",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jean-François Bury",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Grand Restaurant - Jean-François Piège",
+          "ville": "Paris",
+          "adresse": "7 rue d'Aguesseau, Paris, 75008, France",
+          "latitude": 48.8701983,
+          "longitude": 2.3193146,
+          "etoiles_michelin": 2,
+          "url": "http://jeanfrancoispiege.com/le-grand-restaurant"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Grand Restaurant - Jean-François Piège",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pur' - Jean-François Rouquette",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Jean-Philippe Berens",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Ducasse sur Seine",
+          "ville": "Paris",
+          "adresse": "19 Port Debilly, 75016 Paris, France",
+          "latitude": 48.8604329,
+          "longitude": 2.2917343,
+          "etoiles_michelin": 0,
+          "url": "https://ducasse-seine.com/fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jean-Philippe Watteyne",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jennifer Taïeb",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jérémie Falissard",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jérémie Izarn",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Tour des Sens",
+          "ville": "Tencin",
+          "adresse": "Route de Theys, 38570 Tencin, France",
+          "latitude": 45.3134683,
+          "longitude": 5.9655763,
+          "etoiles_michelin": 0,
+          "url": "https://latourdessens.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jérémy Brun",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Table - Bruno Verjus",
+          "ville": "Paris",
+          "adresse": "3 rue de Prague, Paris, 75012, France",
+          "latitude": 48.8486151,
+          "longitude": 2.3759654,
+          "etoiles_michelin": 2,
+          "url": "http://www.table.paris"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Table - Bruno Verjus",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bruno",
+          "ville": "Lorgues"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Racines - Bruno Cirino",
+          "ville": "Nice"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Embrun",
+          "ville": "Brest"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jérémy Galvan",
+          "ville": "Lyon"
+        }
+      ]
+    },
+    {
+      "nom": "Jérémy Moscovici",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Jérémy Galvan",
+          "ville": "Lyon",
+          "adresse": "29 rue du Bœuf, Lyon, 69005, France",
+          "latitude": 45.7621837,
+          "longitude": 4.8264211,
+          "etoiles_michelin": 1,
+          "url": "http://www.jeremygalvanrestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Jérémy Galvan",
+          "ville": "Lyon"
+        }
+      ]
+    },
+    {
+      "nom": "Jérémy Vandernoot",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Jérémy Galvan",
+          "ville": "Lyon",
+          "adresse": "29 rue du Bœuf, Lyon, 69005, France",
+          "latitude": 45.7621837,
+          "longitude": 4.8264211,
+          "etoiles_michelin": 1,
+          "url": "http://www.jeremygalvanrestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Jérémy Galvan",
+          "ville": "Lyon"
+        }
+      ]
+    },
+    {
+      "nom": "Jordan Vignal",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jordan Yuste",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Jorick Dorignac",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Joris Bijdendijk",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Joy-Astrid Poinsot",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Chez Camille",
+          "ville": "Arnay-le-Duc",
+          "adresse": "1 place Édouard Herriot, 21230 Arnay-le-Duc, France",
+          "latitude": 47.1337388,
+          "longitude": 4.4860426,
+          "etoiles_michelin": 0,
+          "url": "https://www.chezcamillearnay.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Juan Arbelaez",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Don Juan II",
+          "ville": "Paris",
+          "adresse": "Port Debilly, Paris, 75016, France",
+          "latitude": 48.8630387,
+          "longitude": 2.2959142,
+          "etoiles_michelin": 1,
+          "url": "http://www.donjuan2.yachtsdeparis.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Don Juan II",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Burbaud",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Duboué",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Hagnery",
+      "saisons": [
+        4,
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Lapraille",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Machet",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Julien Wauthier",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr",
+          "adresse": "7 rue des Cigognes, Ammerschwihr, 68770, France",
+          "latitude": 48.1256598,
+          "longitude": 7.2828846,
+          "etoiles_michelin": 1,
+          "url": "http://www.restaurantjulienbinz.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Julien Binz",
+          "ville": "Ammerschwihr"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Julien",
+          "ville": "Fouday"
+        }
+      ]
+    },
+    {
+      "nom": "Justine Imbert",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Jean Imbert au Plaza Athénée",
+          "ville": "Paris",
+          "adresse": "25 avenue Montaigne, Paris, 75008, France",
+          "latitude": 48.8661718,
+          "longitude": 2.3042735,
+          "etoiles_michelin": 1,
+          "url": "https://www.dorchestercollection.com/fr/paris/hotel-plaza-athenee/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Jean Imbert au Plaza Athénée",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Justine Piluso",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Kelly Rangama",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 100,
+          "nom_restaurant": "Le Faham by Kelly Rangama",
+          "ville": "Paris",
+          "adresse": "108 rue Cardinet, Paris, 75017, France",
+          "latitude": 48.8857122,
+          "longitude": 2.3117036,
+          "etoiles_michelin": 1,
+          "url": "http://www.lefaham.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 100,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 100,
+          "nom_restaurant": "Le Faham by Kelly Rangama",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Kévin d'Andréa",
+      "saisons": [
+        6
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Kevin Roquet",
+      "saisons": [
+        7
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Kilian Franceschi",
+      "saisons": [
+        16
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Latifa Ichou",
+      "saisons": [
+        4,
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Chabichou by Stéphane Buron",
+          "ville": "Courchevel",
+          "adresse": "90 rue des Chenus, Courchevel 1850, Courchevel, 73120, France",
+          "latitude": 45.41616,
+          "longitude": 6.629984,
+          "etoiles_michelin": 2,
+          "url": "https://www.chabichou-courchevel.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Chabichou by Stéphane Buron",
+          "ville": "Courchevel"
+        }
+      ]
+    },
+    {
+      "nom": "Léa Vautier Lecointre",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Ivan Vautier",
+          "ville": "Caen",
+          "adresse": "3 avenue Henry-Chéron, Caen, 14000, France",
+          "latitude": 49.174106,
+          "longitude": -0.3905952,
+          "etoiles_michelin": 1,
+          "url": "https://www.ivanvautier.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Ivan Vautier",
+          "ville": "Caen"
+        }
+      ]
+    },
+    {
+      "nom": "Léo Renusson",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Lilian Douchet",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Capucine",
+          "ville": "Pennedepie",
+          "adresse": "480 route du Bois du Breuil, 14600 Pennedepie, France",
+          "latitude": 49.4037071,
+          "longitude": 0.1783194,
+          "etoiles_michelin": 0,
+          "url": "https://jardins-coppelia.com/fr/produits/5526037231774466085/5526040324209639461/5528439191639162917"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Lise Deveix",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Grange de Belle-Église",
+          "ville": "Belle-Église",
+          "adresse": "28 boulevard René-Aimé-Lagabrielle, Belle-Église, 60540, France",
+          "latitude": 49.1921304,
+          "longitude": 2.2144517,
+          "etoiles_michelin": 1,
+          "url": "https://www.lagrangedebelleeglise.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Grange de Belle-Église",
+          "ville": "Belle-Église"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table d'Élise",
+          "ville": "L'Herbaudière"
+        }
+      ]
+    },
+    {
+      "nom": "Logan Depuydt",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Louise Bourrat",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Louise",
+          "ville": "Lorient",
+          "adresse": "4 rue Léo-le-Bourgo, Lorient, 56100, France",
+          "latitude": 47.7487936,
+          "longitude": -3.3650768,
+          "etoiles_michelin": 1,
+          "url": "https://www.restaurantlouise.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Louise",
+          "ville": "Lorient"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bistrot Louise",
+          "ville": "L'Albenc"
+        }
+      ]
+    },
+    {
+      "nom": "Louise Perrone",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Louise",
+          "ville": "Lorient",
+          "adresse": "4 rue Léo-le-Bourgo, Lorient, 56100, France",
+          "latitude": 47.7487936,
+          "longitude": -3.3650768,
+          "etoiles_michelin": 1,
+          "url": "https://www.restaurantlouise.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Louise",
+          "ville": "Lorient"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bistrot Louise",
+          "ville": "L'Albenc"
+        }
+      ]
+    },
+    {
+      "nom": "Lucas Renault",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Lucas Carton",
+          "ville": "Paris",
+          "adresse": "9 place de la Madeleine, Paris, 75008, France",
+          "latitude": 48.8697476,
+          "longitude": 2.3232442,
+          "etoiles_michelin": 1,
+          "url": "https://www.lucascarton.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Lucas Carton",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Lucie Berthier Gembara",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Valucien - Château de Vault-de-Lugny",
+          "ville": "Vault-de-Lugny",
+          "adresse": "11 rue du Château, Vault-de-Lugny, 89200, France",
+          "latitude": 47.4956359,
+          "longitude": 3.8548891,
+          "etoiles_michelin": 1,
+          "url": "http://www.lugny.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Valucien - Château de Vault-de-Lugny",
+          "ville": "Vault-de-Lugny"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Bistrot Lucien",
+          "ville": "Gevrey-Chambertin"
+        }
+      ]
+    },
+    {
+      "nom": "Ludovic Turac",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Une Table au Sud",
+          "ville": "Marseille",
+          "adresse": "2 quai du Port, 13002 Marseille, France",
+          "latitude": 43.2963677,
+          "longitude": 5.373659,
+          "etoiles_michelin": 1,
+          "url": "https://www.unetableausud.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Maël Duval",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Auberge de La Mère Duval",
+          "ville": "Auzouville-sur-Saâne",
+          "adresse": "Impasse de la Linerie, Auzouville-sur-Saâne, 76730, France",
+          "latitude": 49.7410587,
+          "longitude": 0.9436443,
+          "etoiles_michelin": 1,
+          "url": "https://www.lamereduval.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Auberge de La Mère Duval",
+          "ville": "Auzouville-sur-Saâne"
+        }
+      ]
+    },
+    {
+      "nom": "Maël Paranthoen",
+      "saisons": [
+        17
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mallory Gabsi",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 100,
+          "nom_restaurant": "Mallory Gabsi",
+          "ville": "Paris",
+          "adresse": "28 rue des Acacias, Paris, 75017, France",
+          "latitude": 48.876837,
+          "longitude": 2.2915873,
+          "etoiles_michelin": 1,
+          "url": "http://www.mallory-gabsi.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 100,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 100,
+          "nom_restaurant": "Mallory Gabsi",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Margaux Elie",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Sommelière",
+          "ville": "Lyon",
+          "adresse": "6 rue Mourguet, Lyon, 69005, France",
+          "latitude": 45.759793,
+          "longitude": 4.8261445,
+          "etoiles_michelin": 1,
+          "url": "https://www.la-sommeliere.net/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Sommelière",
+          "ville": "Lyon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier de Joël Robuchon - Étoile",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier du Peintre",
+          "ville": "Colmar"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier Yssoirien",
+          "ville": "Issoire"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier des Augustins",
+          "ville": "Lyon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Atelier Salone",
+          "ville": "Salon-de-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier Locavore",
+          "ville": "Le Coteau"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Atelier Flavien Valère",
+          "ville": "Langon"
+        }
+      ]
+    },
+    {
+      "nom": "Marie Pacotte",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Rosemarie",
+          "ville": "Paris",
+          "adresse": "149 rue de l'Université, Paris, 75007, France",
+          "latitude": 48.8611264,
+          "longitude": 2.3055501,
+          "etoiles_michelin": 1,
+          "url": "http://www.rosemariebistrotparis.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Rosemarie",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Marie-Victorine Manoa",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Fontaine Gaillon",
+          "ville": "Paris",
+          "adresse": "1 rue de la Michodière, 75002 Paris, France",
+          "latitude": 48.8691078,
+          "longitude": 2.3344279,
+          "etoiles_michelin": 0,
+          "url": "https://www.fitz-group.fr/fontaine-gaillon-paris"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Marion Lefebvre",
+      "saisons": [
+        8
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Marjorie Maltais",
+      "saisons": [
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Martin Feragus",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Saint-Martin",
+          "ville": "Vence",
+          "adresse": "2490 avenue des Templiers, Vence, 06140, France",
+          "latitude": 43.7316508,
+          "longitude": 7.1066248,
+          "etoiles_michelin": 1,
+          "url": "https://www.oetkercollection.com/hotels/chateau-saint-martin/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Saint-Martin",
+          "ville": "Vence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Chapelle Saint-Martin",
+          "ville": "Nieul"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Lamartine",
+          "ville": "Le Bourget-du-Lac"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Clos Saint Martin - La Métairie",
+          "ville": "Arvigna"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Martin Bel Air",
+          "ville": "Saint-Martin-du-Tertre"
+        }
+      ]
+    },
+    {
+      "nom": "Martin Volkaerts",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Saint-Martin",
+          "ville": "Vence",
+          "adresse": "2490 avenue des Templiers, Vence, 06140, France",
+          "latitude": 43.7316508,
+          "longitude": 7.1066248,
+          "etoiles_michelin": 1,
+          "url": "https://www.oetkercollection.com/hotels/chateau-saint-martin/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Saint-Martin",
+          "ville": "Vence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Chapelle Saint-Martin",
+          "ville": "Nieul"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Lamartine",
+          "ville": "Le Bourget-du-Lac"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Clos Saint Martin - La Métairie",
+          "ville": "Arvigna"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Le Martin Bel Air",
+          "ville": "Saint-Martin-du-Tertre"
+        }
+      ]
+    },
+    {
+      "nom": "Mathew Hegarty",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mathieu Lagarde",
+      "saisons": [
+        14
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas",
+          "adresse": "Route de Murs, Joucas, 84220, France",
+          "latitude": 43.9289042,
+          "longitude": 5.2559385,
+          "etoiles_michelin": 1,
+          "url": "https://www.lephebus.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Hostellerie de la Pointe Saint-Mathieu",
+          "ville": "Plougonvelin"
+        }
+      ]
+    },
+    {
+      "nom": "Mathieu Vande Velde",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas",
+          "adresse": "Route de Murs, Joucas, 84220, France",
+          "latitude": 43.9289042,
+          "longitude": 5.2559385,
+          "etoiles_michelin": 1,
+          "url": "https://www.lephebus.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Hostellerie de la Pointe Saint-Mathieu",
+          "ville": "Plougonvelin"
+        }
+      ]
+    },
+    {
+      "nom": "Matteo Pioppi",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Blanc",
+          "ville": "Paris",
+          "adresse": "52 rue de Longchamp, Paris, 75116, France",
+          "latitude": 48.8651172,
+          "longitude": 2.2874808,
+          "etoiles_michelin": 1,
+          "url": "https://blanc-paris.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Matthias Marc",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Restaurant Marcon",
+          "ville": "Saint-Bonnet-le-Froid",
+          "adresse": "Larsiallas, Saint-Bonnet-le-Froid, 43290, France",
+          "latitude": 45.1386734,
+          "longitude": 4.4342679,
+          "etoiles_michelin": 3,
+          "url": "https://www.lesmaisonsmarcon.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Marcon",
+          "ville": "Saint-Bonnet-le-Froid"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "The Marcel",
+          "ville": "Sète"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Jean-Marc Pérochon",
+          "ville": "Bretignolles-sur-Mer"
+        }
+      ]
+    },
+    {
+      "nom": "Matthieu Lestrade",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Burgundy by Matthieu",
+          "ville": "Lyon",
+          "adresse": "24 quai Saint-Antoine, Lyon, 69002, France",
+          "latitude": 45.7628677,
+          "longitude": 4.8321372,
+          "etoiles_michelin": 1,
+          "url": "https://www.burgundybym.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Burgundy by Matthieu",
+          "ville": "Lyon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Anne & Matthieu Omont - Hôtel de France",
+          "ville": "Montmarault"
+        }
+      ]
+    },
+    {
+      "nom": "Maxime Zimmer",
+      "saisons": [
+        11
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "René et Maxime Meilleur",
+          "ville": "Saint-Martin-de-Belleville",
+          "adresse": "Hameau de Saint-Marcel, Saint-Martin-de-Belleville, 73440, France",
+          "latitude": 45.3690463,
+          "longitude": 6.5133065,
+          "etoiles_michelin": 2,
+          "url": "https://www.la-bouitte.com/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "René et Maxime Meilleur",
+          "ville": "Saint-Martin-de-Belleville"
+        }
+      ]
+    },
+    {
+      "nom": "Maximilien Dienst",
+      "saisons": [
+        8
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mehdi Kebboul",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Savarin",
+          "ville": "Paris",
+          "adresse": "4 rue de Navarin, 75009 Paris, France",
+          "latitude": 48.8795302,
+          "longitude": 2.3396341,
+          "etoiles_michelin": 0,
+          "url": "https://www.lapantruchoise.com/lesavarin"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Merouan Bounekraf",
+      "saisons": [
+        10
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mickaël Braure",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mickaël Riss",
+      "saisons": [
+        8
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Miguel Garcia-Herrera",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mohamed Cheikh",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Meïda",
+          "ville": "Saint-Ouen-sur-Seine",
+          "adresse": "10 place de la République, 93400 Saint-Ouen-sur-Seine, France",
+          "latitude": 48.9117906,
+          "longitude": 2.3331565,
+          "etoiles_michelin": 0,
+          "url": "https://www.meida.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mohamed Si Abdelkader",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Médley",
+          "ville": "Argenteuil",
+          "adresse": "72 route de Pontoise, 95100 Argenteuil, France",
+          "latitude": 48.947236,
+          "longitude": 2.2061686,
+          "etoiles_michelin": 0,
+          "url": "https://medley-si.netlify.app/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Mory Sacko",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Naoëlle d'Hainaut",
+      "saisons": [
+        4
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "L'or Q'idée",
+          "ville": "Pontoise",
+          "adresse": "6 rue de la Pierre aux Poissons, 95300 Pontoise, France",
+          "latitude": 49.050436,
+          "longitude": 2.0977379,
+          "etoiles_michelin": 1,
+          "url": "https://www.lorqidee.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Nastasia Lyard",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Nicolas Parage",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec",
+          "adresse": "20 rue du Kelenn, Carantec, 29660, France",
+          "latitude": 48.6706639,
+          "longitude": -3.9127356,
+          "etoiles_michelin": 1,
+          "url": "https://www.hotel-carantec.fr/"
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "Prévelle",
+          "ville": "Paris",
+          "adresse": "34 rue Saint-Dominique, 75007 Paris, France",
+          "latitude": 48.8599844,
+          "longitude": 2.3154233,
+          "etoiles_michelin": 1,
+          "url": "https://prevelle.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec"
+        }
+      ]
+    },
+    {
+      "nom": "Nicolas Pourcheresse",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec",
+          "adresse": "20 rue du Kelenn, Carantec, 29660, France",
+          "latitude": 48.6706639,
+          "longitude": -3.9127356,
+          "etoiles_michelin": 1,
+          "url": "https://www.hotel-carantec.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec"
+        }
+      ]
+    },
+    {
+      "nom": "Nicolas Seibold",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec",
+          "adresse": "20 rue du Kelenn, Carantec, 29660, France",
+          "latitude": 48.6706639,
+          "longitude": -3.9127356,
+          "etoiles_michelin": 1,
+          "url": "https://www.hotel-carantec.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Nicolas Carro - Hôtel de Carantec",
+          "ville": "Carantec"
+        }
+      ]
+    },
+    {
+      "nom": "Noé Pellet",
+      "saisons": [
+        16
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Noémie Cadré",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Caravane Palace",
+          "ville": "Rennes",
+          "adresse": "13 rue Saint-Georges, 35000 Rennes, France",
+          "latitude": 48.1118335,
+          "longitude": -1.676539,
+          "etoiles_michelin": 0,
+          "url": "https://www.caravanepalace.pro/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Noëmie Honiat",
+      "saisons": [
+        3,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Norbert Tarayre",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "19.20 by Norbert Tarayre",
+          "ville": "Paris",
+          "adresse": "33 avenue George V, 75008 Paris, France (hôtel Prince de Galles)",
+          "latitude": 48.8691274,
+          "longitude": 2.3007665,
+          "etoiles_michelin": 0,
+          "url": "https://www.19-20paris.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Olivier Streiff",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Table d'Olivier Nasti",
+          "ville": "Kaysersberg",
+          "adresse": "9-13 rue du Général-de-Gaulle, Kaysersberg, 68240, France",
+          "latitude": 48.1386233,
+          "longitude": 7.265581,
+          "etoiles_michelin": 2,
+          "url": "https://www.lechambard.fr/fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Table d'Olivier Nasti",
+          "ville": "Kaysersberg"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table d'Olivier",
+          "ville": "Brive-la-Gaillarde"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Olivier",
+          "ville": "Munster"
+        }
+      ]
+    },
+    {
+      "nom": "Pascal Barandoni",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Paul Delrez",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Paul Bocuse",
+          "ville": "Collonges-au-Mont-d'Or",
+          "adresse": "40 quai de la Plage, Collonges-au-Mont-d'Or, 69660, France",
+          "latitude": 45.8156437,
+          "longitude": 4.8475623,
+          "etoiles_michelin": 2,
+          "url": "http://www.bocuse.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Paul Bocuse",
+          "ville": "Collonges-au-Mont-d'Or"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Paul-Arthur",
+          "ville": "Rouen"
+        }
+      ]
+    },
+    {
+      "nom": "Paul-Arthur Berlan",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Paul-Arthur",
+          "ville": "Rouen",
+          "adresse": "23-25 place de la Pucelle, Rouen, 76000, France",
+          "latitude": 49.4423399,
+          "longitude": 1.0884942,
+          "etoiles_michelin": 1,
+          "url": "http://www.paul-arthurrestaurant.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Paul-Arthur",
+          "ville": "Rouen"
+        }
+      ]
+    },
+    {
+      "nom": "Pauline Berghonnier",
+      "saisons": [
+        11
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Pauline Séné",
+      "saisons": [
+        12
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Pavel Hug",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Philippine Jaillet",
+      "saisons": [
+        16
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Pierre Augé",
+      "saisons": [
+        1,
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Maison de Petit Pierre",
+          "ville": "Béziers",
+          "adresse": "22 avenue Pierre Verdier, 34500 Béziers, France",
+          "latitude": 43.344297,
+          "longitude": 3.2308641,
+          "etoiles_michelin": 0,
+          "url": "https://www.lamaisondepetitpierre.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre Chomet",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre Ciampi",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre Eon",
+      "saisons": [
+        7
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Pierre Meneau",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre Reure",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre Sang Boyer",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris",
+          "adresse": "6 rue Balzac, Paris, 75008, France",
+          "latitude": 48.8732506,
+          "longitude": 2.3003862,
+          "etoiles_michelin": 3,
+          "url": "http://pierregagnaire-lerestaurant.com"
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "Pierre Sang in Oberkampf",
+          "ville": "Paris",
+          "adresse": "55 rue Oberkampf, 75011 Paris, France",
+          "latitude": 48.8647051,
+          "longitude": 2.3724235,
+          "etoiles_michelin": 0,
+          "url": "https://pierresang.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Gaya par Pierre Gagnaire",
+          "ville": "Paris"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Maison de Pierre",
+          "ville": "Hasparren"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre",
+          "ville": "Mâcon"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Restaurant Pierre Grein",
+          "ville": "Manosque"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "Pierre Reboul",
+          "ville": "Aix-en-Provence"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "L'Auberge du Pont des Pierres",
+          "ville": "Montanges"
+        }
+      ]
+    },
+    {
+      "nom": "Pierre-Pascal Clément",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun",
+          "adresse": "6 rue Eugène-Mazélie, Lauzun, 47410, France",
+          "latitude": 44.62969,
+          "longitude": 0.46069,
+          "etoiles_michelin": 1,
+          "url": null
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Clément Artisan Culinaire",
+          "ville": "Lauzun"
+        }
+      ]
+    },
+    {
+      "nom": "Pol-Henri Dieu",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Bistrot de Villedieu",
+          "ville": "Villedieu",
+          "adresse": "21 place de la Libération, Villedieu, 84110, France",
+          "latitude": 44.2840228,
+          "longitude": 5.0342051,
+          "etoiles_michelin": 1,
+          "url": "http://www.azoulay-gastronomie.com/le-bistrot-de-villedieu"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Bistrot de Villedieu",
+          "ville": "Villedieu"
+        }
+      ]
+    },
+    {
+      "nom": "Quentin Bourdy",
+      "saisons": [
+        4,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Quentin Maufrais",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Quentin Mauro",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Restaurant Donna",
+          "ville": "Paris",
+          "adresse": "157 rue Saint-Martin, 75003 Paris, France",
+          "latitude": 48.8622221,
+          "longitude": 2.3518817,
+          "etoiles_michelin": 0,
+          "url": "https://www.donna-paris.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Rémi Blanpoil",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Cour de Rémi",
+          "ville": "Bermicourt",
+          "adresse": "1 rue Baillet, Bermicourt, 62130, France",
+          "latitude": 50.4062836,
+          "longitude": 2.2291703,
+          "etoiles_michelin": 1,
+          "url": "http://www.lacourderemi.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Cour de Rémi",
+          "ville": "Bermicourt"
+        }
+      ]
+    },
+    {
+      "nom": "Renaud Ramamourty",
+      "saisons": [
+        1,
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Petrossian",
+          "ville": "Paris",
+          "adresse": "13 boulevard de la Tour-Maubourg, 75007 Paris, France",
+          "latitude": 48.8609742,
+          "longitude": 2.3104452,
+          "etoiles_michelin": 0,
+          "url": "https://restaurant.petrossian.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Romain Tischenko",
+      "saisons": [
+        1
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Ronan Kernen",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Maison Ronan Kervarrec",
+          "ville": "Saint-Grégoire",
+          "adresse": "1 impasse du Vieux-Bourg, Saint-Grégoire, 35760, France",
+          "latitude": 48.1533015,
+          "longitude": -1.6805561,
+          "etoiles_michelin": 2,
+          "url": "http://www.le-saison.com/fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Maison Ronan Kervarrec",
+          "ville": "Saint-Grégoire"
+        }
+      ]
+    },
+    {
+      "nom": "Ruben Sarfati",
+      "saisons": [
+        3,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Sacha Boyadjian",
+      "saisons": [
+        17
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Samuel Albert",
+      "saisons": [
+        10
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Albert 1er",
+          "ville": "Chamonix-Mont-Blanc",
+          "adresse": "Hameau Albert-1er, 38 route du Bouchet, Chamonix-Mont-Blanc, 74400, France",
+          "latitude": 45.9249264,
+          "longitude": 6.8739886,
+          "etoiles_michelin": 1,
+          "url": "https://www.hameaualbert.fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Albert 1er",
+          "ville": "Chamonix-Mont-Blanc"
+        }
+      ]
+    },
+    {
+      "nom": "Sarah Gade",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Brigade du Tigre",
+          "ville": "Paris",
+          "adresse": "38 rue du Faubourg-Poissonnière, Paris, 75010, France",
+          "latitude": 48.8734837,
+          "longitude": 2.3479318,
+          "etoiles_michelin": 1,
+          "url": "https://www.brigadedutigre.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Brigade du Tigre",
+          "ville": "Paris"
+        }
+      ]
+    },
+    {
+      "nom": "Sarah Mainguy",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Freia",
+          "ville": "Nantes",
+          "adresse": "22 boulevard de Berlin, 44000 Nantes, France",
+          "latitude": 47.2167806,
+          "longitude": -1.5366484,
+          "etoiles_michelin": 0,
+          "url": "https://www.freia-restaurant.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Sarika Sor",
+      "saisons": [
+        14
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Sean Gabbiani",
+      "saisons": [
+        16
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Sébastien Oger",
+      "saisons": [
+        10
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Sébastien Renard",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Maison Renard",
+          "ville": "Béthune",
+          "adresse": "15 place de la République, boulevard Kitchener, 62400 Béthune, France",
+          "latitude": 50.5323226,
+          "longitude": 2.6407399,
+          "etoiles_michelin": 0,
+          "url": "https://www.maisonrenard-bethune.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Shirley Duthilleux",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Stéphanie Le Quellec",
+      "saisons": [
+        2
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "La Scène",
+          "ville": "Paris",
+          "adresse": "32 avenue Matignon, 75008 Paris, France",
+          "latitude": 48.8720354,
+          "longitude": 2.314504,
+          "etoiles_michelin": 2,
+          "url": "https://www.la-scene.paris/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Steven Ramon",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Rouge Barre",
+          "ville": "Lille",
+          "adresse": "50 rue de la Halle, 59800 Lille, France",
+          "latitude": 50.6443664,
+          "longitude": 3.0594052,
+          "etoiles_michelin": 0,
+          "url": "https://www.rougebarre.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Steven Thiebault-Pellegrino",
+      "saisons": [
+        16
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Leptine",
+          "ville": "Lyon",
+          "adresse": "16 rue Hippolyte Flandrin, 69001 Lyon, France",
+          "latitude": 45.7680321,
+          "longitude": 4.8306177,
+          "etoiles_michelin": 0,
+          "url": "https://www.leptine.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Tabata Bonardi",
+      "saisons": [
+        3
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Ombellule",
+          "ville": "Lyon",
+          "adresse": "36 cours Franklin Roosevelt, 69006 Lyon, France",
+          "latitude": 45.7687857,
+          "longitude": 4.8469171,
+          "etoiles_michelin": 1,
+          "url": "https://www.ombellule.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Tania Cadeddu",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Tara Khattar",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Théo Chassé",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Au Lion d'Or - Chez Théo",
+          "ville": "Rosenau",
+          "adresse": "5 rue Village-Neuf, Rosenau, 68128, France",
+          "latitude": 47.6365191,
+          "longitude": 7.5355895,
+          "etoiles_michelin": 1,
+          "url": "https://www.auliondor-rosenau.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Au Lion d'Or - Chez Théo",
+          "ville": "Rosenau"
+        }
+      ]
+    },
+    {
+      "nom": "Thibaud Erard-Penguilly",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Thibault Barbafieri",
+      "saisons": [
+        9
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Thibault Marchand",
+      "saisons": [
+        15
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Thibault Sombardier",
+      "saisons": [
+        5
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Anne",
+          "ville": "Paris",
+          "adresse": "28 place des Vosges, 75003 Paris, France (Hôtel Pavillon de la Reine)",
+          "latitude": 48.8563739,
+          "longitude": 2.3661099,
+          "etoiles_michelin": 1,
+          "url": "https://www.pavillon-de-la-reine.com/restaurant"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Thibaut Spiwack",
+      "saisons": [
+        13
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Anona",
+          "ville": "Paris",
+          "adresse": "80 boulevard des Batignolles, 75017 Paris, France",
+          "latitude": 48.8819703,
+          "longitude": 2.3187122,
+          "etoiles_michelin": 1,
+          "url": "https://www.anona.fr/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Thomas Chisholm",
+      "saisons": [
+        12
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue",
+          "adresse": "61 lieu-dit Cambelong, Conques-en-Rouergue, 12320, France",
+          "latitude": 44.5926775,
+          "longitude": 2.3959849,
+          "etoiles_michelin": 1,
+          "url": "http://www.moulindecambelong.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue"
+        }
+      ]
+    },
+    {
+      "nom": "Thomas Letourneur",
+      "saisons": [
+        8
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue",
+          "adresse": "61 lieu-dit Cambelong, Conques-en-Rouergue, 12320, France",
+          "latitude": 44.5926775,
+          "longitude": 2.3959849,
+          "etoiles_michelin": 1,
+          "url": "http://www.moulindecambelong.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue"
+        }
+      ]
+    },
+    {
+      "nom": "Thomas Murer",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue",
+          "adresse": "61 lieu-dit Cambelong, Conques-en-Rouergue, 12320, France",
+          "latitude": 44.5926775,
+          "longitude": 2.3959849,
+          "etoiles_michelin": 1,
+          "url": "http://www.moulindecambelong.com"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Émilie & Thomas - Moulin de Cambelong",
+          "ville": "Conques-en-Rouergue"
+        }
+      ]
+    },
+    {
+      "nom": "Tiffany Depardieu",
+      "saisons": [
+        2,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Tom Paduano",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Feuillée - Le Couvent des Minimes",
+          "ville": "Mane",
+          "adresse": "Chemin des Jeux-de-Maï, Mane, 04300, France",
+          "latitude": 43.9395915,
+          "longitude": 5.7723757,
+          "etoiles_michelin": 1,
+          "url": "https://www.couventdesminimes-hotelspa.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Valentin Néraudeau",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Valentin Raffali",
+      "saisons": [
+        15
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Bus Palladium",
+          "ville": "Paris",
+          "adresse": "6 rue Pierre Fontaine, 75009 Paris, France",
+          "latitude": 48.8807709,
+          "longitude": 2.3349113,
+          "etoiles_michelin": 0,
+          "url": "https://www.buspalladium.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Vanessa Robuschi",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Question de Goût",
+          "ville": "Marseille",
+          "adresse": "147 avenue Joseph Vidal, 13008 Marseille, France",
+          "latitude": 43.2516822,
+          "longitude": 5.3781947,
+          "etoiles_michelin": 0,
+          "url": "https://unequestiondegout.fr/fr"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Victor Blanchet",
+      "saisons": [
+        14
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe",
+          "adresse": "141 route du Plan-Dessert, Notre-Dame-de-Bellecombe, 73590, France",
+          "latitude": 45.8054077,
+          "longitude": 6.5512822,
+          "etoiles_michelin": 1,
+          "url": "https://la-ferme-de-victorine.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe"
+        }
+      ]
+    },
+    {
+      "nom": "Victor Kuntz",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe",
+          "adresse": "141 route du Plan-Dessert, Notre-Dame-de-Bellecombe, 73590, France",
+          "latitude": 45.8054077,
+          "longitude": 6.5512822,
+          "etoiles_michelin": 1,
+          "url": "https://la-ferme-de-victorine.com/"
+        },
+        {
+          "source": "manuel",
+          "nom_restaurant": "Ida",
+          "ville": "Paris",
+          "adresse": "117 rue de Vaugirard, 75015 Paris, France",
+          "latitude": 48.8447004,
+          "longitude": 2.3190024,
+          "etoiles_michelin": 0,
+          "url": "https://www.restaurant-ida.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe"
+        }
+      ]
+    },
+    {
+      "nom": "Victor Mercier",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe",
+          "adresse": "141 route du Plan-Dessert, Notre-Dame-de-Bellecombe, 73590, France",
+          "latitude": 45.8054077,
+          "longitude": 6.5512822,
+          "etoiles_michelin": 1,
+          "url": "https://la-ferme-de-victorine.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "La Ferme de Victorine",
+          "ville": "Notre-Dame-de-Bellecombe"
+        }
+      ]
+    },
+    {
+      "nom": "Vincent Crepel",
+      "saisons": [
+        9
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Vincent Favre Félix",
+          "ville": "Annecy",
+          "adresse": "15 chemin de l'Abbaye - à Annecy-le-Vieux, Annecy, 74940, France",
+          "latitude": 45.9177189,
+          "longitude": 6.1416315,
+          "etoiles_michelin": 1,
+          "url": "https://www.restaurant-vff.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Vincent Favre Félix",
+          "ville": "Annecy"
+        }
+      ]
+    },
+    {
+      "nom": "Vincent Gomis",
+      "saisons": [
+        4
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Vincent Favre Félix",
+          "ville": "Annecy",
+          "adresse": "15 chemin de l'Abbaye - à Annecy-le-Vieux, Annecy, 74940, France",
+          "latitude": 45.9177189,
+          "longitude": 6.1416315,
+          "etoiles_michelin": 1,
+          "url": "https://www.restaurant-vff.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Vincent Favre Félix",
+          "ville": "Annecy"
+        }
+      ]
+    },
+    {
+      "nom": "Virginie Martinetti",
+      "saisons": [
+        4
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Viviana Pisacane",
+      "saisons": [
+        17
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Le Bœuf d'Argent",
+          "ville": "Lyon",
+          "adresse": "29 rue du Bœuf, Lyon, 69005, France",
+          "latitude": 45.762197,
+          "longitude": 4.8264533,
+          "etoiles_michelin": 0,
+          "url": "https://restaurant-leboeufdargent.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Wilfried Graux",
+      "saisons": [
+        7
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Wilfried Romain",
+      "saisons": [
+        13
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Xavier Koenig",
+      "saisons": [
+        6
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Pré - Xavier Beaudiment",
+          "ville": "Clermont-Ferrand",
+          "adresse": "Route de la Baraque, Clermont-Ferrand, 63000, France",
+          "latitude": 45.7886787,
+          "longitude": 3.0519431,
+          "etoiles_michelin": 2,
+          "url": "https://www.restaurant-lepre.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Pré - Xavier Beaudiment",
+          "ville": "Clermont-Ferrand"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas"
+        }
+      ]
+    },
+    {
+      "nom": "Xavier Pincemin",
+      "saisons": [
+        7
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "csv_michelin",
+          "score": 56,
+          "nom_restaurant": "Le Pré - Xavier Beaudiment",
+          "ville": "Clermont-Ferrand",
+          "adresse": "Route de la Baraque, Clermont-Ferrand, 63000, France",
+          "latitude": 45.7886787,
+          "longitude": 3.0519431,
+          "etoiles_michelin": 2,
+          "url": "https://www.restaurant-lepre.com/"
+        }
+      ],
+      "candidatures_csv_meilleur_score": 56,
+      "autres_tables_csv_score_min_40": [
+        {
+          "score": 56,
+          "nom_restaurant": "Le Pré - Xavier Beaudiment",
+          "ville": "Clermont-Ferrand"
+        },
+        {
+          "score": 56,
+          "nom_restaurant": "La Table de Xavier Mathieu",
+          "ville": "Joucas"
+        }
+      ]
+    },
+    {
+      "nom": "Yoaké San",
+      "saisons": [
+        1,
+        5
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Yohei Hosaka",
+      "saisons": [
+        12
+      ],
+      "statut": "sans_etablissement_repertorie",
+      "etablissements": [],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    },
+    {
+      "nom": "Yoni Saada",
+      "saisons": [
+        4
+      ],
+      "statut": "avec_etablissement",
+      "etablissements": [
+        {
+          "source": "manuel",
+          "nom_restaurant": "Phénice",
+          "ville": "Paris",
+          "adresse": "7 rue du Conservatoire, 75009 Paris, France (Hôtel De Nell)",
+          "latitude": 48.8731709,
+          "longitude": 2.3467834,
+          "etoiles_michelin": 0,
+          "url": "https://www.hoteldenell.com/restaurant-bar"
+        }
+      ],
+      "candidatures_csv_meilleur_score": null,
+      "autres_tables_csv_score_min_40": []
+    }
+  ]
+}

@@ -4,6 +4,16 @@ export function googleDirectionsUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 }
 
+/** Itinéraire depuis une adresse de départ (texte libre). */
+export function googleDirectionsUrlFromOrigin(
+  origin: string,
+  lat: number,
+  lng: number
+): string {
+  const o = encodeURIComponent(origin.trim());
+  return `https://www.google.com/maps/dir/?api=1&origin=${o}&destination=${lat},${lng}`;
+}
+
 /** Ouvre l’app Maps avec destination (mobile / bureau). */
 export function appleMapsDirectionsUrl(lat: number, lng: number): string {
   return `https://maps.apple.com/?daddr=${lat},${lng}`;
@@ -12,6 +22,11 @@ export function appleMapsDirectionsUrl(lat: number, lng: number): string {
 /** Street View dans Google Maps (nouvel onglet). */
 export function googleStreetViewUrl(lat: number, lng: number): string {
   return `https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=${lat},${lng}`;
+}
+
+/** Carte Google intégrée (iframe, sans clé API). */
+export function googleMapsEmbedUrl(lat: number, lng: number): string {
+  return `https://maps.google.com/maps?q=${lat},${lng}&z=16&output=embed&hl=fr`;
 }
 
 /** Carte Waze centrée sur le restaurant (iframe). */

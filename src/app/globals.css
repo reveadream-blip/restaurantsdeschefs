@@ -1,26 +1,73 @@
 @import "tailwindcss";
 
+/* Palette prestige — crème / anthracite / doré mat Michelin */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --rc-page-bg: #fdfdfd;
+  --rc-text: #121212;
+  --rc-text-muted: rgba(18, 18, 18, 0.52);
+  --rc-surface: #fafaf8;
+  --rc-surface-elevated: #ffffff;
+  --rc-border: rgba(18, 18, 18, 0.08);
+  --rc-border-strong: rgba(18, 18, 18, 0.14);
+  /* Doré mat (étoiles / accents prestige) */
+  --rc-gold: #9a7d2e;
+  --rc-gold-soft: rgba(154, 125, 46, 0.16);
+  --rc-ruby: #c41e3a;
+  --rc-ruby-soft: rgba(196, 30, 58, 0.1);
+  --rc-shadow: 0 24px 56px rgba(18, 18, 18, 0.07);
+  --rc-glass: rgba(253, 253, 253, 0.78);
+  --rc-glass-border: rgba(18, 18, 18, 0.06);
+  --rc-radius-lg: 1.25rem;
+  --rc-radius-xl: 1.5rem;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-rc-page: var(--rc-page-bg);
+  --color-rc-text: var(--rc-text);
+  --color-rc-muted: var(--rc-text-muted);
+  --color-rc-surface: var(--rc-surface);
+  --color-rc-gold: var(--rc-gold);
+  --color-rc-ruby: var(--rc-ruby);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
+    serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  min-height: 100%;
+  background: var(--rc-page-bg);
+  color: var(--rc-text);
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-feature-settings: "kern" 1, "liga" 1, "cv02" 1;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Titres, noms de chefs et d’établissements — serif prestige */
+.font-display {
+  font-family: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
+    serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Données techniques : sans-serif légère */
+.font-data {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+
+.leaflet-container {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 }

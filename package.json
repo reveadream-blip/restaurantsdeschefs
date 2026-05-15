@@ -7,11 +7,21 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "data:ville-dept": "node scripts/build-ville-departement-from-sample.mjs",
     "data:topchef": "node scripts/build-topchef-catalog.mjs",
     "data:enrich": "node scripts/enrich-topchef-wikipedia.mjs",
-    "pages:dev": "npm run build && wrangler pages dev ./out --compatibility-date=2024-11-01 --d1=DB=chefs_db"
+    "data:michelin-import": "node scripts/build-etablissements-from-csv.mjs",
+    "pages:dev": "npm run build && wrangler pages dev ./out --compatibility-date=2024-11-01 --d1=DB=chefs_db",
+    "pages:deploy": "wrangler pages deploy ./out --commit-dirty=true",
+    "db:seed:demo": "wrangler d1 execute chefs_db --remote --file=./data/etablissements-demo-seed.sql",
+    "db:seed:topchef-candidats": "wrangler d1 execute chefs_db --remote --file=./data/topchef-candidats-seed.sql",
+    "db:seed:topchef-restaurants": "wrangler d1 execute chefs_db --remote --file=./data/topchef-restaurants-from-etablissements.sql",
+    "data:topchef-restaurants-csv": "node scripts/seed-topchef-restaurants-from-csv.mjs",
+    "data:topchef-census": "node scripts/census-topchef-etablissements.mjs",
+    "db:seed:topchef-restaurants-csv": "wrangler d1 execute chefs_db --remote --file=./data/topchef-restaurants-from-csv.sql"
   },
   "dependencies": {
+    "framer-motion": "^12.38.0",
     "leaflet": "^1.9.4",
     "lucide-react": "^1.14.0",
     "next": "16.2.6",

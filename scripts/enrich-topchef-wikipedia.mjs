@@ -109,7 +109,7 @@ async function main() {
   const sql = [
     "-- Mise à jour parcours + liens Wikipédia (texte intro CC BY-SA — crédit Wikipédia).",
     "-- Généré par scripts/enrich-topchef-wikipedia.mjs",
-    "BEGIN TRANSACTION;",
+    "-- (pas de BEGIN/COMMIT : D1 `wrangler d1 execute --remote --file` ne les accepte pas.)",
   ];
 
   let i = 0;
@@ -156,7 +156,6 @@ async function main() {
     JSON.stringify({ meta, candidats: out }, null, 2),
     "utf8"
   );
-  sql.push("COMMIT;");
   writeFileSync(join(dataDir, "topchef-enrich-wikipedia.sql"), sql.join("\n") + "\n", "utf8");
   console.log(
     "Écrit data/topchef-enriched.json et data/topchef-enrich-wikipedia.sql",

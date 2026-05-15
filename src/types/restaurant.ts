@@ -1,3 +1,14 @@
+/** Champs de contact surchargés sur la fiche publique (édition /admin). */
+export type FicheContactOverride = {
+  telephone?: string;
+  email?: string;
+  site_web?: string;
+  adresse?: string;
+  ville?: string;
+  chef_nom?: string;
+  nom_restaurant?: string;
+};
+
 /** Données affichées : coordonnées de contact = restaurant uniquement (pas de données perso chef). */
 export type Restaurant = {
   id: number;
@@ -12,6 +23,28 @@ export type Restaurant = {
   telephone: string;
   /** E-mail du restaurant (contact ou résa), si communiqué publiquement. */
   email?: string;
+  /** Saisons Top Chef (candidat), si connues. */
+  saisons_top_chef?: number[];
+  /** Fiche candidat / établissement (D1 ou enrichissement local). */
+  candidat_parcours?: string;
+  candidat_diplome?: string;
+  candidat_site_web?: string;
+  lien_wikipedia?: string;
+  lien_fandom?: string;
+  notes_source?: string;
+  restaurant_adresse?: string;
+  restaurant_site_web?: string;
+  /** Intro Wikipédia (fichier enrichi — CC BY-SA). */
+  wikipedia_intro?: string;
+  wikipedia_article_url?: string;
+  wikipedia_article_title?: string;
+  wikidata_id?: string;
+  /** Contenus éditoriaux (D1 `etablissement_fiches`), fusionnés par l’API. */
+  fiche_description?: string;
+  fiche_photos?: string[];
+  fiche_menu_prix?: string;
+  fiche_video_url?: string;
+  fiche_contact?: FicheContactOverride;
 };
 
-export type MenuFiltre = "tous" | "top-chef" | "3" | "2" | "1";
+export type MenuFiltre = "tous" | "top-chef" | "etoiles" | "3" | "2" | "1";

@@ -3,6 +3,7 @@
  * Généré par scripts/build-topchef-catalog.mjs — ne pas éditer à la main.
  *
  * Source des listes : https://topchef.fandom.com/fr/wiki/Liste_des_candidats_de_Top_Chef_par_saison
+ * (saisons 1–17 ; saison 17 : https://topchef.fandom.com/fr/wiki/Saison_17_de_Top_Chef )
  * Contenu sous licence CC-BY-SA (communauté Fandom).
  *
  * Aucune donnée personnelle de contact ici. Téléphone et e-mail des restaurants
@@ -287,6 +288,24 @@ export const TOP_CHEF_BY_SAISON = {
     "Steven Thiebault-Pellegrino",
     "Ilane Tinchant",
     "Grégoire Touchard"
+  ],
+  "17": [
+    "Alexy Algar-Denos",
+    "Aboubakar Bamba",
+    "Sacha Boyadjian",
+    "Dylan Bury",
+    "Théo Chassé",
+    "Antoine Garcia",
+    "Alexia Jolivet",
+    "Victor Kuntz",
+    "Tom Paduano",
+    "Nicolas Parage",
+    "Maël Paranthoen",
+    "Louise Perrone",
+    "Matteo Pioppi",
+    "Viviana Pisacane",
+    "Lucas Renault",
+    "Léa Vautier Lecointre"
   ]
 } as const;
 
@@ -294,6 +313,12 @@ export type TopChefSaison = keyof typeof TOP_CHEF_BY_SAISON;
 
 /** Candidats uniques avec toutes leurs saisons (ex. Pierre Augé : 1 et 5). */
 export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
+  {
+    "nom": "Aboubakar Bamba",
+    "saisons": [
+      17
+    ]
+  },
   {
     "nom": "Abraham de la Rosa",
     "saisons": [
@@ -373,6 +398,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Alexia Jolivet",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Alexis Braconnier",
     "saisons": [
       2,
@@ -383,6 +414,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Alexis Delassaux",
     "saisons": [
       8
+    ]
+  },
+  {
+    "nom": "Alexy Algar-Denos",
+    "saisons": [
+      17
     ]
   },
   {
@@ -419,6 +456,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Anne-Cécile Degenne",
     "saisons": [
       5
+    ]
+  },
+  {
+    "nom": "Antoine Garcia",
+    "saisons": [
+      17
     ]
   },
   {
@@ -671,6 +714,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Dieuveil Malonga",
     "saisons": [
       5
+    ]
+  },
+  {
+    "nom": "Dylan Bury",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1097,6 +1146,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Léa Vautier Lecointre",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Léo Renusson",
     "saisons": [
       14
@@ -1127,6 +1182,18 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Louise Perrone",
+    "saisons": [
+      17
+    ]
+  },
+  {
+    "nom": "Lucas Renault",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Lucie Berthier Gembara",
     "saisons": [
       13
@@ -1142,6 +1209,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Maël Duval",
     "saisons": [
       10
+    ]
+  },
+  {
+    "nom": "Maël Paranthoen",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1208,6 +1281,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Mathieu Vande Velde",
     "saisons": [
       12
+    ]
+  },
+  {
+    "nom": "Matteo Pioppi",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1292,6 +1371,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Nastasia Lyard",
     "saisons": [
       11
+    ]
+  },
+  {
+    "nom": "Nicolas Parage",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1486,6 +1571,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Sacha Boyadjian",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Samuel Albert",
     "saisons": [
       10
@@ -1570,6 +1661,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Théo Chassé",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Thibaud Erard-Penguilly",
     "saisons": [
       9
@@ -1625,6 +1722,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Tom Paduano",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Valentin Néraudeau",
     "saisons": [
       4
@@ -1649,6 +1752,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     ]
   },
   {
+    "nom": "Victor Kuntz",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Victor Mercier",
     "saisons": [
       9
@@ -1670,6 +1779,12 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
     "nom": "Virginie Martinetti",
     "saisons": [
       4
+    ]
+  },
+  {
+    "nom": "Viviana Pisacane",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1717,6 +1832,6 @@ export const TOP_CHEF_CANDIDATS_MERGED: { nom: string; saisons: number[] }[] = [
   }
 ];
 
-export const TOP_CHEF_NOMBRE_SAISONS = 16;
+export const TOP_CHEF_NOMBRE_SAISONS = 17;
 
-export const TOP_CHEF_NOMBRE_CANDIDATS_UNIQUES = 235;
+export const TOP_CHEF_NOMBRE_CANDIDATS_UNIQUES = 251;

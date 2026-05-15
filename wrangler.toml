@@ -1,15 +1,17 @@
-name = "restaurants-des-chefs"
+name = "restaurantsdeschefs"
 compatibility_date = "2024-11-01"
+
+# Secrets (production) — connexion éditeur /admin :
+#   npx wrangler secret put ADMIN_PASSWORD
+#   npx wrangler secret put ADMIN_SESSION_SECRET   # chaîne aléatoire longue (ex. openssl rand -hex 32)
+#   Optionnel : npx wrangler secret put ADMIN_EMAIL   # sinon seul reveadream@gmail.com est accepté
+# Migration contenus fiches : data/migration-etablissement-fiches.sql
 
 pages_build_output_dir = "./out"
 
-# D1 (chefs_db) : sur Cloudflare Pages > ton projet > Paramètres > Liaisons,
-# ajoute la base D1 `chefs_db` avec le nom de variable d’environnement **DB**
-# (identique au binding attendu par functions/api/*.ts).
-#
-# Optionnel : décommente ci-dessous et mets l’UUID de chefs_db pour que wrangler.toml
-# soit la source de vérité (sinon la liaison dashboard suffit).
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "chefs_db"
-# database_id = "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+# Liaisons gérées par ce fichier (dashboard Pages : bindings désactivés / « managed through wrangler »).
+# Variable **DB** = celle lue par functions/api/*.ts via context.env.DB
+[[d1_databases]]
+binding = "DB"
+database_name = "chefs_db"
+database_id = "f3d13278-172f-4871-895f-bfe8f8c89a84"

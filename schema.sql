@@ -56,3 +56,14 @@ CREATE TABLE IF NOT EXISTS top_chef_restaurants (
     est_actif INTEGER DEFAULT 1,
     FOREIGN KEY (candidat_id) REFERENCES top_chef_candidats(id)
 );
+
+-- Fiches éditoriales (description, photos URL, menu/prix, vidéo, contact) — éditables via /admin.
+CREATE TABLE IF NOT EXISTS etablissement_fiches (
+    etablissement_id INTEGER PRIMARY KEY,
+    description_text TEXT,
+    photos_json TEXT,
+    menu_prix TEXT,
+    video_url TEXT,
+    contact_json TEXT,
+    updated_at TEXT DEFAULT (datetime('now'))
+);

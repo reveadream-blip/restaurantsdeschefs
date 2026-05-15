@@ -47,8 +47,11 @@ function FitBounds({ restaurants }: { restaurants: Restaurant[] }) {
 
 export default function ChefMap({
   restaurants,
+  onMarkerSelect,
 }: {
   restaurants: Restaurant[];
+  /** Clic sur un pin : sélectionne l’établissement et fait défiler la liste. */
+  onMarkerSelect?: (id: number) => void;
 }) {
   return (
     <div className="flex h-[520px] w-full flex-col gap-3">
@@ -66,6 +69,15 @@ export default function ChefMap({
               key={restau.id}
               position={[restau.latitude, restau.longitude]}
               icon={customIcon}
+              eventHandlers={
+                onMarkerSelect
+                  ? {
+                      click: () => {
+                        onMarkerSelect(restau.id);
+                      },
+                    }
+                  : undefined
+              }
             >
               <Popup>
                 <div className="min-w-[200px] p-1">
@@ -74,6 +86,12 @@ export default function ChefMap({
                   </p>
                   <h3 className="text-base font-bold">{restau.nom_restaurant}</h3>
                   <p className="text-sm text-gray-700">{restau.chef_nom}</p>
+                  {restau.saisons_top_chef &&
+                  restau.saisons_top_chef.length > 0 ? (
+                    <p className="mt-0.5 text-xs text-gray-500">
+                      Saisons {restau.saisons_top_chef.join(", ")}
+                    </p>
+                  ) : null}
                   {restau.top_chef && (
                     <p className="mt-1 text-xs font-semibold text-orange-600">
                       Top Chef
@@ -101,6 +119,19 @@ export default function ChefMap({
                     >
                       {restau.email}
                     </a>
+                  ) : null}
+                  {restau.restaurant_adresse ? (
+                    <p className="mt-2 text-xs leading-snug text-gray-600">
+                      {restau.restaurant_adresse}
+                    </p>
+                  ) : null}
+                  {restau.candidat_diplome ? (
+                    <p className="mt-1 text-xs text-gray-600">
+                      <span className="font-medium">Formation :</span>{" "}
+                      {restau.candidat_diplome.length > 120
+                        ? `${restau.candidat_diplome.slice(0, 120)}…`
+                        : restau.candidat_diplome}
+                    </p>
                   ) : null}
                   <div className="mt-2 flex flex-wrap gap-2 border-t border-gray-100 pt-2">
                     <a

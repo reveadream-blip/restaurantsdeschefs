@@ -1,5 +1,11 @@
 [
   {
+    "nom": "Aboubakar Bamba",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Abraham de la Rosa",
     "saisons": [
       2
@@ -78,6 +84,12 @@
     ]
   },
   {
+    "nom": "Alexia Jolivet",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Alexis Braconnier",
     "saisons": [
       2,
@@ -88,6 +100,12 @@
     "nom": "Alexis Delassaux",
     "saisons": [
       8
+    ]
+  },
+  {
+    "nom": "Alexy Algar-Denos",
+    "saisons": [
+      17
     ]
   },
   {
@@ -124,6 +142,12 @@
     "nom": "Anne-Cécile Degenne",
     "saisons": [
       5
+    ]
+  },
+  {
+    "nom": "Antoine Garcia",
+    "saisons": [
+      17
     ]
   },
   {
@@ -376,6 +400,12 @@
     "nom": "Dieuveil Malonga",
     "saisons": [
       5
+    ]
+  },
+  {
+    "nom": "Dylan Bury",
+    "saisons": [
+      17
     ]
   },
   {
@@ -802,6 +832,12 @@
     ]
   },
   {
+    "nom": "Léa Vautier Lecointre",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Léo Renusson",
     "saisons": [
       14
@@ -832,6 +868,18 @@
     ]
   },
   {
+    "nom": "Louise Perrone",
+    "saisons": [
+      17
+    ]
+  },
+  {
+    "nom": "Lucas Renault",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Lucie Berthier Gembara",
     "saisons": [
       13
@@ -847,6 +895,12 @@
     "nom": "Maël Duval",
     "saisons": [
       10
+    ]
+  },
+  {
+    "nom": "Maël Paranthoen",
+    "saisons": [
+      17
     ]
   },
   {
@@ -913,6 +967,12 @@
     "nom": "Mathieu Vande Velde",
     "saisons": [
       12
+    ]
+  },
+  {
+    "nom": "Matteo Pioppi",
+    "saisons": [
+      17
     ]
   },
   {
@@ -997,6 +1057,12 @@
     "nom": "Nastasia Lyard",
     "saisons": [
       11
+    ]
+  },
+  {
+    "nom": "Nicolas Parage",
+    "saisons": [
+      17
     ]
   },
   {
@@ -1191,6 +1257,12 @@
     ]
   },
   {
+    "nom": "Sacha Boyadjian",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Samuel Albert",
     "saisons": [
       10
@@ -1275,6 +1347,12 @@
     ]
   },
   {
+    "nom": "Théo Chassé",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Thibaud Erard-Penguilly",
     "saisons": [
       9
@@ -1330,6 +1408,12 @@
     ]
   },
   {
+    "nom": "Tom Paduano",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Valentin Néraudeau",
     "saisons": [
       4
@@ -1354,6 +1438,12 @@
     ]
   },
   {
+    "nom": "Victor Kuntz",
+    "saisons": [
+      17
+    ]
+  },
+  {
     "nom": "Victor Mercier",
     "saisons": [
       9
@@ -1375,6 +1465,12 @@
     "nom": "Virginie Martinetti",
     "saisons": [
       4
+    ]
+  },
+  {
+    "nom": "Viviana Pisacane",
+    "saisons": [
+      17
     ]
   },
   {
