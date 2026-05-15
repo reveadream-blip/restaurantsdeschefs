@@ -68,6 +68,8 @@ function AdminFicheEditor() {
   const [importErr, setImportErr] = useState<string | null>(null);
   const [importPreview, setImportPreview] = useState<unknown>(null);
   const [sponsoring, setSponsoring] = useState(false);
+  const [displayTopChef, setDisplayTopChef] = useState(false);
+  const [displayEtoiles, setDisplayEtoiles] = useState<0 | 1 | 2 | 3>(0);
 
   const checkMe = useCallback(async () => {
     const { ok, data } = await fetchJson<{ authenticated?: boolean }>(
@@ -117,6 +119,8 @@ function AdminFicheEditor() {
       const b = list.find((r) => r.id === id) ?? null;
       if (!cancelled) setBase(b);
 
+      let contact: Record<string, unknown> = {};
+
       const { ok, status, data } = await fetchJson<FicheApi & { error?: string }>(
         `/api/admin/fiche?id=${id}`
       );
@@ -152,26 +156,31 @@ function AdminFicheEditor() {
         setSponsoring(f.sponsoring === 1 || f.sponsoring === true);
         if (f.contact_json) {
           try {
-            const c = JSON.parse(f.contact_json) as Record<string, string>;
-            setCtTel(c.telephone ?? "");
-            setCtEmail(c.email ?? "");
-            setCtSite(c.site_web ?? "");
-            setCtAdr(c.adresse ?? "");
-            setCtVille(c.ville ?? "");
-            setCtChef(c.chef_nom ?? "");
-            setCtNom(c.nom_restaurant ?? "");
+            contact = JSON.parse(f.contact_json) as Record<string, unknown>;
           } catch {
-            /* */
+            contact = {};
           }
-        } else {
-          setCtTel("");
-          setCtEmail("");
-          setCtSite("");
-          setCtAdr("");
-          setCtVille("");
-          setCtChef("");
-          setCtNom("");
         }
+        const c = contact;
+        setCtNom(String(c.nom_restaurant ?? b?.nom_restaurant ?? ""));
+        setCtChef(String(c.chef_nom ?? b?.chef_nom ?? ""));
+        setCtVille(String(c.ville ?? b?.ville ?? ""));
+        setDisplayTopChef(
+          c.top_chef !== undefined
+            ? c.top_chef === true || c.top_chef === 1
+            : Boolean(b?.top_chef)
+        );
+        const starsRaw =
+          c.etoiles_michelin !== undefined
+            ? Number(c.etoiles_michelin)
+            : b?.etoiles_michelin ?? 0;
+        setDisplayEtoiles(
+          Math.min(3, Math.max(0, Math.round(starsRaw))) as 0 | 1 | 2 | 3
+        );
+        setCtTel(String(c.telephone ?? ""));
+        setCtEmail(String(c.email ?? ""));
+        setCtSite(String(c.site_web ?? ""));
+        setCtAdr(String(c.adresse ?? ""));
       }
       setLoading(false);
     })();
@@ -236,14 +245,16 @@ function AdminFicheEditor() {
     setErr(null);
     setSaved(false);
     const photos = parseFichePhotoLines(photosLines);
-    const contact: Record<string, string> = {};
+    const contact: Record<string, string | number | boolean> = {};
+    if (ctNom.trim()) contact.nom_restaurant = ctNom.trim();
+    if (ctChef.trim()) contact.chef_nom = ctChef.trim();
+    if (ctVille.trim()) contact.ville = ctVille.trim();
+    contact.top_chef = displayTopChef;
+    contact.etoiles_michelin = displayEtoiles;
     if (ctTel.trim()) contact.telephone = ctTel.trim();
     if (ctEmail.trim()) contact.email = ctEmail.trim();
     if (ctSite.trim()) contact.site_web = ctSite.trim();
     if (ctAdr.trim()) contact.adresse = ctAdr.trim();
-    if (ctVille.trim()) contact.ville = ctVille.trim();
-    if (ctChef.trim()) contact.chef_nom = ctChef.trim();
-    if (ctNom.trim()) contact.nom_restaurant = ctNom.trim();
 
     const { ok, data } = await fetchJson<{ error?: string }>(
       `/api/admin/fiche?id=${id}`,
@@ -309,16 +320,113 @@ function AdminFicheEditor() {
       <h1 className="mt-4 font-display text-2xl font-semibold text-[var(--rc-text)]">
         Éditer la fiche
       </h1>
-      {base ? (
-        <p className="mt-1 text-sm text-[var(--rc-text-muted)]">
-          {base.nom_restaurant} — {base.chef_nom} ({base.ville}) · id {id}
-        </p>
-      ) : (
+      {!base ? (
         <p className="mt-1 text-sm text-[var(--rc-ruby)]">
           Cet id n’est pas dans l’annuaire actuel ; vous pouvez tout de même
           enregistrer des surcharges si la ligne existe en base.
         </p>
-      )}
+      ) : null}
+
+      <section className="mt-6 rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-5">
+        <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
+          Identité affichée dans l’annuaire
+        </h2>
+        <p className="mt-1 text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
+          Ces champs remplacent la ligne sous le titre sur le site public
+          (cartes, liste, filtres). Enregistrez pour appliquer.
+        </p>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2">
+          <label className="block sm:col-span-2">
+            <span className="text-xs font-medium uppercase tracking-wider text-[var(--rc-text-muted)]">
+              Nom du restaurant
+            </span>
+            <input
+              value={ctNom}
+              onChange={(e) => setCtNom(e.target.value)}
+              className="mt-1.5 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-page-bg)] px-3 py-2 text-sm text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
+            />
+          </label>
+          <label className="block">
+            <span className="text-xs font-medium uppercase tracking-wider text-[var(--rc-text-muted)]">
+              Nom du chef
+            </span>
+            <input
+              value={ctChef}
+              onChange={(e) => setCtChef(e.target.value)}
+              className="mt-1.5 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-page-bg)] px-3 py-2 text-sm text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
+            />
+          </label>
+          <label className="block">
+            <span className="text-xs font-medium uppercase tracking-wider text-[var(--rc-text-muted)]">
+              Ville
+            </span>
+            <input
+              value={ctVille}
+              onChange={(e) => setCtVille(e.target.value)}
+              className="mt-1.5 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-page-bg)] px-3 py-2 text-sm text-[var(--rc-text)] outline-none focus:border-[var(--rc-gold)]"
+            />
+          </label>
+        </div>
+
+        <div className="mt-5 space-y-4 border-t border-[var(--rc-border)] pt-5">
+          <label className="flex cursor-pointer items-center gap-3">
+            <input
+              type="checkbox"
+              checked={displayTopChef}
+              onChange={(e) => setDisplayTopChef(e.target.checked)}
+              className="h-4 w-4 shrink-0 rounded border-[var(--rc-border)] accent-[var(--rc-ruby)]"
+            />
+            <span className="text-sm font-medium text-[var(--rc-text)]">
+              Top Chef
+            </span>
+          </label>
+
+          <fieldset>
+            <legend className="text-xs font-medium uppercase tracking-wider text-[var(--rc-text-muted)]">
+              Étoiles Michelin
+            </legend>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {(
+                [
+                  { value: 0 as const, label: "Aucune" },
+                  { value: 1 as const, label: "1 étoile" },
+                  { value: 2 as const, label: "2 étoiles" },
+                  { value: 3 as const, label: "3 étoiles" },
+                ] as const
+              ).map((opt) => (
+                <label
+                  key={opt.value}
+                  className={`cursor-pointer rounded-lg border px-3 py-2 text-xs font-medium transition ${
+                    displayEtoiles === opt.value
+                      ? "border-[var(--rc-gold)] bg-[var(--rc-gold-soft)] text-[var(--rc-text)]"
+                      : "border-[var(--rc-border)] bg-[var(--rc-page-bg)] text-[var(--rc-text-muted)] hover:border-[var(--rc-border-strong)]"
+                  }`}
+                >
+                  <input
+                    type="radio"
+                    name="etoiles-michelin"
+                    value={opt.value}
+                    checked={displayEtoiles === opt.value}
+                    onChange={() => setDisplayEtoiles(opt.value)}
+                    className="sr-only"
+                  />
+                  {opt.label}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        </div>
+
+        <p className="mt-4 text-sm text-[var(--rc-text-muted)]">
+          <span className="font-medium text-[var(--rc-text)]">Aperçu :</span>{" "}
+          {ctNom.trim() || "—"} — {ctChef.trim() || "—"} ({ctVille.trim() || "—"})
+          {displayTopChef ? " · Top Chef" : ""}
+          {displayEtoiles > 0
+            ? ` · ${displayEtoiles} étoile${displayEtoiles > 1 ? "s" : ""}`
+            : ""}{" "}
+          · id {id}
+        </p>
+      </section>
 
       <section className="mt-8 rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] p-5">
         <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
@@ -502,24 +610,6 @@ function AdminFicheEditor() {
               onChange={(e) => setCtAdr(e.target.value)}
               rows={3}
               className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm whitespace-pre-wrap sm:col-span-2"
-            />
-            <input
-              placeholder="Ville"
-              value={ctVille}
-              onChange={(e) => setCtVille(e.target.value)}
-              className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm"
-            />
-            <input
-              placeholder="Nom du chef (affiché)"
-              value={ctChef}
-              onChange={(e) => setCtChef(e.target.value)}
-              className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm"
-            />
-            <input
-              placeholder="Nom du restaurant (affiché)"
-              value={ctNom}
-              onChange={(e) => setCtNom(e.target.value)}
-              className="rounded-lg border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2 text-sm sm:col-span-2"
             />
           </div>
         </section>

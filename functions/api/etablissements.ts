@@ -134,6 +134,37 @@ function ficheRowSponsoring(f: FicheRow): boolean {
   return f.sponsoring === 1 || f.sponsoring === true;
 }
 
+/** Applique nom, chef, ville, étoiles et Top Chef surchargés via `fiche_contact`. */
+function applyFicheDisplayOverrides(row: Record<string, unknown>): void {
+  const fc = row.fiche_contact;
+  if (!fc || typeof fc !== "object" || Array.isArray(fc)) return;
+  const c = fc as Record<string, unknown>;
+  const nom = c.nom_restaurant;
+  if (typeof nom === "string" && nom.trim() !== "") {
+    row.nom_restaurant = nom.trim();
+  }
+  const chef = c.chef_nom;
+  if (typeof chef === "string" && chef.trim() !== "") {
+    row.chef_nom = chef.trim();
+  }
+  const ville = c.ville;
+  if (typeof ville === "string" && ville.trim() !== "") {
+    row.ville = ville.trim();
+  }
+  if (c.top_chef === true || c.top_chef === 1) {
+    row.top_chef = 1;
+  } else if (c.top_chef === false || c.top_chef === 0) {
+    row.top_chef = 0;
+  }
+  if (c.etoiles_michelin != null && c.etoiles_michelin !== "") {
+    const stars = Math.min(
+      3,
+      Math.max(0, Math.round(Number(c.etoiles_michelin)))
+    );
+    if (Number.isFinite(stars)) row.etoiles_michelin = stars;
+  }
+}
+
 async function mergeEditorialFiches(
   db: D1Database,
   rows: Record<string, unknown>[]
@@ -215,6 +246,7 @@ async function mergeEditorialFiches(
       const u = normalizePhotoUrl(String(f.card_cover_url).trim());
       if (u) row.fiche_card_cover_url = u;
     }
+    applyFicheDisplayOverrides(row);
   }
 }
 

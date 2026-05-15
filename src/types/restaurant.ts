@@ -7,6 +7,10 @@ export type FicheContactOverride = {
   ville?: string;
   chef_nom?: string;
   nom_restaurant?: string;
+  /** Surcharge affichage annuaire / filtres (0–3). */
+  etoiles_michelin?: number;
+  /** Surcharge badge Top Chef. */
+  top_chef?: boolean;
 };
 
 /** Données affichées : coordonnées de contact = restaurant uniquement (pas de données perso chef). */

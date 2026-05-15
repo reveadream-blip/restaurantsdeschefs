@@ -44,7 +44,7 @@ function normalizeContact(input: unknown): string | null {
   if (input == null) return null;
   if (typeof input !== "object" || input === null) return null;
   const o = input as Record<string, unknown>;
-  const out: Record<string, string> = {};
+  const out: Record<string, string | number | boolean> = {};
   const keys = [
     "telephone",
     "email",
@@ -60,6 +60,22 @@ function normalizeContact(input: unknown): string | null {
     const s = String(v).trim();
     if (s === "") continue;
     out[k] = s.length > 500 ? s.slice(0, 500) : s;
+  }
+  if (o.top_chef === true || o.top_chef === 1 || o.top_chef === "1") {
+    out.top_chef = true;
+  } else if (
+    o.top_chef === false ||
+    o.top_chef === 0 ||
+    o.top_chef === "0"
+  ) {
+    out.top_chef = false;
+  }
+  if (o.etoiles_michelin != null && o.etoiles_michelin !== "") {
+    const stars = Math.min(
+      3,
+      Math.max(0, Math.round(Number(o.etoiles_michelin)))
+    );
+    if (Number.isFinite(stars)) out.etoiles_michelin = stars;
   }
   if (Object.keys(out).length === 0) return null;
   return JSON.stringify(out);
