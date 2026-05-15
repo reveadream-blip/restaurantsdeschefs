@@ -382,7 +382,7 @@ export default function Home() {
                       aria-hidden
                     />
                     <span>
-                      Les cartes au contour doré et le libellé « Sponsoring »
+                      Les cartes au contour doré et le libellé « Sponsorisé »
                       indiquent un établissement mis en avant (case cochée
                       dans l’administration).
                     </span>

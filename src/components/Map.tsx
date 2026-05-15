@@ -205,7 +205,7 @@ export default function ChefMap({
                 <p className="text-sm text-gray-700">{restau.chef_nom}</p>
                 {restaurantSponsoring(restau) ? (
                   <p className="mt-1 text-xs font-semibold text-amber-700">
-                    Sponsoring
+                    Sponsorisé
                   </p>
                 ) : null}
                 {restau.top_chef &&
@@ -221,8 +221,11 @@ export default function ChefMap({
                   </p>
                 ) : null}
                 {restau.etoiles_michelin > 0 && (
-                  <p className="mt-1 text-sm text-[var(--rc-ruby)]">
-                    {"★".repeat(restau.etoiles_michelin)} Michelin (
+                  <p className="mt-1 text-sm font-medium text-[var(--rc-michelin-deep)]">
+                    <span className="text-[var(--rc-michelin)]">
+                      {"★".repeat(restau.etoiles_michelin)}
+                    </span>{" "}
+                    Michelin (
                     {restau.etoiles_michelin}{" "}
                     {restau.etoiles_michelin > 1 ? "étoiles" : "étoile"})
                   </p>

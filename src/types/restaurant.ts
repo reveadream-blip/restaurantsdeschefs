@@ -53,7 +53,7 @@ export type Restaurant = {
   fiche_card_cover_url?: string;
   /** Présence d’une fiche éditoriale en base (contenu éditorial enregistré). */
   fiche_enrichie?: boolean;
-  /** Mise en avant payante : badge « Sponsoring » (case cochée dans /admin). */
+  /** Mise en avant payante : badge « Sponsorisé » (case cochée dans /admin). */
   sponsoring?: boolean;
   /** Horodatage D1 `updated_at` de la fiche éditoriale (affichage optionnel). */
   fiche_editor_updated_at?: string;

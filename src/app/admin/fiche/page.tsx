@@ -489,10 +489,10 @@ function AdminFicheEditor() {
             />
             <span>
               <span className="text-sm font-semibold text-[var(--rc-text)]">
-                Sponsoring
+                Sponsorisé
               </span>
               <span className="mt-1 block text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
-                Cochez si l’établissement est sponsorisé : le badge « Sponsoring »
+                Cochez si l’établissement est sponsorisé : le badge « Sponsorisé »
                 s’affiche sur la carte et la fiche publique, avec mise en avant
                 (contour doré, priorité dans les listes).
               </span>

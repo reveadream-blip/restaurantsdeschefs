@@ -194,7 +194,7 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
               aria-hidden
             />
             <span className="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-white/95">
-              Sponsoring
+              Sponsorisé
             </span>
           </div>
         ) : null}
