@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Check, MapPin, Sparkles, Star } from "lucide-react";
 import MarquePartenariatFicheCard from "@/components/MarquePartenariatFiche";
+import PartenariatMarquePackCard from "@/components/PartenariatMarquePackCard";
 import {
   DEFAULT_MARQUE_FICHE,
   type MarquePartenariatFiche,
@@ -90,8 +91,6 @@ export default function PartenairesPageContent() {
           validation de votre fiche.
         </p>
 
-        <MarquePartenariatFicheCard fiche={marqueFiche} />
-
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {PACKS.map((pack) => (
             <article
@@ -161,6 +160,30 @@ export default function PartenairesPageContent() {
             </article>
           ))}
         </div>
+
+        <section
+          id="partenariat-marque"
+          className="mt-20 border-t border-[var(--rc-border)] pt-16"
+          aria-labelledby="espace-marques-titre"
+        >
+          <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-[var(--rc-ruby)]">
+            Espace marques
+          </p>
+          <h2
+            id="espace-marques-titre"
+            className="font-serif-luxe mt-3 text-center text-2xl font-semibold tracking-tight text-[var(--rc-text)] sm:text-3xl"
+          >
+            Partenariat de marque
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl text-center text-sm font-light leading-relaxed text-[var(--rc-text-muted)]">
+            Produits, maisons ou partenaires : une visibilité premium dans
+            l’annuaire et sur cette page.
+          </p>
+          <div className="mx-auto mt-10 max-w-2xl">
+            <PartenariatMarquePackCard />
+            <MarquePartenariatFicheCard fiche={marqueFiche} />
+          </div>
+        </section>
 
         <section className="mt-16 rounded-[var(--rc-radius-xl)] border border-[var(--rc-border)] bg-[var(--rc-surface)] p-6 sm:p-8">
           <h2 className="font-serif-luxe flex items-center gap-2 text-xl font-semibold text-[var(--rc-text)]">
