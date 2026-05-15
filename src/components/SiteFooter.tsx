@@ -10,7 +10,7 @@ const FOOTER_LINKS = [
 export default function SiteFooter() {
   return (
     <footer
-      className="mt-auto border-t border-[var(--rc-gold)]/20 bg-[var(--rc-navy)] text-white/90"
+      className="mt-auto border-t border-[var(--rc-border)] bg-[var(--rc-page-bg)] text-[var(--rc-text)]"
       aria-label="Pied de page"
     >
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
@@ -25,7 +25,7 @@ export default function SiteFooter() {
               alt=""
               width={350}
               height={67}
-              className="h-8 w-auto opacity-95 transition group-hover:opacity-100 sm:h-9"
+              className="h-8 w-auto sm:h-9"
             />
           </Link>
 
@@ -36,7 +36,10 @@ export default function SiteFooter() {
             {FOOTER_LINKS.map((item, i) => (
               <span key={item.href} className="inline-flex items-center">
                 {i > 0 ? (
-                  <span className="mx-2 text-white/25" aria-hidden>
+                  <span
+                    className="mx-2 text-[var(--rc-border-strong)]"
+                    aria-hidden
+                  >
                     {"\u00b7"}
                   </span>
                 ) : null}
@@ -44,8 +47,8 @@ export default function SiteFooter() {
                   href={item.href}
                   className={
                     item.href === "/partenaires"
-                      ? "font-medium text-[var(--rc-michelin)] underline-offset-2 transition hover:text-white hover:underline"
-                      : "font-light text-white/70 underline-offset-2 transition hover:text-white hover:underline"
+                      ? "font-medium text-[var(--rc-gold)] underline-offset-2 transition hover:underline"
+                      : "font-light text-[var(--rc-text-muted)] underline-offset-2 transition hover:text-[var(--rc-text)] hover:underline"
                   }
                 >
                   {item.label}
@@ -55,7 +58,7 @@ export default function SiteFooter() {
           </nav>
         </div>
 
-        <p className="mt-8 border-t border-white/10 pt-6 text-center text-xs font-light tracking-wide text-white/55">
+        <p className="mt-8 border-t border-[var(--rc-border)] pt-6 text-center text-xs font-light tracking-wide text-[var(--rc-text-muted)]">
           &copy;2026 RestaurantsdesChefs.fr - Tous droits r&eacute;serv&eacute;s.
         </p>
       </div>
