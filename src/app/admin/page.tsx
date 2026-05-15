@@ -197,14 +197,6 @@ function AdminHomeInner() {
             {busy ? "Connexion…" : "Se connecter"}
           </button>
         </form>
-        <p className="mt-8 text-center text-sm">
-          <Link
-            href="/"
-            className="text-[var(--rc-ruby)] underline-offset-2 hover:underline"
-          >
-            ← Retour à l’annuaire
-          </Link>
-        </p>
       </main>
     );
   }
@@ -215,21 +207,13 @@ function AdminHomeInner() {
         <h1 className="font-display text-2xl font-semibold text-[var(--rc-text)]">
           Fiches établissements
         </h1>
-        <div className="flex gap-3">
-          <button
-            type="button"
-            onClick={handleLogout}
-            className="rounded-lg border border-[var(--rc-border)] px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:bg-[var(--rc-surface)]"
-          >
-            Déconnexion
-          </button>
-          <Link
-            href="/"
-            className="rounded-lg border border-[var(--rc-border)] px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:bg-[var(--rc-surface)]"
-          >
-            Annuaire
-          </Link>
-        </div>
+        <button
+          type="button"
+          onClick={handleLogout}
+          className="rounded-lg border border-[var(--rc-border)] px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:bg-[var(--rc-surface)]"
+        >
+          Déconnexion
+        </button>
       </div>
       <p className="mt-2 text-sm font-light text-[var(--rc-text-muted)]">
         Choisissez un établissement pour éditer description, photos (URL), menu
