@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
 import SiteFooter from "@/components/SiteFooter";
+import {
+  absoluteUrl,
+  SITE_DESCRIPTION,
+  SITE_TITLE,
+  SITE_URL,
+} from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -17,22 +23,21 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 });
 
-const siteUrl = "https://restaurantsdeschefs.pages.dev";
-const siteDescription =
-  "Restaurants, Top Chef et étoilés Michelin sur une carte interactive.";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
-  title: "L'annuaire des Grands Chefs",
-  description: siteDescription,
+  metadataBase: new URL(SITE_URL),
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: SITE_URL,
+  },
   manifest: "/site.webmanifest",
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: siteUrl,
-    siteName: "L'annuaire des Grands Chefs",
-    title: "L'annuaire des Grands Chefs",
-    description: siteDescription,
+    url: SITE_URL,
+    siteName: SITE_TITLE,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [
       {
         url: "/og-image.png?v=2",
@@ -44,8 +49,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "L'annuaire des Grands Chefs",
-    description: siteDescription,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: ["/og-image.png?v=2"],
   },
   icons: {

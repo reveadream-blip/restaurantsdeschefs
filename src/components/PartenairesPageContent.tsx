@@ -147,8 +147,8 @@ export default function PartenairesPageContent() {
                   </li>
                 ))}
               </ul>
-              <a
-                href={`mailto:reveadream@gmail.com?subject=${encodeURIComponent(`Pack ${pack.name} — Restaurants des Chefs`)}`}
+              <Link
+                href={`/contact?subject=${encodeURIComponent(`Pack ${pack.name} — Restaurants des Chefs`)}`}
                 className={`mt-8 inline-flex items-center justify-center rounded-full px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.14em] transition ${
                   pack.highlight
                     ? "bg-[var(--rc-navy)] text-white hover:opacity-90"
@@ -156,7 +156,7 @@ export default function PartenairesPageContent() {
                 }`}
               >
                 Demander ce pack
-              </a>
+              </Link>
             </article>
           ))}
         </div>

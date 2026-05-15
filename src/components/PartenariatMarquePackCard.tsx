@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Check, Gem } from "lucide-react";
 
 const MARQUE_FEATURES = [
@@ -64,12 +65,12 @@ export default function PartenariatMarquePackCard() {
         ))}
       </ul>
 
-      <a
-        href={`mailto:reveadream@gmail.com?subject=${encodeURIComponent(MAIL_SUBJECT)}`}
+      <Link
+        href={`/contact?subject=${encodeURIComponent(MAIL_SUBJECT)}`}
         className="mt-8 inline-flex items-center justify-center rounded-full bg-[var(--rc-navy)] px-6 py-3 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white shadow-sm transition hover:opacity-90"
       >
         Demander le partenariat marque
-      </a>
+      </Link>
     </article>
   );
 }

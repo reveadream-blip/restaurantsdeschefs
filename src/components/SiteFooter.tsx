@@ -4,6 +4,7 @@ import Link from "next/link";
 const FOOTER_LINKS = [
   { href: "/", label: "Annuaire" },
   { href: "/partenaires", label: "Espace Restaurateurs" },
+  { href: "/contact", label: "Contact" },
   { href: "/admin", label: "Administration" },
 ] as const;
 
@@ -43,7 +44,7 @@ export default function SiteFooter() {
                 <Link
                   href={item.href}
                   className={
-                    item.href === "/partenaires"
+                    item.href === "/contact" || item.href === "/partenaires"
                       ? "font-medium text-[var(--rc-michelin)] underline-offset-2 transition hover:text-white hover:underline"
                       : "font-light text-white/70 underline-offset-2 transition hover:text-white hover:underline"
                   }
