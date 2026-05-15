@@ -128,6 +128,10 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
           <span>{r.ville}</span>
         </p>
 
+        <p className="mt-2 text-sm font-bold text-[var(--rc-text)] group-hover:text-[var(--rc-ruby)]">
+          Ouvrir la fiche
+        </p>
+
         {r.saisons_top_chef && r.saisons_top_chef.length > 0 ? (
           <p className="font-data mt-2 text-xs tracking-wide text-[var(--rc-text-muted)]">
             Saisons {r.saisons_top_chef.join(", ")}
