@@ -16,11 +16,37 @@ const cormorant = Cormorant_Garamond({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteUrl = "https://restaurantsdeschefs.pages.dev";
+const siteDescription =
+  "Restaurants, Top Chef et étoilés Michelin sur une carte interactive.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "L'annuaire des Grands Chefs",
-  description:
-    "Restaurants, Top Chef et étoilés Michelin sur une carte interactive.",
+  description: siteDescription,
   manifest: "/site.webmanifest",
+  openGraph: {
+    type: "website",
+    locale: "fr_FR",
+    url: siteUrl,
+    siteName: "L'annuaire des Grands Chefs",
+    title: "L'annuaire des Grands Chefs",
+    description: siteDescription,
+    images: [
+      {
+        url: "/og-image.png?v=2",
+        width: 512,
+        height: 512,
+        alt: "L'annuaire des Grands Chefs — logo toque",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "L'annuaire des Grands Chefs",
+    description: siteDescription,
+    images: ["/og-image.png?v=2"],
+  },
   icons: {
     icon: [
       { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
