@@ -110,6 +110,10 @@ export function mapEtablissementApiRow(
   if (r.sponsoring === true || r.sponsoring === 1) {
     row.sponsoring = true;
   }
+  const tier = r.abonnement_tier;
+  if (tier === "local" || tier === "total") {
+    row.abonnement_tier = tier;
+  }
   const feu = r.fiche_editor_updated_at;
   if (typeof feu === "string" && feu.trim() !== "") {
     row.fiche_editor_updated_at = feu.trim();

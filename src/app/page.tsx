@@ -8,7 +8,16 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Star, ChefHat, Sparkles, ChevronUp } from "lucide-react";
 import { filterRestaurants } from "@/lib/filterRestaurants";
 import { fetchRestaurantsForApp } from "@/lib/fetchRestaurantsForApp";
-import { restaurantSponsoring } from "@/lib/restaurantEditorial";
+import { restaurantMiseEnAvant } from "@/lib/restaurantEditorial";
+import {
+  pickHomepageFeatured,
+  sortRestaurantsByVisibility,
+} from "@/lib/sortRestaurantsByVisibility";
+import { interleavePartnerBanner } from "@/lib/interleavePartnerBanner";
+import {
+  DEFAULT_PARTNER_BANNER,
+  type PartnerBannerConfig,
+} from "@/types/partenariat";
 import RestaurantFicheDetails from "@/components/RestaurantFicheDetails";
 import RestaurantMapPanel from "@/components/RestaurantMapPanel";
 import SiteHeader from "@/components/SiteHeader";
@@ -47,24 +56,6 @@ const listItemReduced = {
   visible: { opacity: 1 },
 };
 
-/** Jusqu’à `n` établissements : sponsoring en priorité, puis tirage au sort. */
-function pickRandomRestaurants(list: Restaurant[], n: number): Restaurant[] {
-  if (list.length === 0) return [];
-  const enriched = list.filter(restaurantSponsoring);
-  const others = list.filter((r) => !restaurantSponsoring(r));
-  const shuffle = (a: Restaurant[]) => {
-    const copy = [...a];
-    for (let i = copy.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [copy[i], copy[j]] = [copy[j], copy[i]];
-    }
-    return copy;
-  };
-  const merged = [...shuffle(enriched), ...shuffle(others)];
-  if (merged.length <= n) return merged;
-  return merged.slice(0, n);
-}
-
 export default function Home() {
   const router = useRouter();
   const reduceMotion = useReducedMotion();
@@ -81,6 +72,9 @@ export default function Home() {
   /** La carte et la liste complète ne s’affichent qu’après « Carte des Chefs ». */
   const [showMap, setShowMap] = useState(false);
   const [locateHint, setLocateHint] = useState<string | null>(null);
+  const [partnerBanner, setPartnerBanner] = useState<PartnerBannerConfig>(
+    DEFAULT_PARTNER_BANNER
+  );
 
   useEffect(() => {
     if (filtre !== "top-chef") setTopChefSaison(null);
@@ -118,16 +112,31 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/partenariat", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = (await res.json()) as { banner?: PartnerBannerConfig };
+        if (!cancelled && data.banner) setPartnerBanner(data.banner);
+      } catch {
+        /* défaut */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   const rechercheDeferred = useDeferredValue(recherche);
   const affiche = useMemo(() => {
     const f = filterRestaurants(rows, filtre, rechercheDeferred, topChefSaison);
-    const enriched = f.filter(restaurantSponsoring);
-    const others = f.filter((r) => !restaurantSponsoring(r));
-    return [...enriched, ...others];
+    return sortRestaurantsByVisibility(f, rechercheDeferred);
   }, [rows, filtre, rechercheDeferred, topChefSaison]);
 
   const dixAleatoires = useMemo(
-    () => pickRandomRestaurants(affiche, 10),
+    () => pickHomepageFeatured(affiche, 10),
     [affiche]
   );
 
@@ -401,8 +410,9 @@ export default function Home() {
                   </p>
                 ) : (
                   <ul className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 xl:grid-cols-2">
-                    {dixAleatoires.map((restau) => {
-                      const editorial = restaurantSponsoring(restau);
+                    {interleavePartnerBanner(
+                      dixAleatoires.map((restau) => {
+                      const editorial = restaurantMiseEnAvant(restau);
                       return (
                       <li key={restau.id} className="scroll-mt-6">
                         <div
@@ -450,7 +460,10 @@ export default function Home() {
                         </div>
                       </li>
                     );
-                    })}
+                    }),
+                      partnerBanner,
+                      { gridSpan: true, keyPrefix: "preview" }
+                    )}
                   </ul>
                 )}
               </div>
@@ -519,9 +532,10 @@ export default function Home() {
                         initial="hidden"
                         animate="visible"
                       >
-                        {affiche.map((restau) => {
+                        {interleavePartnerBanner(
+                          affiche.map((restau) => {
                           const highlighted = selectedId === restau.id;
-                          const editorial = restaurantSponsoring(restau);
+                          const editorial = restaurantMiseEnAvant(restau);
                           return (
                             <motion.li
                               id={`liste-fiche-${restau.id}`}
@@ -577,7 +591,10 @@ export default function Home() {
                               </div>
                             </motion.li>
                           );
-                        })}
+                        }),
+                          partnerBanner,
+                          { keyPrefix: "liste" }
+                        )}
                       </motion.ul>
                     )}
                   </div>
@@ -586,14 +603,28 @@ export default function Home() {
             )}
           </section>
         </div>
-        <p className="mt-10 border-t border-[var(--rc-border)] pt-8 text-center text-xs font-light text-[var(--rc-text-muted)]">
-          <Link
-            href="/admin"
-            className="text-[var(--rc-text-muted)] underline-offset-2 hover:text-[var(--rc-text)] hover:underline"
+        <footer className="mt-10 border-t border-[var(--rc-border)] pt-8">
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center text-xs font-light text-[var(--rc-text-muted)]"
+            aria-label="Pied de page"
           >
-            Administration des fiches
-          </Link>
-        </p>
+            <Link
+              href="/partenaires"
+              className="font-medium text-[var(--rc-gold)] underline-offset-2 transition hover:underline"
+            >
+              Espace Restaurateurs
+            </Link>
+            <span className="text-[var(--rc-border-strong)]" aria-hidden>
+              ·
+            </span>
+            <Link
+              href="/admin"
+              className="underline-offset-2 transition hover:text-[var(--rc-text)] hover:underline"
+            >
+              Administration des fiches
+            </Link>
+          </nav>
+        </footer>
       </main>
     </>
   );

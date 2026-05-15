@@ -80,6 +80,21 @@ h3 {
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
+/* Espace restaurateurs — Playfair Display + Inter (charte luxe) */
+.partenaires-theme {
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+.partenaires-theme .font-serif-luxe,
+.partenaires-theme h1,
+.partenaires-theme h2,
+.partenaires-theme h3 {
+  font-family: var(--font-playfair), "Playfair Display", ui-serif, Georgia,
+    "Times New Roman", serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  letter-spacing: -0.02em;
+}
+
 .font-data {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   font-weight: 300;

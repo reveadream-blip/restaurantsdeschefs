@@ -16,6 +16,7 @@ type FicheApi = {
   contact_json: string | null;
   card_cover_url?: string | null;
   sponsoring?: number | boolean | null;
+  subscription_tier?: string | null;
 };
 
 async function fetchJson<T>(
@@ -68,6 +69,9 @@ function AdminFicheEditor() {
   const [importErr, setImportErr] = useState<string | null>(null);
   const [importPreview, setImportPreview] = useState<unknown>(null);
   const [sponsoring, setSponsoring] = useState(false);
+  const [subscriptionTier, setSubscriptionTier] = useState<
+    "" | "local" | "total"
+  >("");
   const [displayTopChef, setDisplayTopChef] = useState(false);
   const [displayEtoiles, setDisplayEtoiles] = useState<0 | 1 | 2 | 3>(0);
 
@@ -154,6 +158,10 @@ function AdminFicheEditor() {
         setVideoUrl(f.video_url ?? "");
         setCardCoverUrl(f.card_cover_url ?? "");
         setSponsoring(f.sponsoring === 1 || f.sponsoring === true);
+        const tier = f.subscription_tier;
+        setSubscriptionTier(
+          tier === "local" || tier === "total" ? tier : ""
+        );
         if (f.contact_json) {
           try {
             contact = JSON.parse(f.contact_json) as Record<string, unknown>;
@@ -268,6 +276,7 @@ function AdminFicheEditor() {
           video_url: videoUrl.trim() || null,
           card_cover_url: cardCoverUrl.trim() || null,
           sponsoring,
+          subscription_tier: subscriptionTier || null,
           contact_json: Object.keys(contact).length ? contact : null,
         }),
       }
@@ -479,6 +488,51 @@ function AdminFicheEditor() {
       </section>
 
       <form onSubmit={handleSave} className="mt-8 space-y-8">
+        <section className="rounded-lg border border-[var(--rc-navy)]/25 bg-[var(--rc-navy-soft)]/30 p-5">
+          <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
+            Abonnement partenaire
+          </h2>
+          <p className="mt-1 text-xs font-light text-[var(--rc-text-muted)]">
+            Pack activé après souscription —{" "}
+            <Link href="/partenaires" className="text-[var(--rc-ruby)] underline">
+              voir les offres
+            </Link>
+            .
+          </p>
+          <div className="mt-4 flex flex-col gap-2">
+            {(
+              [
+                { value: "", label: "Aucun pack" },
+                {
+                  value: "local",
+                  label: "Visibilité Locale — 9 €/mois (priorité ville)",
+                },
+                {
+                  value: "total",
+                  label:
+                    "Visibilité Totale — 19 €/mois (ville, département, accueil)",
+                },
+              ] as const
+            ).map((opt) => (
+              <label
+                key={opt.value || "none"}
+                className="flex cursor-pointer items-start gap-2 rounded-md border border-[var(--rc-border)] bg-[var(--rc-surface)] px-3 py-2.5 has-[:checked]:border-[var(--rc-gold)]"
+              >
+                <input
+                  type="radio"
+                  name="subscription-tier"
+                  checked={subscriptionTier === opt.value}
+                  onChange={() =>
+                    setSubscriptionTier(opt.value as "" | "local" | "total")
+                  }
+                  className="mt-0.5 accent-[var(--rc-gold)]"
+                />
+                <span className="text-sm text-[var(--rc-text)]">{opt.label}</span>
+              </label>
+            ))}
+          </div>
+        </section>
+
         <section className="rounded-lg border border-[var(--rc-gold)]/45 bg-[var(--rc-gold-soft)]/25 p-5">
           <label className="flex cursor-pointer items-start gap-3">
             <input
@@ -489,12 +543,11 @@ function AdminFicheEditor() {
             />
             <span>
               <span className="text-sm font-semibold text-[var(--rc-text)]">
-                Sponsorisé
+                Sponsorisé (manuel)
               </span>
               <span className="mt-1 block text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
-                Cochez si l’établissement est sponsorisé : le badge « Sponsorisé »
-                s’affiche sur la carte et la fiche publique, avec mise en avant
-                (contour doré, priorité dans les listes).
+                Badge et contour doré sans pack. Les abonnements ci-dessus activent
+                aussi la mise en avant automatiquement.
               </span>
             </span>
           </label>

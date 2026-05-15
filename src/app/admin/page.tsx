@@ -207,13 +207,21 @@ function AdminHomeInner() {
         <h1 className="font-display text-2xl font-semibold text-[var(--rc-text)]">
           Fiches établissements
         </h1>
-        <button
-          type="button"
-          onClick={handleLogout}
-          className="rounded-lg border border-[var(--rc-border)] px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:bg-[var(--rc-surface)]"
-        >
-          Déconnexion
-        </button>
+        <div className="flex flex-wrap items-center gap-2">
+          <Link
+            href="/admin/partenariat"
+            className="rounded-lg border border-[var(--rc-gold)]/50 bg-[var(--rc-gold-soft)]/40 px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:border-[var(--rc-gold)]"
+          >
+            Bannière partenaire
+          </Link>
+          <button
+            type="button"
+            onClick={handleLogout}
+            className="rounded-lg border border-[var(--rc-border)] px-3 py-2 text-xs font-medium uppercase tracking-wider text-[var(--rc-text)] hover:bg-[var(--rc-surface)]"
+          >
+            Déconnexion
+          </button>
+        </div>
       </div>
       <p className="mt-2 text-sm font-light text-[var(--rc-text-muted)]">
         Choisissez un établissement pour éditer description, photos (URL), menu

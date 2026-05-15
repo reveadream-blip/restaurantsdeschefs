@@ -2,7 +2,7 @@
 
 import { Mail, MapPin, Phone, Sparkles, Star } from "lucide-react";
 import { normalizeFichePhotoUrl } from "@/lib/normalizeFicheMediaUrl";
-import { restaurantSponsoring } from "@/lib/restaurantEditorial";
+import { restaurantMiseEnAvant } from "@/lib/restaurantEditorial";
 import type { Restaurant } from "@/types/restaurant";
 
 export type ChefCardProps = {
@@ -80,7 +80,7 @@ export default function ChefCard({
         )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
 
-        {restaurantSponsoring(r) ? (
+        {restaurantMiseEnAvant(r) ? (
           <div className="absolute left-3 top-3 z-[1] flex items-center gap-1 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 backdrop-blur-md sm:left-4 sm:top-4">
             <Sparkles
               className="h-3.5 w-3.5 shrink-0 text-[#e8d089]"

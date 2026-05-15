@@ -55,6 +55,8 @@ export type Restaurant = {
   fiche_enrichie?: boolean;
   /** Mise en avant payante : badge « Sponsorisé » (case cochée dans /admin). */
   sponsoring?: boolean;
+  /** Abonnement partenaire : visibilité locale (9€) ou totale (19€). */
+  abonnement_tier?: "local" | "total";
   /** Horodatage D1 `updated_at` de la fiche éditoriale (affichage optionnel). */
   fiche_editor_updated_at?: string;
 };

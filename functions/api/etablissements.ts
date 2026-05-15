@@ -95,8 +95,17 @@ type FicheRow = {
   contact_json: string | null;
   card_cover_url: string | null;
   sponsoring?: number | null;
+  subscription_tier?: string | null;
   updated_at: string | null;
 };
+
+function normalizeSubscriptionTier(
+  raw: string | null | undefined
+): "local" | "total" | null {
+  const t = raw != null ? String(raw).trim().toLowerCase() : "";
+  if (t === "local" || t === "total") return t;
+  return null;
+}
 
 function ficheRowHasEditorialContent(f: FicheRow): boolean {
   if (f.description_text != null && String(f.description_text).trim() !== "")
@@ -182,7 +191,7 @@ async function mergeEditorialFiches(
   for (let i = 0; i < ids.length; i += BATCH) {
     const slice = ids.slice(i, i + BATCH);
     const placeholders = slice.map(() => "?").join(",");
-    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, sponsoring, updated_at
+    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, sponsoring, subscription_tier, updated_at
                  FROM etablissement_fiches WHERE etablissement_id IN (${placeholders})`;
     try {
       const { results = [] } = await db
@@ -200,7 +209,11 @@ async function mergeEditorialFiches(
     const id = Number(row.id);
     const f = map.get(id);
     if (!f) continue;
-    if (ficheRowSponsoring(f)) {
+    const tier = normalizeSubscriptionTier(f.subscription_tier);
+    if (tier) {
+      row.abonnement_tier = tier;
+    }
+    if (ficheRowSponsoring(f) || tier === "total" || tier === "local") {
       row.sponsoring = true;
     }
     if (ficheRowHasEditorialContent(f)) {
