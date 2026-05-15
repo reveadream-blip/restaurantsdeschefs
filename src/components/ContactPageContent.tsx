@@ -39,7 +39,9 @@ function ContactPageInner() {
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-center text-sm font-light leading-relaxed text-[var(--rc-text-muted)]">
           Une question sur l&apos;annuaire, un pack partenaire ou votre fiche ?
-          {"Remplissez le formulaire ci-dessous : nous vous r\u00e9pondrons dans les meilleurs d\u00e9lais."}
+          {
+            "Remplissez le formulaire : votre application mail s\u2019ouvrira avec le message pr\u00e9rempli, sans afficher notre adresse sur cette page."
+          }
         </p>
 
         <div className="mt-10">

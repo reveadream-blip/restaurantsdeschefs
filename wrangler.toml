@@ -6,12 +6,6 @@ compatibility_date = "2024-11-01"
 #   npx wrangler secret put ADMIN_SESSION_SECRET   # chaîne aléatoire longue (ex. openssl rand -hex 32)
 #   Optionnel : npx wrangler secret put ADMIN_EMAIL   # sinon seul reveadream@gmail.com est accepté
 #
-# Formulaire /contact (Resend) :
-#   npx wrangler pages secret put RESEND_API_KEY --project-name=restaurantsdeschefs
-#   CONTACT_TO_EMAIL ci-dessous (non affiché sur le site)
-
-[vars]
-CONTACT_TO_EMAIL = "contact.restaurantsdeschefs@gmail.com"
 # Migration contenus fiches : data/migration-etablissement-fiches.sql
 # Puis image couverture carte / bandeau : data/migration-fiche-card-cover-url.sql
 

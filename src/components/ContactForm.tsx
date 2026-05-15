@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { buildContactMailtoUrl } from "@/lib/contactMailto";
 
 const fieldClass =
   "mt-1.5 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-page-bg)] px-3 py-2.5 text-sm text-[var(--rc-text)] outline-none transition focus:border-[var(--rc-gold)] focus:ring-1 focus:ring-[var(--rc-gold)]/30";
 const labelClass =
   "text-xs font-semibold uppercase tracking-[0.14em] text-[var(--rc-text-muted)]";
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export default function ContactForm({
   defaultSubject = "",
@@ -17,7 +20,6 @@ export default function ContactForm({
   const [subject, setSubject] = useState(defaultSubject);
   const [message, setMessage] = useState("");
   const [website, setWebsite] = useState("");
-  const [submitting, setSubmitting] = useState(false);
   const [feedback, setFeedback] = useState<{
     type: "ok" | "err";
     text: string;
@@ -27,40 +29,48 @@ export default function ContactForm({
     setSubject((prev) => (prev ? prev : defaultSubject));
   }, [defaultSubject]);
 
-  async function onSubmit(e: React.FormEvent) {
+  function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setFeedback(null);
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, subject, message, website }),
-      });
-      const data = (await res.json()) as { ok?: boolean; error?: string };
-      if (!res.ok) {
-        setFeedback({
-          type: "err",
-          text: data.error ?? "Envoi impossible. Réessayez plus tard.",
-        });
-        return;
-      }
-      setFeedback({
-        type: "ok",
-        text: "Merci, votre message a bien été envoyé. Nous vous répondrons rapidement.",
-      });
-      setName("");
-      setEmail("");
-      setSubject(defaultSubject);
-      setMessage("");
-    } catch {
+
+    if (website.trim()) return;
+
+    const trimmedName = name.trim();
+    const trimmedEmail = email.trim();
+    const trimmedMessage = message.trim();
+
+    if (trimmedName.length < 2) {
       setFeedback({
         type: "err",
-        text: "Erreur réseau. Vérifiez votre connexion et réessayez.",
+        text: "Indiquez votre nom (2 caractères minimum).",
       });
-    } finally {
-      setSubmitting(false);
+      return;
     }
+    if (!EMAIL_RE.test(trimmedEmail)) {
+      setFeedback({ type: "err", text: "Adresse e-mail invalide." });
+      return;
+    }
+    if (trimmedMessage.length < 10) {
+      setFeedback({
+        type: "err",
+        text: "Votre message doit contenir au moins 10 caractères.",
+      });
+      return;
+    }
+
+    const mailto = buildContactMailtoUrl({
+      name: trimmedName,
+      email: trimmedEmail,
+      subject: subject.trim(),
+      message: trimmedMessage,
+    });
+
+    window.location.href = mailto;
+
+    setFeedback({
+      type: "ok",
+      text: "Votre application mail va s'ouvrir : vérifiez le message puis envoyez-le.",
+    });
   }
 
   return (
@@ -162,10 +172,9 @@ export default function ContactForm({
 
       <button
         type="submit"
-        disabled={submitting}
-        className="inline-flex w-full items-center justify-center rounded-full bg-[var(--rc-navy)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
+        className="inline-flex w-full items-center justify-center rounded-full bg-[var(--rc-navy)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:opacity-90 sm:w-auto"
       >
-        {submitting ? "Envoi en cours…" : "Envoyer le message"}
+        Ouvrir mon application mail
       </button>
     </form>
   );
