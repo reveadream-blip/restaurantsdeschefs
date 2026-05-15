@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { useDeferredValue, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, useReducedMotion } from "framer-motion";
@@ -603,28 +602,6 @@ export default function Home() {
             )}
           </section>
         </div>
-        <footer className="mt-10 border-t border-[var(--rc-border)] pt-8">
-          <nav
-            className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-center text-xs font-light text-[var(--rc-text-muted)]"
-            aria-label="Pied de page"
-          >
-            <Link
-              href="/partenaires"
-              className="font-medium text-[var(--rc-gold)] underline-offset-2 transition hover:underline"
-            >
-              Espace Restaurateurs
-            </Link>
-            <span className="text-[var(--rc-border-strong)]" aria-hidden>
-              ·
-            </span>
-            <Link
-              href="/admin"
-              className="underline-offset-2 transition hover:text-[var(--rc-text)] hover:underline"
-            >
-              Administration des fiches
-            </Link>
-          </nav>
-        </footer>
       </main>
     </>
   );

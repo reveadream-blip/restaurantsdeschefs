@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Cormorant_Garamond, Inter } from "next/font/google";
+import SiteFooter from "@/components/SiteFooter";
 import "./globals.css";
 
 const inter = Inter({
@@ -75,7 +76,8 @@ export default function RootLayout({
       <body
         className={`${inter.className} min-h-full flex flex-col bg-rc-page text-rc-text font-normal`}
       >
-        {children}
+        <div className="flex min-h-full flex-1 flex-col">{children}</div>
+        <SiteFooter />
       </body>
     </html>
   );
