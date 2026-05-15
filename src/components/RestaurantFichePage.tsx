@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Calendar,
   FileUser,
   MapPin,
   MessageCircle,
+  Pencil,
   Star,
 } from "lucide-react";
 import {
@@ -49,6 +50,27 @@ function menusPrixHint(r: Restaurant): string {
 export default function RestaurantFichePage({ restaurant: r }: { restaurant: Restaurant }) {
   const [tab, setTab] = useState<TabId>("apropos");
   const [itineraireDepart, setItineraireDepart] = useState("");
+  const [adminAuth, setAdminAuth] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/admin/me", { credentials: "include" });
+        let authenticated = false;
+        if (res.ok) {
+          const data = (await res.json()) as { authenticated?: boolean };
+          authenticated = Boolean(data.authenticated);
+        }
+        if (!cancelled) setAdminAuth(authenticated);
+      } catch {
+        if (!cancelled) setAdminAuth(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   const c = r.fiche_contact;
   const displayChefNom = (c?.chef_nom?.trim() || r.chef_nom).trim();
@@ -111,6 +133,21 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
           </h1>
         </div>
       </div>
+
+      {adminAuth === true ? (
+        <div className="border-b border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 py-2.5 text-center sm:px-6">
+          <Link
+            href={`/admin/fiche?id=${r.id}`}
+            className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--rc-gold)]/50 bg-[var(--rc-page-bg)] px-4 py-2 text-sm font-medium text-[var(--rc-text)] shadow-sm transition hover:border-[var(--rc-gold)] hover:bg-[var(--rc-surface)]"
+          >
+            <Pencil className="h-4 w-4 shrink-0 text-[var(--rc-ruby)]" aria-hidden />
+            Modifier cette fiche
+          </Link>
+          <span className="mt-1 block text-xs font-light text-[var(--rc-text-muted)]">
+            Session administrateur — accès à l’éditeur pour cet établissement.
+          </span>
+        </div>
+      ) : null}
 
       <div className="mx-auto max-w-4xl px-4 pt-6 sm:px-6">
         <nav
