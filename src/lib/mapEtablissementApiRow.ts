@@ -103,6 +103,9 @@ export function mapEtablissementApiRow(
   if (r.fiche_enrichie === true) {
     row.fiche_enrichie = true;
   }
+  if (r.sponsoring === true || r.sponsoring === 1) {
+    row.sponsoring = true;
+  }
   const feu = r.fiche_editor_updated_at;
   if (typeof feu === "string" && feu.trim() !== "") {
     row.fiche_editor_updated_at = feu.trim();

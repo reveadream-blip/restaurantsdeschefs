@@ -15,6 +15,7 @@ type FicheApi = {
   video_url: string | null;
   contact_json: string | null;
   card_cover_url?: string | null;
+  sponsoring?: number | boolean | null;
 };
 
 async function fetchJson<T>(
@@ -66,6 +67,7 @@ function AdminFicheEditor() {
   const [importBusy, setImportBusy] = useState(false);
   const [importErr, setImportErr] = useState<string | null>(null);
   const [importPreview, setImportPreview] = useState<unknown>(null);
+  const [sponsoring, setSponsoring] = useState(false);
 
   const checkMe = useCallback(async () => {
     const { ok, data } = await fetchJson<{ authenticated?: boolean }>(
@@ -147,6 +149,7 @@ function AdminFicheEditor() {
         setMenuPrix(f.menu_prix ?? "");
         setVideoUrl(f.video_url ?? "");
         setCardCoverUrl(f.card_cover_url ?? "");
+        setSponsoring(f.sponsoring === 1 || f.sponsoring === true);
         if (f.contact_json) {
           try {
             const c = JSON.parse(f.contact_json) as Record<string, string>;
@@ -253,6 +256,7 @@ function AdminFicheEditor() {
           menu_prix: menuPrix.trim() || null,
           video_url: videoUrl.trim() || null,
           card_cover_url: cardCoverUrl.trim() || null,
+          sponsoring,
           contact_json: Object.keys(contact).length ? contact : null,
         }),
       }
@@ -367,6 +371,27 @@ function AdminFicheEditor() {
       </section>
 
       <form onSubmit={handleSave} className="mt-8 space-y-8">
+        <section className="rounded-lg border border-[var(--rc-gold)]/45 bg-[var(--rc-gold-soft)]/25 p-5">
+          <label className="flex cursor-pointer items-start gap-3">
+            <input
+              type="checkbox"
+              checked={sponsoring}
+              onChange={(e) => setSponsoring(e.target.checked)}
+              className="mt-1 h-4 w-4 shrink-0 rounded border-[var(--rc-border)] accent-[var(--rc-gold)]"
+            />
+            <span>
+              <span className="text-sm font-semibold text-[var(--rc-text)]">
+                Sponsoring
+              </span>
+              <span className="mt-1 block text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
+                Cochez si l’établissement est sponsorisé : le badge « Sponsoring »
+                s’affiche sur la carte et la fiche publique, avec mise en avant
+                (contour doré, priorité dans les listes).
+              </span>
+            </span>
+          </label>
+        </section>
+
         <section>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-[var(--rc-text)]">
             Description

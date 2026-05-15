@@ -11,7 +11,7 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Restaurant } from "@/types/restaurant";
-import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
+import { restaurantSponsoring } from "@/lib/restaurantEditorial";
 import {
   googleDirectionsUrl,
   googleStreetViewUrl,
@@ -77,7 +77,7 @@ export default function ChefMap({
               key={restau.id}
               position={[restau.latitude, restau.longitude]}
               icon={
-                restaurantFicheEnrichie(restau)
+                restaurantSponsoring(restau)
                   ? editorialMarkerIcon
                   : customIcon
               }
@@ -98,9 +98,9 @@ export default function ChefMap({
                   </p>
                   <h3 className="text-base font-bold">{restau.nom_restaurant}</h3>
                   <p className="text-sm text-gray-700">{restau.chef_nom}</p>
-                  {restaurantFicheEnrichie(restau) ? (
+                  {restaurantSponsoring(restau) ? (
                     <p className="mt-1 text-xs font-semibold text-amber-700">
-                      Fiche enrichie (contenu éditorial)
+                      Sponsoring (contenu éditorial)
                     </p>
                   ) : null}
                   {restau.saisons_top_chef &&

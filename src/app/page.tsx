@@ -8,7 +8,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Star, ChefHat, Sparkles, ChevronUp } from "lucide-react";
 import { filterRestaurants } from "@/lib/filterRestaurants";
 import { fetchRestaurantsForApp } from "@/lib/fetchRestaurantsForApp";
-import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
+import { restaurantSponsoring } from "@/lib/restaurantEditorial";
 import RestaurantFicheDetails from "@/components/RestaurantFicheDetails";
 import RestaurantMapPanel from "@/components/RestaurantMapPanel";
 import SiteHeader from "@/components/SiteHeader";
@@ -45,11 +45,11 @@ const listItemReduced = {
   visible: { opacity: 1 },
 };
 
-/** Jusqu’à `n` établissements : les fiches enrichies (éditoriales) en priorité, puis tirage au sort. */
+/** Jusqu’à `n` établissements : sponsoring en priorité, puis tirage au sort. */
 function pickRandomRestaurants(list: Restaurant[], n: number): Restaurant[] {
   if (list.length === 0) return [];
-  const enriched = list.filter(restaurantFicheEnrichie);
-  const others = list.filter((r) => !restaurantFicheEnrichie(r));
+  const enriched = list.filter(restaurantSponsoring);
+  const others = list.filter((r) => !restaurantSponsoring(r));
   const shuffle = (a: Restaurant[]) => {
     const copy = [...a];
     for (let i = copy.length - 1; i > 0; i--) {
@@ -118,8 +118,8 @@ export default function Home() {
   const rechercheDeferred = useDeferredValue(recherche);
   const affiche = useMemo(() => {
     const f = filterRestaurants(rows, filtre, rechercheDeferred, topChefSaison);
-    const enriched = f.filter(restaurantFicheEnrichie);
-    const others = f.filter((r) => !restaurantFicheEnrichie(r));
+    const enriched = f.filter(restaurantSponsoring);
+    const others = f.filter((r) => !restaurantSponsoring(r));
     return [...enriched, ...others];
   }, [rows, filtre, rechercheDeferred, topChefSaison]);
 
@@ -384,9 +384,9 @@ export default function Home() {
                       aria-hidden
                     />
                     <span>
-                      Les cartes au contour doré et le libellé « Enrichie »
-                      indiquent une fiche mise à jour depuis l’administration
-                      (textes, photos, etc.).
+                      Les cartes au contour doré et le libellé « Sponsoring »
+                      indiquent un établissement mis en avant (case cochée
+                      dans l’administration).
                     </span>
                   </p>
                 </div>
@@ -404,7 +404,7 @@ export default function Home() {
                 ) : (
                   <ul className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 xl:grid-cols-2">
                     {dixAleatoires.map((restau) => {
-                      const editorial = restaurantFicheEnrichie(restau);
+                      const editorial = restaurantSponsoring(restau);
                       return (
                       <li key={restau.id} className="scroll-mt-6">
                         <div
@@ -508,7 +508,7 @@ export default function Home() {
                       >
                         {affiche.map((restau) => {
                           const highlighted = selectedId === restau.id;
-                          const editorial = restaurantFicheEnrichie(restau);
+                          const editorial = restaurantSponsoring(restau);
                           return (
                             <motion.li
                               id={`liste-fiche-${restau.id}`}

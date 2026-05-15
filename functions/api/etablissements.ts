@@ -94,8 +94,45 @@ type FicheRow = {
   video_url: string | null;
   contact_json: string | null;
   card_cover_url: string | null;
+  sponsoring?: number | null;
   updated_at: string | null;
 };
+
+function ficheRowHasEditorialContent(f: FicheRow): boolean {
+  if (f.description_text != null && String(f.description_text).trim() !== "")
+    return true;
+  if (f.menu_prix != null && String(f.menu_prix).trim() !== "") return true;
+  if (f.video_url != null && String(f.video_url).trim() !== "") return true;
+  if (f.card_cover_url != null && String(f.card_cover_url).trim() !== "")
+    return true;
+  if (f.photos_json) {
+    try {
+      const p: unknown = JSON.parse(f.photos_json);
+      if (
+        Array.isArray(p) &&
+        p.some((x) => typeof x === "string" && x.trim() !== "")
+      )
+        return true;
+    } catch {
+      /* ignore */
+    }
+  }
+  if (f.contact_json) {
+    try {
+      const c: unknown = JSON.parse(f.contact_json);
+      if (c && typeof c === "object" && !Array.isArray(c)) {
+        if (Object.keys(c as Record<string, unknown>).length > 0) return true;
+      }
+    } catch {
+      /* ignore */
+    }
+  }
+  return false;
+}
+
+function ficheRowSponsoring(f: FicheRow): boolean {
+  return f.sponsoring === 1 || f.sponsoring === true;
+}
 
 async function mergeEditorialFiches(
   db: D1Database,
@@ -114,7 +151,7 @@ async function mergeEditorialFiches(
   for (let i = 0; i < ids.length; i += BATCH) {
     const slice = ids.slice(i, i + BATCH);
     const placeholders = slice.map(() => "?").join(",");
-    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at
+    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, sponsoring, updated_at
                  FROM etablissement_fiches WHERE etablissement_id IN (${placeholders})`;
     try {
       const { results = [] } = await db
@@ -132,7 +169,12 @@ async function mergeEditorialFiches(
     const id = Number(row.id);
     const f = map.get(id);
     if (!f) continue;
-    row.fiche_enrichie = true;
+    if (ficheRowSponsoring(f)) {
+      row.sponsoring = true;
+    }
+    if (ficheRowHasEditorialContent(f)) {
+      row.fiche_enrichie = true;
+    }
     if (f.updated_at != null && String(f.updated_at).trim() !== "") {
       row.fiche_editor_updated_at = String(f.updated_at).trim();
     }

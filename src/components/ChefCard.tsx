@@ -2,7 +2,7 @@
 
 import { Mail, MapPin, Phone, Sparkles, Star } from "lucide-react";
 import { normalizeFichePhotoUrl } from "@/lib/normalizeFicheMediaUrl";
-import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
+import { restaurantSponsoring } from "@/lib/restaurantEditorial";
 import type { Restaurant } from "@/types/restaurant";
 
 export type ChefCardProps = {
@@ -73,7 +73,7 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
         )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
 
-        {restaurantFicheEnrichie(r) ? (
+        {restaurantSponsoring(r) ? (
           <div className="absolute left-3 top-3 z-[1] flex items-center gap-1 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 backdrop-blur-md sm:left-4 sm:top-4">
             <Sparkles
               className="h-3.5 w-3.5 shrink-0 text-[#e8d089]"
@@ -81,7 +81,7 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
               aria-hidden
             />
             <span className="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-white/95">
-              Enrichie
+              Sponsoring
             </span>
           </div>
         ) : null}
@@ -113,30 +113,32 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
         type="button"
         onClick={onSelect}
         aria-label={`Ouvrir la fiche détaillée — ${r.nom_restaurant}, ${r.chef_nom}`}
-        className="group w-full cursor-pointer border-b border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 pb-4 pt-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--rc-gold)] sm:px-5 sm:pt-5"
+        className="group flex w-full cursor-pointer items-center justify-between gap-4 border-b border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--rc-gold)] sm:px-5"
       >
-        <p className="font-display text-[1.05rem] font-semibold leading-snug text-[var(--rc-text)] sm:text-lg">
-          {r.chef_nom}
-        </p>
-
-        <p className="font-data mt-2 flex items-center gap-1.5 text-sm tracking-wide text-[var(--rc-text-muted)]">
-          <MapPin
-            className="h-4 w-4 shrink-0 text-[var(--rc-gold)]"
-            strokeWidth={1.75}
-            aria-hidden
-          />
-          <span>{r.ville}</span>
-        </p>
-
-        <p className="mt-2 text-sm font-bold text-[var(--rc-text)] group-hover:text-[var(--rc-ruby)]">
-          Ouvrir la fiche
-        </p>
-
-        {r.saisons_top_chef && r.saisons_top_chef.length > 0 ? (
-          <p className="font-data mt-2 text-xs tracking-wide text-[var(--rc-text-muted)]">
-            Saisons {r.saisons_top_chef.join(", ")}
+        <div className="min-w-0 flex-1">
+          <p className="font-display text-[1.05rem] font-semibold leading-snug text-[var(--rc-text)] sm:text-lg">
+            {r.chef_nom}
           </p>
-        ) : null}
+
+          <p className="font-data mt-2 flex items-center gap-1.5 text-sm tracking-wide text-[var(--rc-text-muted)]">
+            <MapPin
+              className="h-4 w-4 shrink-0 text-[var(--rc-gold)]"
+              strokeWidth={1.75}
+              aria-hidden
+            />
+            <span>{r.ville}</span>
+          </p>
+
+          {r.saisons_top_chef && r.saisons_top_chef.length > 0 ? (
+            <p className="font-data mt-2 text-xs tracking-wide text-[var(--rc-text-muted)]">
+              Saisons {r.saisons_top_chef.join(", ")}
+            </p>
+          ) : null}
+        </div>
+
+        <span className="shrink-0 text-right text-[0.65rem] font-bold uppercase leading-tight tracking-[0.14em] text-[var(--rc-text)] transition group-hover:text-[var(--rc-ruby)] sm:text-xs">
+          Ouvrir la fiche
+        </span>
       </button>
 
       <div className="flex flex-wrap gap-2 bg-[var(--rc-page-bg)]/80 px-4 py-3 sm:px-5">

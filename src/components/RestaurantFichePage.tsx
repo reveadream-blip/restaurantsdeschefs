@@ -23,7 +23,7 @@ import {
   normalizeFichePhotoList,
   normalizeFichePhotoUrl,
 } from "@/lib/normalizeFicheMediaUrl";
-import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
+import { restaurantSponsoring } from "@/lib/restaurantEditorial";
 import type { Restaurant } from "@/types/restaurant";
 
 type TabId = "apropos" | "localisation" | "evenements" | "avis";
@@ -186,7 +186,7 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
             />
           </>
         )}
-        {restaurantFicheEnrichie(r) ? (
+        {restaurantSponsoring(r) ? (
           <div className="absolute right-3 top-3 z-[1] flex items-center gap-1 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 backdrop-blur-md sm:right-4 sm:top-4">
             <Sparkles
               className="h-3.5 w-3.5 shrink-0 text-[#e8d089]"
@@ -194,7 +194,7 @@ export default function RestaurantFichePage({ restaurant: r }: { restaurant: Res
               aria-hidden
             />
             <span className="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-white/95">
-              Fiche enrichie
+              Sponsoring
             </span>
           </div>
         ) : null}

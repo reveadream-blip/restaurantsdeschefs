@@ -65,5 +65,7 @@ CREATE TABLE IF NOT EXISTS etablissement_fiches (
     menu_prix TEXT,
     video_url TEXT,
     contact_json TEXT,
+    card_cover_url TEXT,
+    sponsoring INTEGER NOT NULL DEFAULT 0,
     updated_at TEXT DEFAULT (datetime('now'))
 );

@@ -96,7 +96,7 @@ export async function onRequest(context: {
     try {
       const row = await db
         .prepare(
-          `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at
+          `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, sponsoring, updated_at
            FROM etablissement_fiches WHERE etablissement_id = ?`
         )
         .bind(id)
@@ -108,6 +108,7 @@ export async function onRequest(context: {
           video_url: string | null;
           contact_json: string | null;
           card_cover_url: string | null;
+          sponsoring: number | null;
           updated_at: string | null;
         }>();
       if (!row) {
@@ -119,10 +120,14 @@ export async function onRequest(context: {
           video_url: null,
           contact_json: null,
           card_cover_url: null,
+          sponsoring: 0,
           updated_at: null,
         });
       }
-      return Response.json(row);
+      return Response.json({
+        ...row,
+        sponsoring: row.sponsoring === 1 ? 1 : 0,
+      });
     } catch (e) {
       const msg =
         e instanceof Error ? e.message : "Erreur lecture fiche éditoriale.";
@@ -140,6 +145,15 @@ export async function onRequest(context: {
           {
             error:
               "Colonne card_cover_url absente. Exécutez : data/migration-fiche-card-cover-url.sql",
+          },
+          { status: 500 }
+        );
+      }
+      if (msg.includes("no such column") && msg.includes("sponsoring")) {
+        return Response.json(
+          {
+            error:
+              "Colonne sponsoring absente. Exécutez : data/migration-fiche-sponsoring.sql",
           },
           { status: 500 }
         );
@@ -175,12 +189,18 @@ export async function onRequest(context: {
     const card_cover_url = card_cover_raw
       ? normalizePhotoUrl(card_cover_raw)
       : null;
+    const sponsoring =
+      body.sponsoring === true ||
+      body.sponsoring === 1 ||
+      body.sponsoring === "1"
+        ? 1
+        : 0;
 
     try {
       await db
         .prepare(
-          `INSERT INTO etablissement_fiches (etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at)
-           VALUES (?, ?, ?, ?, ?, ?, ?, datetime('now'))
+          `INSERT INTO etablissement_fiches (etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, sponsoring, updated_at)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
            ON CONFLICT(etablissement_id) DO UPDATE SET
              description_text = excluded.description_text,
              photos_json = excluded.photos_json,
@@ -188,6 +208,7 @@ export async function onRequest(context: {
              video_url = excluded.video_url,
              contact_json = excluded.contact_json,
              card_cover_url = excluded.card_cover_url,
+             sponsoring = excluded.sponsoring,
              updated_at = excluded.updated_at`
         )
         .bind(
@@ -197,7 +218,8 @@ export async function onRequest(context: {
           menu_prix,
           video_url,
           contact_json,
-          card_cover_url
+          card_cover_url,
+          sponsoring
         )
         .run();
       return Response.json({ ok: true });
@@ -218,6 +240,15 @@ export async function onRequest(context: {
           {
             error:
               "Colonne card_cover_url absente. Exécutez : data/migration-fiche-card-cover-url.sql",
+          },
+          { status: 500 }
+        );
+      }
+      if (msg.includes("no such column") && msg.includes("sponsoring")) {
+        return Response.json(
+          {
+            error:
+              "Colonne sponsoring absente. Exécutez : data/migration-fiche-sponsoring.sql",
           },
           { status: 500 }
         );
