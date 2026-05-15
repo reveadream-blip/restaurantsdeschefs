@@ -4,7 +4,7 @@ export const SITE_URL =
 
 export const SITE_NAME = "Restaurants des Chefs";
 export const SITE_TITLE = "L'annuaire des Grands Chefs";
-export const CONTACT_EMAIL = "contact.applimanagement@gmail.com";
+export const CONTACT_EMAIL = "contact.restaurantsdeschefs@gmail.com";
 
 export const SITE_DESCRIPTION =
   "Restaurants, Top Chef et étoilés Michelin sur une carte interactive.";

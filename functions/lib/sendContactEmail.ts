@@ -22,7 +22,7 @@ export async function sendContactEmail(
     };
   }
 
-  const to = (env.CONTACT_TO_EMAIL ?? "contact.applimanagement@gmail.com").trim();
+  const to = (env.CONTACT_TO_EMAIL ?? "contact.restaurantsdeschefs@gmail.com").trim();
   const from =
     env.CONTACT_FROM_EMAIL?.trim() ??
     "Restaurants des Chefs <onboarding@resend.dev>";
