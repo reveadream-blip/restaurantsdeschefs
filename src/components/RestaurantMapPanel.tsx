@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { MapPin } from "lucide-react";
+import type { MapFlyTarget } from "@/components/Map";
 import type { Restaurant } from "@/types/restaurant";
 
 const ChefMap = dynamic(() => import("@/components/Map"), { ssr: false });
@@ -9,7 +10,11 @@ const ChefMap = dynamic(() => import("@/components/Map"), { ssr: false });
 type Props = {
   restaurants: Restaurant[];
   selectedId: number | null;
+  flyToTarget: MapFlyTarget | null;
   onSelectId: (id: number) => void;
+  onLocatedNearby?: (nearby: Restaurant[]) => void;
+  onLocateError?: (message: string) => void;
+  locateHint?: string | null;
 };
 
 const MAP_H = 520;
@@ -17,7 +22,11 @@ const MAP_H = 520;
 export default function RestaurantMapPanel({
   restaurants,
   selectedId,
+  flyToTarget,
   onSelectId,
+  onLocatedNearby,
+  onLocateError,
+  locateHint,
 }: Props) {
   return (
     <div className="flex w-full flex-col gap-3">
@@ -32,7 +41,7 @@ export default function RestaurantMapPanel({
             Restaurant mis en avant sur la carte
           </span>
           <select
-            className="w-full max-w-xl rounded-xl border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] px-3 py-2.5 text-sm font-light text-[var(--rc-text)] shadow-sm outline-none transition focus:border-[var(--rc-gold)] focus:ring-2 focus:ring-[var(--rc-gold-soft)]"
+            className="w-full max-w-xl rounded-full border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] px-4 py-2.5 text-sm font-light text-[var(--rc-text)] shadow-sm outline-none transition focus:border-[var(--rc-gold)] focus:ring-2 focus:ring-[var(--rc-gold-soft)]"
             value={selectedId ?? ""}
             onChange={(e) => {
               const v = e.target.value;
@@ -53,16 +62,24 @@ export default function RestaurantMapPanel({
         </label>
       </div>
 
+      {locateHint ? (
+        <p className="text-xs font-light text-[var(--rc-text-muted)]">
+          {locateHint}
+        </p>
+      ) : null}
+
       <div
         className="overflow-hidden rounded-[var(--rc-radius-xl)] border border-[var(--rc-border)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)]"
         style={{ height: MAP_H }}
       >
-        <div className="h-full w-full">
-          <ChefMap
-            restaurants={restaurants}
-            onMarkerSelect={onSelectId}
-          />
-        </div>
+        <ChefMap
+          restaurants={restaurants}
+          flyToTarget={flyToTarget}
+          pauseFitBounds={selectedId != null}
+          onMarkerSelect={onSelectId}
+          onLocatedNearby={onLocatedNearby}
+          onLocateError={onLocateError}
+        />
       </div>
     </div>
   );

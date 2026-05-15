@@ -1,22 +1,25 @@
 @import "tailwindcss";
 
-/* Palette prestige — crème / anthracite / doré mat Michelin */
+/* Guide gastronomique de luxe — crème #FAF9F6, bleu nuit Top Chef, rouge Michelin */
 :root {
-  --rc-page-bg: #fdfdfd;
-  --rc-text: #121212;
-  --rc-text-muted: rgba(18, 18, 18, 0.52);
-  --rc-surface: #fafaf8;
+  --rc-page-bg: #faf9f6;
+  --rc-text: #141414;
+  --rc-text-muted: rgba(20, 20, 20, 0.52);
+  --rc-surface: #fffefb;
   --rc-surface-elevated: #ffffff;
-  --rc-border: rgba(18, 18, 18, 0.08);
-  --rc-border-strong: rgba(18, 18, 18, 0.14);
-  /* Doré mat (étoiles / accents prestige) */
+  --rc-border: rgba(20, 20, 20, 0.08);
+  --rc-border-strong: rgba(20, 20, 20, 0.14);
   --rc-gold: #9a7d2e;
-  --rc-gold-soft: rgba(154, 125, 46, 0.16);
-  --rc-ruby: #c41e3a;
-  --rc-ruby-soft: rgba(196, 30, 58, 0.1);
-  --rc-shadow: 0 24px 56px rgba(18, 18, 18, 0.07);
-  --rc-glass: rgba(253, 253, 253, 0.78);
-  --rc-glass-border: rgba(18, 18, 18, 0.06);
+  --rc-gold-soft: rgba(154, 125, 46, 0.14);
+  --rc-ruby: #a31830;
+  --rc-ruby-soft: rgba(163, 24, 48, 0.1);
+  --rc-navy: #1a2744;
+  --rc-navy-soft: rgba(26, 39, 68, 0.12);
+  --rc-shadow: 0 24px 56px rgba(20, 20, 20, 0.07);
+  --rc-shadow-soft: 0 12px 32px rgba(20, 20, 20, 0.06);
+  --rc-shadow-lift: 0 32px 64px rgba(20, 20, 20, 0.12);
+  --rc-glass: rgba(250, 249, 246, 0.82);
+  --rc-glass-border: rgba(20, 20, 20, 0.07);
   --rc-radius-lg: 1.25rem;
   --rc-radius-xl: 1.5rem;
 }
@@ -28,6 +31,7 @@
   --color-rc-surface: var(--rc-surface);
   --color-rc-gold: var(--rc-gold);
   --color-rc-ruby: var(--rc-ruby);
+  --color-rc-navy: var(--rc-navy);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
     serif;
@@ -54,18 +58,39 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Titres, noms de chefs et d’établissements — serif prestige */
+h1,
+h2,
+h3 {
+  font-family: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
+    serif;
+  font-feature-settings: "kern" 1, "liga" 1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
 .font-display {
   font-family: var(--font-cormorant), ui-serif, Georgia, "Times New Roman",
     serif;
   font-feature-settings: "kern" 1, "liga" 1;
 }
 
-/* Données techniques : sans-serif légère */
 .font-data {
   font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   font-weight: 300;
   letter-spacing: 0.01em;
+}
+
+/* Carte liste — soulèvement au survol */
+.chef-card-shell {
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.25s ease;
+}
+
+.chef-card-shell:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--rc-shadow-lift);
 }
 
 .leaflet-container {

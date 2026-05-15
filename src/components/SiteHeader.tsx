@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown } from "lucide-react";
+import LuxSearchBar from "@/components/LuxSearchBar";
 import type { MenuFiltre } from "@/types/restaurant";
 
 const SAISONS_TOP_CHEF = Array.from({ length: 17 }, (_, i) => i + 1);
@@ -67,6 +68,7 @@ export default function SiteHeader({
   const navBtnPhotoActive = `${navBtnBase} bg-white/18 text-white ring-1 ring-white/35 [text-shadow:0_1px_8px_rgba(0,0,0,0.65)]`;
   const navBtnPageInactive = `${navBtnBase} text-[var(--rc-text-muted)] hover:bg-[var(--rc-surface)] hover:text-[var(--rc-text)]`;
   const navBtnPageActive = `${navBtnBase} bg-[var(--rc-gold-soft)] text-[var(--rc-text)] ring-1 ring-[var(--rc-gold)]/40`;
+  const navBtnTopChefActive = `${navBtnBase} bg-[var(--rc-navy)] text-white ring-1 ring-[var(--rc-navy)]/50`;
 
   const carteBtnPhoto =
     "rounded-xl px-3 py-2 text-sm font-medium text-white/90 transition hover:bg-white/10 hover:text-white [text-shadow:0_1px_8px_rgba(0,0,0,0.65)] sm:px-4 sm:py-2.5 sm:text-base";
@@ -112,30 +114,12 @@ export default function SiteHeader({
           />
         </div>
 
-        <div
-          className="relative w-full min-w-0 max-w-lg shrink-0 sm:max-w-none sm:flex-1 sm:basis-72 md:basis-96 lg:basis-[30rem]"
-          role="search"
-        >
-          <Search
-            className={`pointer-events-none absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 sm:left-3.5 sm:h-5 sm:w-5 md:left-4 md:h-6 md:w-6 ${
-              overPhoto ? "text-white/65" : "text-[var(--rc-text-muted)]"
-            }`}
-            strokeWidth={1.75}
-            aria-hidden
-          />
-          <input
-            type="search"
-            value={value}
-            onChange={(e) => onChange(e.target.value)}
-            placeholder="Ville, département, chef, restaurant…"
-            className={
-              overPhoto
-                ? "w-full rounded-2xl border border-white/30 bg-black/25 py-3 pl-11 pr-3 text-sm font-light text-white outline-none ring-0 backdrop-blur-sm transition placeholder:text-white/55 focus:border-white/55 focus:ring-2 focus:ring-white/20 sm:py-3.5 sm:pl-12 sm:text-base md:py-4 md:pl-14 md:text-[1.0625rem] [text-shadow:0_1px_2px_rgba(0,0,0,0.4)]"
-                : "w-full rounded-2xl border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] py-3 pl-11 pr-3 text-sm font-light text-[var(--rc-text)] outline-none ring-0 transition placeholder:text-[var(--rc-text-muted)] focus:border-[var(--rc-gold)] focus:ring-2 focus:ring-[var(--rc-gold-soft)] sm:py-3.5 sm:pl-12 sm:text-base md:py-4 md:pl-14 md:text-[1.0625rem]"
-            }
-            aria-label="Rechercher des établissements"
-          />
-        </div>
+        <LuxSearchBar
+          value={value}
+          onChange={onChange}
+          overPhoto={overPhoto}
+          className="min-w-0 max-w-lg shrink-0 sm:max-w-none sm:flex-1 sm:basis-72 md:basis-96 lg:basis-[30rem]"
+        />
 
         <nav
           aria-label="Navigation principale"
@@ -152,7 +136,7 @@ export default function SiteHeader({
                 topChefActif
                   ? overPhoto
                     ? navBtnPhotoActive
-                    : navBtnPageActive
+                    : navBtnTopChefActive
                   : overPhoto
                     ? navBtnPhotoInactive
                     : navBtnPageInactive

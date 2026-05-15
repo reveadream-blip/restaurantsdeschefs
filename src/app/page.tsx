@@ -12,7 +12,9 @@ import { restaurantSponsoring } from "@/lib/restaurantEditorial";
 import RestaurantFicheDetails from "@/components/RestaurantFicheDetails";
 import RestaurantMapPanel from "@/components/RestaurantMapPanel";
 import SiteHeader from "@/components/SiteHeader";
+import LuxSearchBar from "@/components/LuxSearchBar";
 import ChefCard from "@/components/ChefCard";
+import type { MapFlyTarget } from "@/components/Map";
 import { googleDirectionsUrl, googleStreetViewUrl } from "@/lib/mapsLinks";
 import type { MenuFiltre, Restaurant } from "@/types/restaurant";
 
@@ -78,6 +80,7 @@ export default function Home() {
   const [selectedId, setSelectedId] = useState<number | null>(null);
   /** La carte et la liste complète ne s’affichent qu’après « Carte des Chefs ». */
   const [showMap, setShowMap] = useState(false);
+  const [locateHint, setLocateHint] = useState<string | null>(null);
 
   useEffect(() => {
     if (filtre !== "top-chef") setTopChefSaison(null);
@@ -147,6 +150,17 @@ export default function Home() {
     return affiche[0].id;
   }, [affiche, selectedId]);
 
+  const flyToTarget = useMemo((): MapFlyTarget | null => {
+    if (!showMap || effectiveSelectedId == null) return null;
+    const r = affiche.find((x) => x.id === effectiveSelectedId);
+    if (!r) return null;
+    return {
+      latitude: r.latitude,
+      longitude: r.longitude,
+      zoom: 14,
+    };
+  }, [showMap, effectiveSelectedId, affiche]);
+
   const afficheRef = useRef(affiche);
   useEffect(() => {
     afficheRef.current = affiche;
@@ -204,7 +218,7 @@ export default function Home() {
 
           <div className="pointer-events-none absolute inset-0 z-[1] flex min-h-[100svh] flex-col pt-[min(30vh,14rem)] sm:pt-[min(26vh,12rem)] md:pt-[min(24vh,11rem)]">
             <div className="flex flex-1 flex-col items-center justify-center px-5 pb-16 text-center sm:px-8 sm:pb-24">
-              <h1 className="max-w-5xl font-sans text-[2rem] font-bold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_32px_rgba(0,0,0,0.88)]">
+              <h1 className="max-w-5xl font-display text-[2rem] font-semibold leading-[1.12] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl [text-shadow:0_2px_32px_rgba(0,0,0,0.88)]">
                 L&apos;annuaire des Grands Chefs
               </h1>
               <p className="mt-5 max-w-3xl font-sans text-base font-light leading-relaxed text-white/95 sm:mt-6 sm:text-xl md:text-2xl [text-shadow:0_1px_16px_rgba(0,0,0,0.8)]">
@@ -308,9 +322,9 @@ export default function Home() {
                       actif
                         ? `font-medium ${
                             isTopChef
-                              ? "border-[var(--rc-ruby)] bg-[var(--rc-ruby)] text-white shadow-md"
+                              ? "border-[var(--rc-navy)] bg-[var(--rc-navy)] text-white shadow-md"
                               : isStar
-                                ? "border-[var(--rc-gold)] bg-[var(--rc-gold)] text-white shadow-md"
+                                ? "border-[var(--rc-ruby)] bg-[var(--rc-ruby)] text-white shadow-md"
                                 : "border-[var(--rc-text)] bg-[var(--rc-text)] text-[var(--rc-page-bg)] shadow-md"
                           }`
                         : "font-light border-[var(--rc-border)] bg-[var(--rc-surface)] text-[var(--rc-text-muted)] hover:border-[var(--rc-border-strong)] hover:text-[var(--rc-text)]"
@@ -327,28 +341,12 @@ export default function Home() {
               })}
             </nav>
 
-            <div
-              className="relative mt-6 w-full max-w-2xl sm:mt-8"
-              role="search"
-              aria-label="Affiner la recherche"
-            >
-              <Image
-                src="/top-chef-icon.png"
-                alt=""
-                width={192}
-                height={192}
-                className="pointer-events-none absolute left-2.5 top-1/2 z-[1] h-7 w-7 -translate-y-1/2 rounded-md object-contain sm:left-3 sm:h-8 sm:w-8"
-                aria-hidden
-              />
-              <input
-                type="search"
-                value={recherche}
-                onChange={(e) => setRecherche(e.target.value)}
-                placeholder="Ville, département, chef, restaurant…"
-                className="w-full rounded-xl border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] py-2.5 pl-11 pr-3 text-sm font-light text-[var(--rc-text)] outline-none transition placeholder:text-[var(--rc-text-muted)] focus:border-[var(--rc-gold)] focus:ring-2 focus:ring-[var(--rc-gold-soft)] sm:py-3 sm:pl-[3.25rem] sm:text-[0.9375rem] md:pl-14"
-                aria-label="Rechercher près de la carte"
-              />
-            </div>
+            <LuxSearchBar
+              value={recherche}
+              onChange={setRecherche}
+              className="mt-6 w-full max-w-2xl sm:mt-8"
+              aria-label="Rechercher près de la carte"
+            />
           </header>
 
           <section className="grid grid-cols-1 gap-10 lg:grid-cols-3 lg:gap-12">
@@ -408,10 +406,10 @@ export default function Home() {
                       return (
                       <li key={restau.id} className="scroll-mt-6">
                         <div
-                          className={`overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 ${
+                          className={`chef-card-shell overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] ${
                             editorial
-                              ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30 shadow-md"
-                              : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
+                              ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30"
+                              : "border border-[var(--rc-border)]"
                           }`}
                         >
                           <ChefCard
@@ -465,7 +463,22 @@ export default function Home() {
                   <RestaurantMapPanel
                     restaurants={affiche}
                     selectedId={effectiveSelectedId}
+                    flyToTarget={flyToTarget}
                     onSelectId={setSelectedId}
+                    locateHint={locateHint}
+                    onLocatedNearby={(nearby) => {
+                      if (nearby.length > 0) {
+                        setSelectedId(nearby[0].id);
+                        setLocateHint(
+                          `${nearby.length} établissement${nearby.length > 1 ? "s" : ""} à proximité (80 km).`
+                        );
+                      } else {
+                        setLocateHint(
+                          "Aucun établissement repéré à moins de 80 km."
+                        );
+                      }
+                    }}
+                    onLocateError={setLocateHint}
                   />
 
                   <p className="text-center text-sm font-light text-[var(--rc-text-muted)]">
@@ -517,17 +530,18 @@ export default function Home() {
                               variants={itemVariants}
                             >
                               <div
-                                className={`overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 ${
+                                className={`chef-card-shell overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] ${
                                   highlighted
                                     ? "border border-[var(--rc-gold)] ring-2 ring-[var(--rc-gold-soft)] ring-offset-2 ring-offset-[var(--rc-page-bg)]"
                                     : editorial
-                                      ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30 shadow-md"
-                                      : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
+                                      ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30"
+                                      : "border border-[var(--rc-border)]"
                                 }`}
                               >
                                 <ChefCard
                                   restaurant={restau}
-                                  onSelect={() =>
+                                  onSelect={() => setSelectedId(restau.id)}
+                                  onOpenDetail={() =>
                                     router.push(`/restaurant?id=${restau.id}`)
                                   }
                                 />

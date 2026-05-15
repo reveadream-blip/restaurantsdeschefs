@@ -7,7 +7,10 @@ import type { Restaurant } from "@/types/restaurant";
 
 export type ChefCardProps = {
   restaurant: Restaurant;
+  /** Sélection / zoom carte (liste avec carte visible). */
   onSelect: () => void;
+  /** Ouvre la fiche détaillée ; par défaut = onSelect. */
+  onOpenDetail?: () => void;
 };
 
 function MichelinStars({ count }: { count: 1 | 2 | 3 }) {
@@ -30,7 +33,11 @@ function MichelinStars({ count }: { count: 1 | 2 | 3 }) {
  * badges floutés, typographie serif pour les noms.
  * Le cadre (bordure / mise en avant) est appliqué par le parent qui englobe aussi la fiche détaillée et les liens carte.
  */
-export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
+export default function ChefCard({
+  restaurant: r,
+  onSelect,
+  onOpenDetail,
+}: ChefCardProps) {
   const stars = r.etoiles_michelin;
   const hasStars = stars > 0;
   const coverUrl = normalizeFichePhotoUrl(r.fiche_card_cover_url ?? "");
@@ -88,15 +95,15 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
 
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2 sm:right-4 sm:top-4">
           {hasStars ? (
-            <div className="flex items-center gap-2 rounded-full border border-white/25 bg-black/35 px-3 py-1.5 backdrop-blur-md">
+            <div className="flex items-center gap-2 rounded-full border border-[var(--rc-ruby)]/55 bg-[var(--rc-ruby)]/95 px-3 py-1.5 shadow-sm backdrop-blur-md">
               <MichelinStars count={stars as 1 | 2 | 3} />
-              <span className="font-sans text-[0.65rem] font-medium uppercase tracking-[0.2em] text-white/90">
+              <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white">
                 Michelin
               </span>
             </div>
           ) : null}
           {r.top_chef ? (
-            <div className="rounded-full border border-white/20 bg-[var(--rc-ruby)]/88 px-3 py-1.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white shadow-sm backdrop-blur-md">
+            <div className="rounded-full border border-white/25 bg-[var(--rc-navy)] px-3 py-1.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white shadow-sm backdrop-blur-md">
               Top Chef
             </div>
           ) : null}
@@ -109,13 +116,13 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onSelect}
-        aria-label={`Ouvrir la fiche détaillée — ${r.nom_restaurant}, ${r.chef_nom}`}
-        className="group flex w-full cursor-pointer items-center justify-between gap-4 border-b border-[var(--rc-border)] bg-[var(--rc-surface)] px-4 py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--rc-gold)] sm:px-5"
-      >
-        <div className="min-w-0 flex-1">
+      <div className="flex w-full items-stretch border-b border-[var(--rc-border)] bg-[var(--rc-surface)]">
+        <button
+          type="button"
+          onClick={onSelect}
+          aria-label={`Voir sur la carte — ${r.nom_restaurant}, ${r.chef_nom}`}
+          className="min-w-0 flex-1 cursor-pointer px-4 py-4 text-left outline-none transition-colors focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[var(--rc-gold)] sm:px-5"
+        >
           <p className="font-display text-[1.05rem] font-semibold leading-snug text-[var(--rc-text)] sm:text-lg">
             {r.chef_nom}
           </p>
@@ -136,12 +143,16 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
               Saisons {r.saisons_top_chef.join(", ")}
             </p>
           ) : null}
-        </div>
+        </button>
 
-        <span className="shrink-0 text-right text-[0.65rem] font-bold uppercase leading-tight tracking-[0.14em] text-[var(--rc-text)] transition group-hover:text-[var(--rc-ruby)] sm:text-xs">
+        <button
+          type="button"
+          onClick={onOpenDetail ?? onSelect}
+          className="shrink-0 self-center px-4 py-4 text-right text-[0.65rem] font-bold uppercase leading-tight tracking-[0.14em] text-[var(--rc-text)] transition hover:text-[var(--rc-ruby)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--rc-gold)] sm:px-5 sm:text-xs"
+        >
           Ouvrir la fiche
-        </span>
-      </button>
+        </button>
+      </div>
 
       <div className="flex flex-wrap gap-2 bg-[var(--rc-page-bg)]/80 px-4 py-3 sm:px-5">
         {r.telephone ? (
