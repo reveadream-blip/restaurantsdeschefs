@@ -11,6 +11,7 @@ import {
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import type { Restaurant } from "@/types/restaurant";
+import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
 import {
   googleDirectionsUrl,
   googleStreetViewUrl,
@@ -21,6 +22,13 @@ const customIcon = new L.Icon({
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png",
   iconSize: [25, 41],
   iconAnchor: [12, 41],
+});
+
+const editorialMarkerIcon = L.divIcon({
+  className: "leaflet-div-icon !border-0 !bg-transparent",
+  html: '<div style="width:26px;height:26px;border-radius:9999px;background:linear-gradient(145deg,#d4af37,#9a7d2e);border:2px solid #fff;box-shadow:0 2px 10px rgba(0,0,0,.45);"></div>',
+  iconSize: [26, 26],
+  iconAnchor: [13, 13],
 });
 
 function FitBounds({ restaurants }: { restaurants: Restaurant[] }) {
@@ -68,7 +76,11 @@ export default function ChefMap({
             <Marker
               key={restau.id}
               position={[restau.latitude, restau.longitude]}
-              icon={customIcon}
+              icon={
+                restaurantFicheEnrichie(restau)
+                  ? editorialMarkerIcon
+                  : customIcon
+              }
               eventHandlers={
                 onMarkerSelect
                   ? {
@@ -86,6 +98,11 @@ export default function ChefMap({
                   </p>
                   <h3 className="text-base font-bold">{restau.nom_restaurant}</h3>
                   <p className="text-sm text-gray-700">{restau.chef_nom}</p>
+                  {restaurantFicheEnrichie(restau) ? (
+                    <p className="mt-1 text-xs font-semibold text-amber-700">
+                      Fiche enrichie (contenu éditorial)
+                    </p>
+                  ) : null}
                   {restau.saisons_top_chef &&
                   restau.saisons_top_chef.length > 0 ? (
                     <p className="mt-0.5 text-xs text-gray-500">

@@ -94,6 +94,7 @@ type FicheRow = {
   video_url: string | null;
   contact_json: string | null;
   card_cover_url: string | null;
+  updated_at: string | null;
 };
 
 async function mergeEditorialFiches(
@@ -113,7 +114,7 @@ async function mergeEditorialFiches(
   for (let i = 0; i < ids.length; i += BATCH) {
     const slice = ids.slice(i, i + BATCH);
     const placeholders = slice.map(() => "?").join(",");
-    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url
+    const sql = `SELECT etablissement_id, description_text, photos_json, menu_prix, video_url, contact_json, card_cover_url, updated_at
                  FROM etablissement_fiches WHERE etablissement_id IN (${placeholders})`;
     try {
       const { results = [] } = await db
@@ -131,6 +132,10 @@ async function mergeEditorialFiches(
     const id = Number(row.id);
     const f = map.get(id);
     if (!f) continue;
+    row.fiche_enrichie = true;
+    if (f.updated_at != null && String(f.updated_at).trim() !== "") {
+      row.fiche_editor_updated_at = String(f.updated_at).trim();
+    }
     if (f.description_text && String(f.description_text).trim() !== "") {
       row.fiche_description = String(f.description_text).trim();
     }

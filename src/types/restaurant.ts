@@ -47,6 +47,10 @@ export type Restaurant = {
   fiche_contact?: FicheContactOverride;
   /** Image bandeau fiche + carte liste (URL https, D1). */
   fiche_card_cover_url?: string;
+  /** Présence d’une fiche éditoriale en base (ligne `etablissement_fiches`). */
+  fiche_enrichie?: boolean;
+  /** Horodatage D1 `updated_at` de la fiche éditoriale (affichage optionnel). */
+  fiche_editor_updated_at?: string;
 };
 
 export type MenuFiltre = "tous" | "top-chef" | "etoiles" | "3" | "2" | "1";

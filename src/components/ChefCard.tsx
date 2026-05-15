@@ -1,7 +1,8 @@
 "use client";
 
-import { Mail, MapPin, Phone, Star } from "lucide-react";
+import { Mail, MapPin, Phone, Sparkles, Star } from "lucide-react";
 import { normalizeFichePhotoUrl } from "@/lib/normalizeFicheMediaUrl";
+import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
 import type { Restaurant } from "@/types/restaurant";
 
 export type ChefCardProps = {
@@ -71,6 +72,19 @@ export default function ChefCard({ restaurant: r, onSelect }: ChefCardProps) {
           </>
         )}
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/55 to-transparent" />
+
+        {restaurantFicheEnrichie(r) ? (
+          <div className="absolute left-3 top-3 z-[1] flex items-center gap-1 rounded-full border border-white/30 bg-black/45 px-2.5 py-1 backdrop-blur-md sm:left-4 sm:top-4">
+            <Sparkles
+              className="h-3.5 w-3.5 shrink-0 text-[#e8d089]"
+              strokeWidth={2}
+              aria-hidden
+            />
+            <span className="font-sans text-[0.6rem] font-semibold uppercase tracking-[0.16em] text-white/95">
+              Enrichie
+            </span>
+          </div>
+        ) : null}
 
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2 sm:right-4 sm:top-4">
           {hasStars ? (

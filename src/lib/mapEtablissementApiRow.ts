@@ -100,6 +100,13 @@ export function mapEtablissementApiRow(
     const u = normalizeFichePhotoUrl(fcc.trim());
     if (u) row.fiche_card_cover_url = u;
   }
+  if (r.fiche_enrichie === true) {
+    row.fiche_enrichie = true;
+  }
+  const feu = r.fiche_editor_updated_at;
+  if (typeof feu === "string" && feu.trim() !== "") {
+    row.fiche_editor_updated_at = feu.trim();
+  }
 
   return row;
 }

@@ -8,6 +8,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Star, ChefHat, Sparkles, ChevronUp } from "lucide-react";
 import { filterRestaurants } from "@/lib/filterRestaurants";
 import { fetchRestaurantsForApp } from "@/lib/fetchRestaurantsForApp";
+import { restaurantFicheEnrichie } from "@/lib/restaurantEditorial";
 import RestaurantFicheDetails from "@/components/RestaurantFicheDetails";
 import RestaurantMapPanel from "@/components/RestaurantMapPanel";
 import SiteHeader from "@/components/SiteHeader";
@@ -44,16 +45,22 @@ const listItemReduced = {
   visible: { opacity: 1 },
 };
 
-/** Jusqu’à `n` établissements choisis au hasard (ordre différent à chaque chargement des données). */
+/** Jusqu’à `n` établissements : les fiches enrichies (éditoriales) en priorité, puis tirage au sort. */
 function pickRandomRestaurants(list: Restaurant[], n: number): Restaurant[] {
   if (list.length === 0) return [];
-  if (list.length <= n) return [...list];
-  const a = [...list];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a.slice(0, n);
+  const enriched = list.filter(restaurantFicheEnrichie);
+  const others = list.filter((r) => !restaurantFicheEnrichie(r));
+  const shuffle = (a: Restaurant[]) => {
+    const copy = [...a];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };
+  const merged = [...shuffle(enriched), ...shuffle(others)];
+  if (merged.length <= n) return merged;
+  return merged.slice(0, n);
 }
 
 export default function Home() {
@@ -109,11 +116,12 @@ export default function Home() {
   }, []);
 
   const rechercheDeferred = useDeferredValue(recherche);
-  const affiche = useMemo(
-    () =>
-      filterRestaurants(rows, filtre, rechercheDeferred, topChefSaison),
-    [rows, filtre, rechercheDeferred, topChefSaison]
-  );
+  const affiche = useMemo(() => {
+    const f = filterRestaurants(rows, filtre, rechercheDeferred, topChefSaison);
+    const enriched = f.filter(restaurantFicheEnrichie);
+    const others = f.filter((r) => !restaurantFicheEnrichie(r));
+    return [...enriched, ...others];
+  }, [rows, filtre, rechercheDeferred, topChefSaison]);
 
   const dixAleatoires = useMemo(
     () => pickRandomRestaurants(affiche, 10),
@@ -369,6 +377,18 @@ export default function Home() {
                     </button>{" "}
                     pour afficher la carte et toute la liste.
                   </p>
+                  <p className="flex items-start gap-2 text-xs font-light text-[var(--rc-text-muted)] sm:max-w-xl">
+                    <Sparkles
+                      className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[var(--rc-gold)]"
+                      strokeWidth={2}
+                      aria-hidden
+                    />
+                    <span>
+                      Les cartes au contour doré et le libellé « Enrichie »
+                      indiquent une fiche mise à jour depuis l’administration
+                      (textes, photos, etc.).
+                    </span>
+                  </p>
                 </div>
 
                 {!fetchDone ? (
@@ -383,9 +403,17 @@ export default function Home() {
                   </p>
                 ) : (
                   <ul className="grid grid-cols-1 gap-5 pb-8 sm:grid-cols-2 xl:grid-cols-2">
-                    {dixAleatoires.map((restau) => (
+                    {dixAleatoires.map((restau) => {
+                      const editorial = restaurantFicheEnrichie(restau);
+                      return (
                       <li key={restau.id} className="scroll-mt-6">
-                        <div className="overflow-hidden rounded-[var(--rc-radius-xl)] border border-[var(--rc-border)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 hover:border-[var(--rc-border-strong)]">
+                        <div
+                          className={`overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 ${
+                            editorial
+                              ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30 shadow-md"
+                              : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
+                          }`}
+                        >
                           <ChefCard
                             restaurant={restau}
                             onSelect={() =>
@@ -423,7 +451,8 @@ export default function Home() {
                           </div>
                         </div>
                       </li>
-                    ))}
+                    );
+                    })}
                   </ul>
                 )}
               </div>
@@ -479,6 +508,7 @@ export default function Home() {
                       >
                         {affiche.map((restau) => {
                           const highlighted = selectedId === restau.id;
+                          const editorial = restaurantFicheEnrichie(restau);
                           return (
                             <motion.li
                               id={`liste-fiche-${restau.id}`}
@@ -490,7 +520,9 @@ export default function Home() {
                                 className={`overflow-hidden rounded-[var(--rc-radius-xl)] bg-[var(--rc-surface)] shadow-[var(--rc-shadow)] transition-[box-shadow,border-color] duration-300 ${
                                   highlighted
                                     ? "border border-[var(--rc-gold)] ring-2 ring-[var(--rc-gold-soft)] ring-offset-2 ring-offset-[var(--rc-page-bg)]"
-                                    : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
+                                    : editorial
+                                      ? "border border-[var(--rc-gold)]/80 ring-1 ring-[var(--rc-gold)]/30 shadow-md"
+                                      : "border border-[var(--rc-border)] hover:border-[var(--rc-border-strong)]"
                                 }`}
                               >
                                 <ChefCard
