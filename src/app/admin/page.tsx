@@ -37,12 +37,34 @@ function AdminHomeInner() {
   const [loadErr, setLoadErr] = useState<string | null>(null);
   const [loginErr, setLoginErr] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
+  /** Message si /api/admin/* ne répond pas (souvent Functions ou secrets manquants en prod). */
+  const [apiProblem, setApiProblem] = useState<string | null>(null);
 
   const checkMe = useCallback(async () => {
-    const { ok, data } = await fetchJson<{ authenticated?: boolean }>(
-      "/api/admin/me"
-    );
-    setAuth(Boolean(ok && data.authenticated));
+    setApiProblem(null);
+    try {
+      const res = await fetch("/api/admin/me", { credentials: "include" });
+      const text = await res.text();
+      let authenticated = false;
+      try {
+        const data = JSON.parse(text) as { authenticated?: boolean };
+        authenticated = Boolean(data.authenticated);
+      } catch {
+        if (!res.ok && res.status !== 401) {
+          setApiProblem(
+            res.status === 404
+              ? "L’API d’administration est introuvable (404). Ce site est peut‑être déployé sans les Cloudflare Pages Functions : vérifiez que le dossier « functions » est à la racine du dépôt et que le build Pages inclut bien les fonctions, ou déployez avec « npx wrangler pages deploy » depuis la machine de build."
+              : `Le serveur a répondu ${res.status} avec une réponse non JSON. Vérifiez la configuration Cloudflare (binding D1 « DB », secrets).`
+          );
+        }
+      }
+      setAuth(res.ok && authenticated);
+    } catch {
+      setApiProblem(
+        "Impossible de contacter /api/admin/me (réseau ou domaine incorrect)."
+      );
+      setAuth(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -89,9 +111,11 @@ function AdminHomeInner() {
     if (!ok) {
       setLoginErr(
         (data as { error?: string }).error ??
-          (status === 503
-            ? "API admin indisponible (secrets ou D1 non configurés sur cet environnement)."
-            : "Échec de la connexion.")
+          (status === 404
+            ? "Route d’API introuvable : le site en ligne n’expose probablement pas les Pages Functions (dossier functions/ à la racine du dépôt)."
+            : status === 503
+              ? "API admin indisponible : définissez les secrets ADMIN_PASSWORD et ADMIN_SESSION_SECRET sur le projet Cloudflare Pages."
+              : "Échec de la connexion.")
       );
       return;
     }
@@ -133,6 +157,14 @@ function AdminHomeInner() {
           Connexion réservée. Après authentification, vous pourrez modifier les
           contenus publiés sur chaque fiche établissement.
         </p>
+        {apiProblem ? (
+          <p
+            role="alert"
+            className="mt-6 rounded-lg border border-amber-500/35 bg-amber-500/10 px-3 py-3 text-sm leading-relaxed text-[var(--rc-text)]"
+          >
+            {apiProblem}
+          </p>
+        ) : null}
         <form onSubmit={handleLogin} className="mt-8 space-y-4">
           <label className="block text-xs font-medium uppercase tracking-wider text-[var(--rc-text-muted)]">
             E-mail administrateur

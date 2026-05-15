@@ -34,7 +34,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          # Node 20 : avertissement de dépréciation GitHub Actions (retrait prévu des runners).
+          node-version: "24"
           cache: npm
 
       - name: Install dependencies
@@ -49,6 +50,19 @@ jobs:
           test -f out/restaurant.html || test -f out/restaurant/index.html || (echo "ERREUR: route restaurant manquante dans out/." && exit 1)
           echo "Contenu de out/ (extrait):"
           ls -la out | head -30
+
+      # Sans ces secrets, wrangler échoue : c’est la cause la plus fréquente d’un site
+      # qui ne se met pas à jour malgré des pushes sur main (voir historique Actions).
+      - name: Vérifier les secrets Cloudflare (Actions)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -z "$CLOUDFLARE_API_TOKEN" ] || [ -z "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "::error::Secrets GitHub manquants : Réglages du dépôt → Secrets and variables → Actions → définir CLOUDFLARE_API_TOKEN (jeton avec « Cloudflare Pages — Edit ») et CLOUDFLARE_ACCOUNT_ID (identifiant du compte, onglet Aperçu Cloudflare). Sinon l’étape « Deploy to Cloudflare Pages » échoue."
+            exit 1
+          fi
+          echo "Secrets Cloudflare présents pour wrangler."
 
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
