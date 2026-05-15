@@ -216,8 +216,9 @@ export default function ChefMap({
                   </p>
                 ) : null}
                 {restau.top_chef ? (
-                  <p className="mt-1 text-xs font-semibold text-[var(--rc-navy)]">
-                    Top Chef
+                  <p className="mt-1 text-xs font-semibold uppercase tracking-wide">
+                    <span className="text-[var(--rc-michelin-deep)]">Top</span>
+                    <span className="text-[var(--rc-navy)]"> Chef</span>
                   </p>
                 ) : null}
                 {restau.etoiles_michelin > 0 && (

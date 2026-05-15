@@ -14,6 +14,8 @@
   --rc-michelin: #f0c14b;
   --rc-michelin-deep: #d4a017;
   --rc-michelin-soft: rgba(240, 193, 75, 0.22);
+  --rc-michelin-bg: #fce8ec;
+  --rc-michelin-border: rgba(163, 24, 48, 0.28);
   --rc-ruby: #a31830;
   --rc-ruby-soft: rgba(163, 24, 48, 0.1);
   --rc-navy: #1a2744;

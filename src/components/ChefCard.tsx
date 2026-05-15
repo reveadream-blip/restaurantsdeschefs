@@ -95,7 +95,7 @@ export default function ChefCard({
 
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2 sm:right-4 sm:top-4">
           {hasStars ? (
-            <div className="flex items-center gap-2 rounded-full border border-[var(--rc-michelin)]/70 bg-[#1c1810]/88 px-3 py-1.5 shadow-sm backdrop-blur-md">
+            <div className="flex items-center gap-2 rounded-full border border-[var(--rc-michelin-border)] bg-[var(--rc-michelin-bg)] px-3 py-1.5 shadow-sm">
               <MichelinStars count={stars as 1 | 2 | 3} />
               <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--rc-michelin)]">
                 Michelin
@@ -103,8 +103,9 @@ export default function ChefCard({
             </div>
           ) : null}
           {r.top_chef ? (
-            <div className="rounded-full border border-white/25 bg-[var(--rc-navy)] px-3 py-1.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-white shadow-sm backdrop-blur-md">
-              Top Chef
+            <div className="rounded-full border border-white/25 bg-[var(--rc-navy)] px-3 py-1.5 font-sans text-[0.65rem] font-semibold uppercase tracking-[0.18em] shadow-sm backdrop-blur-md">
+              <span className="text-[var(--rc-michelin)]">Top</span>
+              <span className="text-white"> Chef</span>
             </div>
           ) : null}
         </div>
