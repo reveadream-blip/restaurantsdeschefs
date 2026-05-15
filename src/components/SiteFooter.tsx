@@ -11,38 +11,28 @@ export default function SiteFooter() {
   return (
     <footer
       className="mt-auto border-t border-[var(--rc-border)] bg-gradient-to-b from-[var(--rc-surface)] via-[var(--rc-page-bg)] to-[var(--rc-navy-soft)]/50"
-      aria-labelledby="site-footer-heading"
+      aria-label="Pied de page"
     >
       <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
-        <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-start sm:justify-between sm:gap-10">
+        <div className="flex flex-col items-center gap-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
           <Link
             href="/"
-            className="group flex flex-col items-center gap-3 text-center sm:items-start sm:text-left"
+            className="group shrink-0 transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--rc-gold)]"
+            aria-label="Restaurants des Chefs - retour a l annuaire"
           >
-            <span className="relative flex h-16 w-16 items-center justify-center rounded-2xl border border-[var(--rc-border)] bg-[var(--rc-surface-elevated)] p-2 shadow-[var(--rc-shadow-soft)] transition group-hover:border-[var(--rc-gold)]/40">
+            <span className="block overflow-hidden rounded-xl bg-black px-4 py-2.5 shadow-[var(--rc-shadow-soft)] ring-1 ring-black/10 transition group-hover:ring-[var(--rc-gold)]/50">
               <Image
                 src="/logo-restaurants-des-chefs.png"
-                alt="Restaurants des Chefs"
-                width={56}
-                height={56}
-                className="h-auto w-full object-contain"
+                alt=""
+                width={350}
+                height={67}
+                className="h-7 w-auto sm:h-8"
               />
-            </span>
-            <span>
-              <span
-                id="site-footer-heading"
-                className="font-display text-lg font-semibold tracking-tight text-[var(--rc-text)]"
-              >
-                Restaurants des Chefs
-              </span>
-              <span className="mt-1 block text-xs font-light leading-relaxed text-[var(--rc-text-muted)]">
-                L&apos;annuaire des Grands Chefs
-              </span>
             </span>
           </Link>
 
           <nav
-            className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2 text-sm sm:pt-2"
+            className="flex flex-wrap items-center justify-center gap-x-1 gap-y-2 text-sm"
             aria-label="Liens du pied de page"
           >
             {FOOTER_LINKS.map((item, i) => (
