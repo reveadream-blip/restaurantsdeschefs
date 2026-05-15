@@ -5,7 +5,6 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { Mail } from "lucide-react";
 import ContactForm from "@/components/ContactForm";
-import { CONTACT_EMAIL } from "@/lib/site";
 
 function ContactPageInner() {
   const searchParams = useSearchParams();
@@ -40,14 +39,7 @@ function ContactPageInner() {
         </h1>
         <p className="mx-auto mt-5 max-w-xl text-center text-sm font-light leading-relaxed text-[var(--rc-text-muted)]">
           Une question sur l&apos;annuaire, un pack partenaire ou votre fiche ?
-          {"Envoyez-nous un message : nous r\u00e9pondons \u00e0 "}
-          <a
-            href={`mailto:${CONTACT_EMAIL}`}
-            className="font-medium text-[var(--rc-ruby)] underline-offset-2 hover:underline"
-          >
-            {CONTACT_EMAIL}
-          </a>
-          .
+          {"Remplissez le formulaire ci-dessous : nous vous r\u00e9pondrons dans les meilleurs d\u00e9lais."}
         </p>
 
         <div className="mt-10">
