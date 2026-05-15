@@ -1,4 +1,4 @@
-import { parsePartnerBannerJson } from "../lib/partnerBanner";
+import { parsePartenariatSettingsJson } from "../lib/partnerSettings";
 
 type D1Db = {
   prepare: (q: string) => {
@@ -16,11 +16,10 @@ export async function onRequest(context: {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
+  const defaults = parsePartenariatSettingsJson(null);
   const db = context.env.DB;
   if (!db) {
-    return Response.json({
-      banner: parsePartnerBannerJson(null),
-    });
+    return Response.json(defaults);
   }
 
   try {
@@ -29,12 +28,8 @@ export async function onRequest(context: {
         `SELECT value_json FROM site_settings WHERE key = 'partner_banner' LIMIT 1`
       )
       .first<{ value_json: string }>();
-    return Response.json({
-      banner: parsePartnerBannerJson(row?.value_json),
-    });
+    return Response.json(parsePartenariatSettingsJson(row?.value_json));
   } catch {
-    return Response.json({
-      banner: parsePartnerBannerJson(null),
-    });
+    return Response.json(defaults);
   }
 }

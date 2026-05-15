@@ -1,5 +1,5 @@
 import { isAdminRequest } from "../../lib/adminSession";
-import { parsePartnerBannerJson } from "../../lib/partnerBanner";
+import { parsePartenariatSettingsJson } from "../../lib/partnerSettings";
 
 type D1Db = {
   prepare: (q: string) => {
@@ -37,8 +37,9 @@ export async function onRequest(context: {
           `SELECT value_json, updated_at FROM site_settings WHERE key = 'partner_banner' LIMIT 1`
         )
         .first<{ value_json: string; updated_at: string | null }>();
+      const settings = parsePartenariatSettingsJson(row?.value_json);
       return Response.json({
-        banner: parsePartnerBannerJson(row?.value_json),
+        ...settings,
         updated_at: row?.updated_at ?? null,
       });
     } catch (e) {
@@ -66,9 +67,13 @@ export async function onRequest(context: {
     } catch {
       return Response.json({ error: "Corps JSON invalide." }, { status: 400 });
     }
-    const banner = parsePartnerBannerJson(
-      JSON.stringify(body.banner ?? body)
-    );
+
+    const incoming = {
+      banner: body.banner ?? body,
+      marqueFiche: body.marqueFiche ?? body.marque,
+    };
+    const settings = parsePartenariatSettingsJson(JSON.stringify(incoming));
+
     try {
       await db
         .prepare(
@@ -78,9 +83,9 @@ export async function onRequest(context: {
              value_json = excluded.value_json,
              updated_at = excluded.updated_at`
         )
-        .bind(JSON.stringify(banner))
+        .bind(JSON.stringify(settings))
         .run();
-      return Response.json({ ok: true, banner });
+      return Response.json({ ok: true, ...settings });
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Erreur enregistrement.";
       if (msg.includes("no such table")) {

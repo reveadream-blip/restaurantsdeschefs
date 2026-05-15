@@ -1,5 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { Check, MapPin, Sparkles, Star } from "lucide-react";
+import MarquePartenariatFicheCard from "@/components/MarquePartenariatFiche";
+import {
+  DEFAULT_MARQUE_FICHE,
+  type MarquePartenariatFiche,
+} from "@/types/partenariat";
 
 const PACKS = [
   {
@@ -30,6 +38,26 @@ const PACKS = [
 ] as const;
 
 export default function PartenairesPageContent() {
+  const [marqueFiche, setMarqueFiche] =
+    useState<MarquePartenariatFiche>(DEFAULT_MARQUE_FICHE);
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/partenariat", { cache: "no-store" });
+        if (!res.ok) return;
+        const data = (await res.json()) as { marqueFiche?: MarquePartenariatFiche };
+        if (!cancelled && data.marqueFiche) setMarqueFiche(data.marqueFiche);
+      } catch {
+        /* défaut */
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-[var(--rc-page-bg)]">
       <header className="border-b border-[var(--rc-border)] bg-[var(--rc-surface)]/90 backdrop-blur-md">
@@ -61,6 +89,8 @@ export default function PartenairesPageContent() {
           mensuel sans engagement technique : nous activons votre visibilité après
           validation de votre fiche.
         </p>
+
+        <MarquePartenariatFicheCard fiche={marqueFiche} />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {PACKS.map((pack) => (
