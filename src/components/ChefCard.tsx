@@ -19,7 +19,7 @@ function MichelinStars({ count }: { count: 1 | 2 | 3 }) {
       {Array.from({ length: count }, (_, i) => (
         <Star
           key={i}
-          className="h-3.5 w-3.5 text-[var(--rc-michelin)] drop-shadow-[0_0_6px_rgba(240,193,75,0.55)] sm:h-4 sm:w-4"
+          className="h-3.5 w-3.5 text-white sm:h-4 sm:w-4"
           fill="currentColor"
           strokeWidth={0}
         />
@@ -95,9 +95,9 @@ export default function ChefCard({
 
         <div className="absolute right-3 top-3 flex flex-col items-end gap-2 sm:right-4 sm:top-4">
           {hasStars ? (
-            <div className="flex items-center gap-2 rounded-full border border-[var(--rc-michelin-border)] bg-[var(--rc-michelin-bg)] px-3 py-1.5 shadow-sm">
+            <div className="flex items-center gap-2 rounded-full border border-white/25 bg-[var(--rc-michelin-bg)] px-3 py-1.5 shadow-sm">
               <MichelinStars count={stars as 1 | 2 | 3} />
-              <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--rc-michelin)]">
+              <span className="font-sans text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-white">
                 Michelin
               </span>
             </div>
