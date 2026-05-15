@@ -13,14 +13,14 @@ const MAIL_SUBJECT = "Pack Partenariat de marque 19€ — Restaurants des Chefs
 export default function PartenariatMarquePackCard() {
   return (
     <article
-      className="relative flex flex-col overflow-hidden rounded-[var(--rc-radius-xl)] border border-[var(--rc-navy)]/25 bg-gradient-to-br from-[var(--rc-surface)] via-[var(--rc-page-bg)] to-[var(--rc-navy-soft)]/40 p-6 shadow-[var(--rc-shadow)] sm:p-8"
+      className="relative flex flex-col rounded-[var(--rc-radius-xl)] border border-[var(--rc-navy)]/25 bg-gradient-to-br from-[var(--rc-surface)] via-[var(--rc-page-bg)] to-[var(--rc-navy-soft)]/40 p-6 shadow-[var(--rc-shadow)] sm:p-8"
       aria-labelledby="pack-marque-titre"
     >
-      <span className="absolute -top-3 left-6 rounded-full bg-[var(--rc-ruby)] px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white">
+      <span className="mb-4 inline-flex w-fit rounded-full bg-[var(--rc-ruby)] px-3 py-1.5 text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-white">
         Marques & maisons
       </span>
 
-      <div className="flex items-center gap-2 pt-2">
+      <div className="flex items-center gap-2">
         <Gem
           className="h-5 w-5 text-[var(--rc-gold)]"
           strokeWidth={2}

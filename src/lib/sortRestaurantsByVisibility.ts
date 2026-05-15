@@ -6,7 +6,7 @@ import {
 import {
   restaurantAbonnementLocal,
   restaurantAbonnementTotal,
-  restaurantAccueilEligible,
+  restaurantMiseEnAvant,
   restaurantSponsoring,
 } from "@/lib/restaurantEditorial";
 import type { Restaurant } from "@/types/restaurant";
@@ -75,24 +75,24 @@ function shuffle<T>(a: T[]): T[] {
   return copy;
 }
 
-/** Dix tables d’accueil : pack total éligible en priorité, puis sponsoring, puis tirage. */
+/**
+ * Dix tables d’accueil : toutes les fiches sponsorisées (badge / pack) en priorité,
+ * ordre d’affichage mélangé à chaque tirage.
+ */
 export function pickHomepageFeatured(
   list: Restaurant[],
   n: number
 ): Restaurant[] {
   if (list.length === 0) return [];
-  const accueil = list.filter(restaurantAccueilEligible);
-  const sponsoring = list.filter(
-    (r) => restaurantSponsoring(r) && !restaurantAccueilEligible(r)
-  );
-  const others = list.filter(
-    (r) => !restaurantAccueilEligible(r) && !restaurantSponsoring(r)
-  );
-  const merged = [
-    ...shuffle(accueil),
-    ...shuffle(sponsoring),
-    ...shuffle(others),
-  ];
-  if (merged.length <= n) return merged;
-  return merged.slice(0, n);
+
+  const sponsored = shuffle(list.filter(restaurantMiseEnAvant));
+  const others = shuffle(list.filter((r) => !restaurantMiseEnAvant(r)));
+
+  let picked: Restaurant[];
+  if (sponsored.length >= n) {
+    picked = sponsored.slice(0, n);
+  } else {
+    picked = [...sponsored, ...others.slice(0, n - sponsored.length)];
+  }
+  return shuffle(picked);
 }

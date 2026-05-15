@@ -392,8 +392,8 @@ export default function Home() {
                     />
                     <span>
                       Les cartes au contour doré et le libellé « Sponsorisé »
-                      indiquent un établissement mis en avant (case cochée
-                      dans l’administration).
+                      indiquent un établissement mis en avant ; leur ordre
+                      dans cet aperçu change à chaque visite.
                     </span>
                   </p>
                 </div>
