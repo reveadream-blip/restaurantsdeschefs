@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { buildContactMailtoUrl } from "@/lib/contactMailto";
+import { buildContactMailtoUrl, openContactMailto } from "@/lib/contactMailto";
 
 const fieldClass =
   "mt-1.5 w-full rounded-lg border border-[var(--rc-border)] bg-[var(--rc-page-bg)] px-3 py-2.5 text-sm text-[var(--rc-text)] outline-none transition focus:border-[var(--rc-gold)] focus:ring-1 focus:ring-[var(--rc-gold)]/30";
@@ -174,7 +174,7 @@ export default function ContactForm({
         type="submit"
         className="inline-flex w-full items-center justify-center rounded-full bg-[var(--rc-navy)] px-6 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-white transition hover:opacity-90 sm:w-auto"
       >
-        Ouvrir mon application mail
+        Envoyer le message
       </button>
     </form>
   );
